@@ -1,0 +1,46 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.nav {
+  background-color: $Graphite;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    padding: 1.5rem $gutter-mobile;
+  }
+
+  &__logo {
+    aspect-ratio: 4.61;
+    object-fit: contain;
+    object-position: center;
+    width: 11.25rem;
+    align-self: center;
+    max-width: 100%;
+  }
+
+  &-links__wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem 4.375rem;
+    align-self: center;
+  }
+}
+
+.nav__link-inactive {
+  text-decoration: none;
+  color: $Cloud;
+
+  &.nav__link-active {
+    text-decoration: none;
+    background-color: $Instock-Black;
+    color: $White;
+    padding: $padding-spacing-base-unit 3rem;
+  }
+}
