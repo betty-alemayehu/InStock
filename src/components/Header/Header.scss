@@ -54,6 +54,8 @@
 }
 
 .nav__link-inactive {
+  max-width: 12.5rem;
+  min-width: 9.375rem;
   @include navLink {
     color: $Cloud;
 
@@ -64,6 +66,8 @@
 }
 
 .nav__link-active {
+  max-width: 12.5rem;
+  min-width: 9.375rem;
   @include navLink {
     background-color: $Instock-Black;
     color: $White;
