@@ -8,6 +8,7 @@ import Inventory from "./pages/Inventory/Inventory";
 import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         v7_startTransition: true,
       }}
     >
+      <Header />
       <Routes>
         <Route path="/" element={<Warehouses />} />
         <Route path="warehouses" element={<Warehouses />} />
