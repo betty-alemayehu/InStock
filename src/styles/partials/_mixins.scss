@@ -94,9 +94,13 @@
 
 // NavLink
 @mixin navLink {
+  font-size: 1.125rem; // Text size: 18px
   font-weight: $demi-600;
-  font-size: 1.25rem; // Text size: 16px
+  text-decoration: none;
   line-height: 1.5rem; // Line height: 24px
+  border-radius: 1.5rem;
+  padding: .75rem 4rem;
+  width: 100%;
 
   @include tablet {
     font-size: 1.5rem; // Text size: 24px
