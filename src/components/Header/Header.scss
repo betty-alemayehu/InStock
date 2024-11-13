@@ -1,0 +1,79 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.nav {
+  background-color: $Graphite;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    padding: 1.5rem $gutter-mobile;
+    height: 15.625rem;
+    
+    @include tablet {
+      flex-direction: row;
+      height: 11.25rem;
+      align-items: flex-start;
+      padding: 2rem $gutter-tablet-desktop;
+    }
+
+    @include desktop {
+      padding: 1.5rem 7.5rem;
+    }
+  }
+
+  &__logo {
+    aspect-ratio: 4.61;
+    object-fit: contain;
+    object-position: center;
+    width: 11.25rem;
+    align-self: center;
+    max-width: 100%;
+  }
+
+  &-links__wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-self: center;
+    gap: $gutter-mobile;
+
+    @include tablet {
+      justify-content: flex-end;
+      align-self: flex-start;
+      gap: 0;
+    }
+  }
+}
+
+.nav__link-inactive {
+  max-width: 12.5rem;
+  min-width: 9.375rem;
+  @include navLink {
+    color: $Cloud;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.nav__link-active {
+  max-width: 12.5rem;
+  min-width: 9.375rem;
+  @include navLink {
+    background-color: $Instock-Black;
+    color: $White;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
