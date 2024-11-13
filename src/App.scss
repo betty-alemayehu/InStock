@@ -1,4 +1,8 @@
-#root {
+@use "./partials/global";
+
+body {
+  // font-family: "TitilliumWeb", Inter, system-ui, Avenir, Helvetica, Arial,    sans-serif;
+  font-family: "TitilliumWeb", sans-serif;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
