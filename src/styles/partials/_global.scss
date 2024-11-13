@@ -32,6 +32,11 @@
   border: none;
   cursor: pointer;
   font-weight: $demi-600;
+  width: 100%;
+
+  @include tablet {
+    width: fit-content;
+  }
 
   &--primary {
     background-color: $Instock-Indigo;

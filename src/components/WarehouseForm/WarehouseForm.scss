@@ -1,7 +1,41 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
 
+.warehouse-management {
+  display: flex;
+  justify-content: center;
+  padding: $padding-spacing-base-unit * 2; // Only if you want padding around the form within .warehouse-management
+}
+
+.warehouse-form {
+  background-color: $White;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Subtle shadow for a cleaner look
+  position: relative;
+  border-radius: 0.25rem; // Rounded corners?
+
+  //mobile specific - todo: update for tablet/desktop
+  max-width: 600px; // Constrain width to keep form compact
+  width: 100%; // Responsive full width within max-width
+}
+
+section {
+  padding: 0 $padding-spacing-base-unit * 2; // Horizontal padding only
+}
+
 .form-header {
   display: flex;
   gap: $gutter-mobile;
+}
+
+.form-divider {
+  border-top: 0.0625rem solid $Cloud;
+  overflow: visible;
+}
+
+.form-actions {
+  display: flex;
+  gap: $gutter-mobile;
+  justify-content: center;
+  background-color: $Light-Grey;
+  padding: $padding-spacing-base-unit * 2;
 }

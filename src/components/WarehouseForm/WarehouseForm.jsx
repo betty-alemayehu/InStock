@@ -29,6 +29,7 @@ function WarehouseForm() {
             />
             <h1 className="form-title">Add New Warehouse</h1>
           </section>
+
           <hr className="form-divider" />
 
           <form>
@@ -49,7 +50,9 @@ function WarehouseForm() {
                 </div>
               ))}
             </section>
+
             <hr className="form-divider" />
+
             <section className="contact-details">
               <h2 className="section-title">Contact Details</h2>
               {contactFields.map((field) => (
