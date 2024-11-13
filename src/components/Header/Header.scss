@@ -28,19 +28,35 @@
   &-links__wrap {
     display: flex;
     flex-direction: row;
-    gap: 2.5rem 4.375rem;
+    width: 100%;
+    justify-content: space-between;
     align-self: center;
   }
 }
 
 .nav__link-inactive {
-  text-decoration: none;
-  color: $Cloud;
+  @include navLink {
+    text-decoration: none;
+    color: $Cloud;
+    padding: $padding-spacing-base-unit 4rem;
+    border-radius: 13.75rem;
 
-  &.nav__link-active {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.nav__link-active {
+  @include navLink {
     text-decoration: none;
     background-color: $Instock-Black;
     color: $White;
-    padding: $padding-spacing-base-unit 3rem;
+    padding: $padding-spacing-base-unit 4rem;
+    border-radius: 1.25rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
