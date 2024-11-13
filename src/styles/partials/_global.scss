@@ -3,7 +3,6 @@
 @use "./mixins" as *;
 
 #root {
-  // font-family: "TitilliumWeb", "Arial", sans-serif;
   font-family: "TitilliumWeb", sans-serif;
   margin: 0;
   padding: 0;
@@ -19,4 +18,60 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+//BUTTON
+.button {
+  font-feature-settings: "liga" off, "clig" off;
+  align-self: stretch;
+  border-radius: 1.25rem;
+  gap: 0.625rem;
+  overflow: hidden;
+  padding: 0.5rem 1.3125rem;
+  border: none;
+  cursor: pointer;
+  font-weight: $demi-600;
+
+  &--primary {
+    background-color: $Instock-Indigo;
+    color: $White;
+  }
+
+  &--secondary {
+    background-color: $White;
+    color: $Slate;
+    border: 0.0625rem solid $Cloud;
+  }
+}
+
+//INPUT FIELD
+.input-field {
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  display: flex;
+  font-feature-settings: "liga" off, "clig" off;
+  color: $Instock-Black;
+  font-weight: $demi-600;
+  margin-bottom: 0.25rem;
+}
+
+.input-control {
+  font-feature-settings: "liga" off, "clig" off;
+  border-radius: 1.25rem;
+  border: 0.0625rem solid $Cloud;
+  background-color: $White;
+  width: 100%;
+  color: $Slate;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+
+  @include tablet {
+    padding: 0.625rem 1.125rem;
+  }
+
+  @include desktop {
+    padding: 0.75rem 1.25rem;
+  }
 }

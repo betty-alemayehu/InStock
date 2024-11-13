@@ -10,8 +10,7 @@ import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 
 //test imports
-import InputField from "./components/InputField/InputField";
-import Button from "./components/Button/Button";
+import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
 
 function App() {
   return (
@@ -21,8 +20,10 @@ function App() {
       }}
     >
       <h1>Test Font Rendering</h1>
-      <InputField />
-      <Button />
+      <button className="button">button</button>
+      <button className="button button--primary">button--primary</button>
+      <button className="button button--secondary">button--secondary</button>
+      <WarehouseForm />
 
       <Routes>
         <Route path="/" element={<Warehouses />} />
