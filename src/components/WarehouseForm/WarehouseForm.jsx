@@ -18,21 +18,19 @@ function WarehouseForm() {
   ];
 
   return (
-    <div className="warehouse-management">
-      <main className="warehouse-form">
-        <section className="form-header">
-          <img
-            src="/assets/icons/arrow_back-24px.svg"
-            alt=""
-            className="form-icon"
-          />
-          <h1 className="form-title">Add New Warehouse</h1>
-        </section>
-
-        <hr className="form-divider" />
-
+    <main className="warehouse-management">
+      <div className="warehouse-form">
         <form>
           <section className="warehouse-details">
+            <legend className="form-header">
+              <img
+                src="/assets/icons/arrow_back-24px.svg"
+                alt=""
+                className="form-icon"
+              />
+              <h1 className="form-title">Add New Warehouse</h1>
+            </legend>
+            {/* <hr className="form-divider" /> */}
             <h2 className="section-title">Warehouse Details</h2>
             {warehouseFields.map((field) => (
               <div className="input-field" key={field.name}>
@@ -50,7 +48,7 @@ function WarehouseForm() {
             ))}
           </section>
 
-          <hr className="form-divider" />
+          {/* <hr className="form-divider" /> */}
 
           <section className="contact-details">
             <h2 className="section-title">Contact Details</h2>
@@ -78,8 +76,8 @@ function WarehouseForm() {
             </button>
           </div>
         </form>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
 
