@@ -9,9 +9,6 @@ import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 
-//test imports
-import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
-
 function App() {
   return (
     <BrowserRouter
@@ -19,20 +16,6 @@ function App() {
         v7_startTransition: true,
       }}
     >
-      {/* Test Area */}
-      {/* Test Area */}
-      {/* Test Area */}
-
-      {/* <h1>Test Font Rendering</h1>
-      <button className="button">button</button>
-      <button className="button button--primary">button--primary</button>
-      <button className="button button--secondary">button--secondary</button> */}
-      <WarehouseForm />
-
-      {/* Test Area */}
-      {/* Test Area */}
-      {/* Test Area */}
-
       <Routes>
         <Route path="/" element={<Warehouses />} />
         <Route path="warehouses" element={<Warehouses />} />

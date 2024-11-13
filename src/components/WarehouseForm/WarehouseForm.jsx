@@ -18,70 +18,68 @@ function WarehouseForm() {
   ];
 
   return (
-    <>
-      <div className="warehouse-management">
-        <main className="warehouse-form">
-          <section className="form-header">
-            <img
-              src="../../public/assets/icons/arrow_back-24px.svg"
-              alt=""
-              className="form-icon"
-            />
-            <h1 className="form-title">Add New Warehouse</h1>
+    <div className="warehouse-management">
+      <main className="warehouse-form">
+        <section className="form-header">
+          <img
+            src="/public/assets/icons/arrow_back-24px.svg"
+            alt=""
+            className="form-icon"
+          />
+          <h1 className="form-title">Add New Warehouse</h1>
+        </section>
+
+        <hr className="form-divider" />
+
+        <form>
+          <section className="warehouse-details">
+            <h2 className="section-title">Warehouse Details</h2>
+            {warehouseFields.map((field) => (
+              <div className="input-field" key={field.name}>
+                <label htmlFor={field.name} className="input-label">
+                  {field.label}
+                </label>
+                <input
+                  type="text"
+                  id={field.name}
+                  name={field.name}
+                  className="input-control"
+                  placeholder={`Enter ${field.label.toLowerCase()}`}
+                />
+              </div>
+            ))}
           </section>
 
           <hr className="form-divider" />
 
-          <form>
-            <section className="warehouse-details">
-              <h2 className="section-title">Warehouse Details</h2>
-              {warehouseFields.map((field) => (
-                <div className="input-field" key={field.name}>
-                  <label htmlFor={field.name} className="input-label">
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    id={field.name}
-                    name={field.name}
-                    className="input-control"
-                    placeholder={`Enter ${field.label.toLowerCase()}`}
-                  />
-                </div>
-              ))}
-            </section>
-
-            <hr className="form-divider" />
-
-            <section className="contact-details">
-              <h2 className="section-title">Contact Details</h2>
-              {contactFields.map((field) => (
-                <div className="input-field" key={field.name}>
-                  <label htmlFor={field.name} className="input-label">
-                    {field.label}
-                  </label>
-                  <input
-                    type="text"
-                    id={field.name}
-                    name={field.name}
-                    className="input-control"
-                    placeholder={`Enter ${field.label.toLowerCase()}`}
-                  />
-                </div>
-              ))}
-            </section>
-            <div className="form-actions">
-              <button type="button" className="button button--secondary">
-                Cancel
-              </button>
-              <button type="submit" className="button button--primary">
-                + Add Warehouse
-              </button>
-            </div>
-          </form>
-        </main>
-      </div>
-    </>
+          <section className="contact-details">
+            <h2 className="section-title">Contact Details</h2>
+            {contactFields.map((field) => (
+              <div className="input-field" key={field.name}>
+                <label htmlFor={field.name} className="input-label">
+                  {field.label}
+                </label>
+                <input
+                  type="text"
+                  id={field.name}
+                  name={field.name}
+                  className="input-control"
+                  placeholder={`Enter ${field.label.toLowerCase()}`}
+                />
+              </div>
+            ))}
+          </section>
+          <div className="form-actions">
+            <button type="button" className="button button--secondary">
+              Cancel
+            </button>
+            <button type="submit" className="button button--primary">
+              + Add Warehouse
+            </button>
+          </div>
+        </form>
+      </main>
+    </div>
   );
 }
 
