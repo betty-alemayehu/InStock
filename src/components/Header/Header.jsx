@@ -5,9 +5,9 @@ import logo from "/assets/logo/InStock-Logo_2x.png";
 function Header() {
   return (
     <nav className="nav">
-      <header className="nav-header__container">
-        <img src={logo} alt="InStock logo" className="nav-header__logo" />
-        <div>
+      <header className="nav__container">
+        <img src={logo} alt="InStock logo" className="nav__logo" />
+        <div className="nav-links__wrap">
           <NavLink
             to="/warehouses"
             className={({ isActive }) =>
