@@ -21,6 +21,31 @@
   box-sizing: border-box;
 }
 
+//TYPE STYLES
+h1 {
+  @include page-header;
+}
+h2 {
+  @include subheader;
+}
+h3 {
+  @include labels-links-buttons;
+}
+h4 {
+  @include table-header;
+}
+p {
+  .p1 {
+    @include body-large;
+  }
+  .p2 {
+    @include body-medium;
+  }
+  .p3 {
+    @include body-small;
+  }
+}
+
 //BUTTON
 .button {
   font-feature-settings: "liga" off, "clig" off;
