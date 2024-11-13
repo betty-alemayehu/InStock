@@ -9,7 +9,13 @@ function InputField() {
         InputField component
         {/* //to do convert label, id, name to variable - potentially also className */}
       </label>
-      <input type="text" id="name" name="name" className="input-control" />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        className="input-control"
+        placeholder="InputField component placeholder"
+      />
     </div>
   );
 }

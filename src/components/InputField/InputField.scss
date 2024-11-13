@@ -2,11 +2,11 @@
 @use "/src/styles/partials/mixins" as *;
 
 .input-field {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .input-label {
-  display: block;
+  display: flex;
   font-feature-settings: "liga" off, "clig" off;
   color: $Instock-Black;
   font-weight: $demi-600;
@@ -28,6 +28,6 @@
   }
 
   @include desktop {
-    padding: 12px 20px;
+    padding: 0.75rem 1.25rem;
   }
 }
