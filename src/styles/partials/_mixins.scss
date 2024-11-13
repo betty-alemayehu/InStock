@@ -91,3 +91,19 @@
     line-height: 1.125rem; // Line height: 18px
   }
 }
+
+// NavLink
+@mixin navLink {
+  font-weight: $demi-600;
+  font-size: 1.25rem; // Text size: 16px
+  line-height: 1.5rem; // Line height: 24px
+
+  @include tablet {
+    font-size: 1.5rem; // Text size: 24px
+    line-height: 2rem; // Line height: 32px
+
+    @content;
+  }
+
+  @content;
+}
