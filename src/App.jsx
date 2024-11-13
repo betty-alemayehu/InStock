@@ -9,6 +9,10 @@ import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 
+//test imports
+import InputField from "./components/InputField/InputField";
+import Button from "./components/Button/Button";
+
 function App() {
   return (
     <BrowserRouter
@@ -17,6 +21,9 @@ function App() {
       }}
     >
       <h1>Test Font Rendering</h1>
+      <InputField />
+      <Button />
+
       <Routes>
         <Route path="/" element={<Warehouses />} />
         <Route path="warehouses" element={<Warehouses />} />
