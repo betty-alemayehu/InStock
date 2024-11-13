@@ -47,6 +47,8 @@
     font-size: 0.875rem; // Text size: 14px
     line-height: 1.375rem; // Line height: 22px
   }
+
+  @content;
 }
 
 @mixin table-header {
@@ -99,14 +101,17 @@
   text-decoration: none;
   line-height: 1.5rem; // Line height: 24px
   border-radius: 1.5rem;
-  padding: .75rem 4rem;
-  width: 100%;
+  padding: 0.75rem 3.5rem;
+  width: 50%;
 
   @include tablet {
-    font-size: 1.5rem; // Text size: 24px
-    line-height: 2rem; // Line height: 32px
+    @include labels-links-buttons {
+      border-radius: 1.5rem;
+      padding: 0.5rem;
+      width: 20%;
 
-    @content;
+      @content;
+    }
   }
 
   @content;
