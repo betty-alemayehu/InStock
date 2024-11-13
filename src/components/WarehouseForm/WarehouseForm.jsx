@@ -22,7 +22,7 @@ function WarehouseForm() {
       <main className="warehouse-form">
         <section className="form-header">
           <img
-            src="/public/assets/icons/arrow_back-24px.svg"
+            src="/assets/icons/arrow_back-24px.svg"
             alt=""
             className="form-icon"
           />
