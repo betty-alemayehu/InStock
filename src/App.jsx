@@ -11,7 +11,11 @@ import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+      }}
+    >
       <h1>Test Font Rendering</h1>
       <Routes>
         <Route path="/" element={<Warehouses />} />
