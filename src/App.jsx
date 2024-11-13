@@ -19,11 +19,19 @@ function App() {
         v7_startTransition: true,
       }}
     >
-      <h1>Test Font Rendering</h1>
+      {/* Test Area */}
+      {/* Test Area */}
+      {/* Test Area */}
+
+      {/* <h1>Test Font Rendering</h1>
       <button className="button">button</button>
       <button className="button button--primary">button--primary</button>
-      <button className="button button--secondary">button--secondary</button>
+      <button className="button button--secondary">button--secondary</button> */}
       <WarehouseForm />
+
+      {/* Test Area */}
+      {/* Test Area */}
+      {/* Test Area */}
 
       <Routes>
         <Route path="/" element={<Warehouses />} />

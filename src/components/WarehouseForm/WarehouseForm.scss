@@ -1,2 +1,7 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
+
+.form-header {
+  display: flex;
+  gap: $gutter-mobile;
+}

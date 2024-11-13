@@ -29,6 +29,8 @@ function WarehouseForm() {
             />
             <h1 className="form-title">Add New Warehouse</h1>
           </section>
+          <hr className="form-divider" />
+
           <form>
             <section className="warehouse-details">
               <h2 className="section-title">Warehouse Details</h2>
