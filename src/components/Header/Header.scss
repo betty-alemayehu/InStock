@@ -5,6 +5,9 @@
 
 .nav {
   background-color: $Graphite;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
   &__container {
     display: flex;
@@ -13,18 +16,16 @@
     width: 100%;
     white-space: nowrap;
     text-align: center;
-    padding: 1.5rem $gutter-mobile;
+    padding: 1.5rem;
     height: 15rem;
+    max-width: 600px;
 
     @include tablet {
       flex-direction: row;
       height: 14rem;
       align-items: flex-start;
-      padding: 2rem $gutter-tablet-desktop;
-    }
-
-    @include desktop {
-      padding: 1.5rem 7.5rem;
+      max-width: 1000px;
+      padding: 1.5rem 0;
     }
   }
 
