@@ -69,18 +69,18 @@ function WarehouseForm() {
 
     // Validates required fields and checks formats for phone and email fields
     Object.keys(formData).forEach((field) => {
-      if (!formData[field].trim()) {
+      const fieldValue = formData[field]
+        ? formData[field].toString().trim()
+        : ""; // Safely convert to string and trim
+      if (!fieldValue) {
         newErrors[field] = "This field is required.";
       } else if (
         field === "contact_phone" &&
-        !phoneRegex.test(formData[field].replace(/\D/g, ""))
+        !phoneRegex.test(fieldValue.replace(/\D/g, ""))
       ) {
         newErrors[field] =
           "Phone number must include country and area code, e.g. +1 (123) 555-6789";
-      } else if (
-        field === "contact_email" &&
-        !emailRegex.test(formData[field])
-      ) {
+      } else if (field === "contact_email" && !emailRegex.test(fieldValue)) {
         newErrors[field] = "Invalid email format.";
       }
     });
