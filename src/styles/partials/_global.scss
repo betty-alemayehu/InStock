@@ -59,48 +59,68 @@ button {
 
 //BUTTON
 .button {
-  font-feature-settings: "liga" off, "clig" off;
-  align-self: stretch;
+  font-family: "TitilliumWeb", sans-serif;
+  text-decoration: none;
+  text-align: center;
   border-radius: 1.25rem;
-  gap: 0.625rem;
-  overflow: hidden;
   padding: 0.5rem 1.3125rem;
   border: none;
   cursor: pointer;
   font-weight: $demi-600;
   width: 100%;
+  min-height: 2.5rem;
+  height: 2.5rem;
+
+  min-width: fit-content;
 
   @include tablet {
-    width: fit-content;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    max-width: fit-content;
+
+    padding: 0 1rem;
   }
 
   &--primary {
     background-color: $Instock-Indigo;
     color: $White;
+
+    &:hover {
+      background-color: $Instock-Black;
+    }
   }
 
   &--secondary {
     background-color: $White;
     color: $Slate;
     border: 0.0625rem solid $Cloud;
+
+    &:hover {
+      color: $Instock-Indigo;
+      border: 0.0625rem solid $Instock-Indigo;
+    }
   }
 }
 
 //INPUT FIELD
+input,
+textarea,
+::placeholder {
+  font-family: "TitilliumWeb", sans-serif;
+}
+
 .input-field {
   margin-bottom: 1rem;
 }
 
 .input-label {
   display: flex;
-  font-feature-settings: "liga" off, "clig" off;
   color: $Instock-Black;
   font-weight: $demi-600;
   margin-bottom: 0.25rem;
 }
 
 .input-control {
-  font-feature-settings: "liga" off, "clig" off;
   border-radius: 1.25rem;
   border: 0.0625rem solid $Cloud;
   background-color: $White;
@@ -108,9 +128,13 @@ button {
   color: $Slate;
   font-weight: 400;
   padding: 0.5rem 1rem;
+  min-height: 2.5rem;
+  height: 2.5rem;
 
   @include tablet {
     padding: 0.625rem 1.125rem;
+    min-height: 2.75rem;
+    height: 2.75rem;
   }
 
   @include desktop {
