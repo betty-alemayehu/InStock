@@ -62,7 +62,6 @@
 
     &::placeholder {
       color: $Slate;
-      //   font-size: $fs-mobile-buttons;
     }
 
     @include tablet {
@@ -82,11 +81,9 @@
     margin-top: -1rem;
     border-radius: 1.25rem;
     color: #ffffff;
-    // font-weight: $fw-semi-bold;
     background: $Instock-Indigo;
     cursor: pointer;
     text-align: center;
-    // font-size: $fs-mobile-buttons;
     border: 0;
     padding-top: 0.65rem;
     transition: all 0.3s ease-in-out;

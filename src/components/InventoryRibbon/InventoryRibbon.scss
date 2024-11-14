@@ -29,17 +29,14 @@
 
     &--title {
       font-size: 0.75rem;
-      // font-weight: $fw-semi-bold;
       display: flex;
       flex-direction: row;
       align-items: center;
       color: $Instock-Indigo;
       text-decoration: none;
-      // margin-top: -0.3rem;
 
       @include tablet {
         margin-top: 0;
-        // font-size: $fs-desktop-bodyMedium;
       }
 
       &::after {

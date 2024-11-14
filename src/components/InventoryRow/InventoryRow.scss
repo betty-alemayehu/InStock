@@ -37,16 +37,11 @@
     font-size: 0.875rem;
 
     &--title {
-      // font-size: $fs-mobile-bodyMedium;
-      // font-weight: $fw-semi-bold;
       display: flex;
       flex-direction: row;
       align-items: center;
-      // color: $instock-indigo;
       text-decoration: none;
       animation: none;
-
-      // margin-top: -0.3rem;
 
       @keyframes moveArrowRight {
         0% {
@@ -62,7 +57,6 @@
 
       @include tablet {
         margin-top: 0;
-        // font-size: $fs-desktop-bodyMedium;
       }
 
       &::after {
@@ -72,7 +66,6 @@
 
       &:hover::after {
         animation: moveArrow 1s linear infinite;
-        // transform: translateX(10px);
       }
     }
 
@@ -83,7 +76,6 @@
       text-align: center;
       padding: 0.4rem;
       border-radius: 1rem;
-      // font-size: $fs-mobile-bodySmall;
       text-transform: uppercase;
       font-weight: $demi-600;
     }
@@ -94,7 +86,6 @@
       text-align: center;
       padding: 0.4rem;
       border-radius: 1rem;
-      // font-size: $fs-mobile-bodySmall;
       text-transform: uppercase;
       font-weight: $demi-600;
       color: $Red;
@@ -211,7 +202,6 @@
         margin-top: 0;
         justify-content: flex-end;
         padding-bottom: 0;
-        // padding-top: 1rem;
       }
 
       &::before {
