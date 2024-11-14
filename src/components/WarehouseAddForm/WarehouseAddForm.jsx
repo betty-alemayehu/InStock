@@ -3,35 +3,35 @@ import { useState } from "react";
 
 function WarehouseAddForm() {
   const warehouseFields = [
-    { label: "Warehouse Name", name: "warehouseName" },
-    { label: "Street Address", name: "streetAddress" },
+    { label: "Warehouse Name", name: "warehouse_name" },
+    { label: "Street Address", name: "address" },
     { label: "City", name: "city" },
     { label: "Country", name: "country" },
   ];
 
   const contactFields = [
-    { label: "Contact Name", name: "contactName" },
-    { label: "Position", name: "position" },
-    { label: "Phone Number", name: "phoneNumber" },
-    { label: "Email", name: "email" },
+    { label: "Contact Name", name: "contact_name" },
+    { label: "Position", name: "contact_position" },
+    { label: "Phone Number", name: "contact_phone" },
+    { label: "Email", name: "contact_email" },
   ];
 
   const [formData, setFormData] = useState({
-    warehouseName: "",
-    streetAddress: "",
+    warehouse_name: "",
+    address: "",
     city: "",
     country: "",
-    contactName: "",
-    position: "",
-    phoneNumber: "",
-    email: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
   });
 
   const [errors, setErrors] = useState({});
 
   // Handles field changes and removes error message on input
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
@@ -49,11 +49,17 @@ function WarehouseAddForm() {
       if (!formData[field].trim()) {
         newErrors[field] = "This field is required.";
       } else if (
-        field === "phoneNumber" &&
+        //notes this field name must match the actual keys in formData
+        field === "contact_phone" &&
         !phoneRegex.test(formData[field].replace(/\D/g, ""))
       ) {
-        newErrors[field] = "Phone number must be 11 digits.";
-      } else if (field === "email" && !emailRegex.test(formData[field])) {
+        newErrors[field] =
+          "Phone number must include country and area code, e.g. +1 (123) 555-6789";
+      } else if (
+        //notes this field name must match the actual keys in formData
+        field === "contact_email" &&
+        !emailRegex.test(formData[field])
+      ) {
         newErrors[field] = "Invalid email format.";
       }
     });
@@ -66,7 +72,35 @@ function WarehouseAddForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateFields()) {
-      console.log("Success!");
+      try {
+        const response = await fetch("http://localhost:5050/warehouses/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          console.log("Warehouse added successfully!");
+          setFormData({
+            warehouse_name: "",
+            address: "",
+            city: "",
+            country: "",
+            contact_name: "",
+            contact_position: "",
+            contact_phone: "",
+            contact_email: "",
+          });
+        } else {
+          console.log("Failed to add warehouse. Please try again.");
+        }
+      } catch (error) {
+        console.error(
+          "Error connecting to the server. Please try again later."
+        );
+      }
     }
   };
 
