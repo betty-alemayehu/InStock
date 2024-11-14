@@ -11,6 +11,9 @@
   max-width: $mobile-max-width;
   margin: auto;
 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 28px 24px;
+
   @include tablet {
     flex-direction: row;
     padding: 1.3rem 2rem 1rem;
