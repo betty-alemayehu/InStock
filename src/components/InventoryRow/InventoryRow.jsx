@@ -66,6 +66,7 @@ function InventoryRow({ inventory, setInventory }) {
           <button className="inventory-row__col--btn">
             <img src={deleteImage} alt="delete" />
           </button>
+          {/* Route to: <Route path="inventory/:id/edit" element={<InventoryEdit />} /> */}
           <Link
             to={`/inventory/${inventory.id}/edit`}
             className="inventory-row__col--btn"
