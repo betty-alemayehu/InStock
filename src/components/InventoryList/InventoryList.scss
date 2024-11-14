@@ -1,0 +1,21 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/global" as *;
+
+.inventory-list {
+  padding: 0;
+  border-top: solid 1px $Cloud;
+
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  max-width: $mobile-max-width;
+
+  margin: auto;
+
+  @include tablet {
+    border-top: none;
+    max-width: $tablet-max-width;
+  }
+}
