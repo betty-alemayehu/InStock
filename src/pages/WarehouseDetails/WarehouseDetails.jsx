@@ -1,10 +1,37 @@
 import "./WarehouseDetails.scss";
 import WareHouseInfo from "../../components/WarehouseInfo/WarehouseInfo";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const { VITE_API_URL } = import.meta.env;
 
 export default function WarehouseDetails() {
+	const { id } = useParams();
+	const [currentWarehouse, setCurrentWarehouse] = useState({});
+	let navigate = useNavigate();
+
+	useEffect(() => {
+		async function getWarehouse() {
+			try {
+				const response = await axios.get(`${VITE_API_URL}/warehouses/${id}`);
+				setCurrentWarehouse(response.data);
+			} catch (error) {
+				console.error(`Cannot fetch warehouse with id ${id}: ${error}`);
+				navigate("/");
+			}
+		}
+
+		getWarehouse();
+	}, [id]);
+
+	if (!currentWarehouse) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<>
-			<WareHouseInfo />
+			<WareHouseInfo currentWarehouse={currentWarehouse} />
 		</>
 	);
 }
