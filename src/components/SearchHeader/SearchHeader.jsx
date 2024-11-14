@@ -9,7 +9,7 @@ function SearchHeader({ title, buttonLink, buttonTitle, handleSearchInput }) {
         <input
           className="search-header__input"
           type="search"
-          placeholder="Search"
+          placeholder="Search..."
           onChange={handleSearchInput}
         ></input>
         <Link className="search-header__button" to={buttonLink}>
