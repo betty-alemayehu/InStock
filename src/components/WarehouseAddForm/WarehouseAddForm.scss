@@ -9,10 +9,10 @@
   justify-content: center;
   padding: $padding-spacing-base-unit * 2;
   @include tablet {
-    padding: 0 $padding-spacing-base-unit * 4;
+    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4;
   }
   @include desktop {
-    padding: 0 $padding-spacing-base-unit * 8;
+    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 8;
   }
 }
 
@@ -47,6 +47,9 @@ section {
 
 .form-divider {
   border-top: 0.0625rem solid $Cloud;
+  margin: 0;
+  @include tablet {
+  }
 }
 
 .input-control {
@@ -83,4 +86,9 @@ section {
     display: flex;
     flex-direction: row;
   }
+}
+
+.warehouse-details,
+.contact-details {
+  flex-grow: 1;
 }
