@@ -42,19 +42,16 @@
       align-items: center;
       text-decoration: none;
       color: $Instock-Indigo;
+      font-weight: $bold-700;
+      @include body-large;
 
       @include tablet {
         margin-top: 0;
       }
 
       &::after {
-        content: url(../../assets/icons/chevron_right-24px.svg);
+        content: url(/assets/icons/chevron_right-24px.svg);
         line-height: 0;
-      }
-      /* Prevent color change on active or focus */
-      &:visited {
-        outline: none; /* Prevent the focus outline */
-        color: inherit; /* Keep the original color when clicked or focused */
       }
     }
 
@@ -242,16 +239,5 @@
         transition: all 0.2s;
       }
     }
-  }
-}
-
-.sort {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &::after {
-    content: url(/assets/icons/sort-24px.svg);
   }
 }
