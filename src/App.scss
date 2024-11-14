@@ -1,46 +1,17 @@
 @use "./styles/partials/global" as *;
 
 body {
-  // font-family: "TitilliumWeb", Inter, system-ui, Avenir, Helvetica, Arial,    sans-serif;
-  font-family: "TitilliumWeb", sans-serif;
-  // max-width: 1280px;
   margin: 0 auto;
-  // padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.header {
+  position: relative;
+  z-index: 1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.app-content {
+  position: relative;
+  top: -7.5rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
+  padding-top: 25px; // Ensure content starts below the header
+  z-index: 0; // Place below the header if needed
 }
