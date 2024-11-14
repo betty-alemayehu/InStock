@@ -64,6 +64,7 @@ p {
   @include tablet {
     height: 2.75rem;
     min-height: 2.75rem;
+    max-width: fit-content;
 
     padding: 0 1rem;
   }

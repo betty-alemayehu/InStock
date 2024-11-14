@@ -1,9 +1,6 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
 
-// $tablet-breakpoint: 768px;
-// $desktop-breakpoint: 1280px;
-
 .warehouse-management {
   display: flex;
   justify-content: center;
@@ -18,80 +15,87 @@
 
 .warehouse-form {
   background-color: $White;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Subtle shadow for a cleaner look
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
-  border-radius: 0.25rem; // Rounded corners?
-
-  //mobile specific - todo: update for tablet/desktop
-  max-width: 600px; // Constrain width to keep form compact
-  width: 100%; // Responsive full width within max-width
+  border-radius: 0.25rem;
+  max-width: 600px;
+  width: 100%;
   @include tablet {
     max-width: 1000px;
-    width: 100%;
   }
-}
 
-legend {
-  padding: $padding-spacing-base-unit * 2 $padding-spacing-base-unit * 4; // Horizontal padding only
-}
+  &__header {
+    display: flex;
+    align-items: baseline;
+    gap: $gutter-mobile;
+    padding: $padding-spacing-base-unit * 2 $padding-spacing-base-unit * 4;
+  }
 
-section {
-  padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4; // Horizontal padding only
-}
+  &__divider {
+    border-top: 0.0625rem solid $Cloud;
+    margin: 0;
 
-.form-header {
-  display: flex;
-  align-items: baseline;
-  gap: $gutter-mobile;
-}
-
-.form-divider {
-  border-top: 0.0625rem solid $Cloud;
-  margin: 0;
-  &--tablet {
-    @include tablet {
-      margin: $padding-spacing-base-unit * 4 0;
+    &--tablet {
+      @include tablet {
+        margin: $padding-spacing-base-unit * 4 0;
+      }
     }
   }
-}
 
-.input-control {
-  border: 1px solid $Cloud;
-  padding: 8px;
-  outline: none;
-  transition: border-color 0.3s;
-
-  &:focus {
-    border-color: $Instock-Indigo;
+  &__sections {
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
-  &.error {
+  &__warehouse-details,
+  &__contact-details {
+    flex-grow: 1;
+    max-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
+    min-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
+    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4;
+  }
+
+  &__section-title {
+    font-weight: bold;
+  }
+
+  &__input-field {
+    margin-bottom: 1rem;
+  }
+
+  &__input-label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input-control--error {
     border-color: $Red;
   }
-}
 
-.error-message {
-  color: $Red;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.form-actions {
-  display: flex;
-  gap: $gutter-mobile;
-  justify-content: center;
-  background-color: $Light-Grey;
-  padding: $padding-spacing-base-unit * 3 $padding-spacing-base-unit * 4;
-}
-
-.form-sections {
-  @include tablet {
-    display: flex;
-    flex-direction: row;
+  &__error-message {
+    color: $Red;
+    font-size: 12px;
+    margin-top: 4px;
   }
-}
 
-.warehouse-details,
-.contact-details {
-  flex-grow: 1;
+  &__actions {
+    display: flex;
+    gap: $gutter-mobile;
+    justify-content: center;
+    background-color: $Light-Grey;
+    padding: $padding-spacing-base-unit * 3 $padding-spacing-base-unit * 4;
+    flex-direction: row;
+    @include tablet {
+      justify-content: end;
+    }
+  }
+
+  &__button--link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

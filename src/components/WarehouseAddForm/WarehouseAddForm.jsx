@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./WarehouseAddForm.scss";
 import { useState } from "react";
 
 function WarehouseAddForm() {
+  //to redirect user to warehouse list after submission
+  const navigate = useNavigate();
+
+  // Field configurations for warehouse and contact information sections
   const warehouseFields = [
     { label: "Warehouse Name", name: "warehouse_name" },
     { label: "Street Address", name: "address" },
@@ -17,6 +21,7 @@ function WarehouseAddForm() {
     { label: "Email", name: "contact_email" },
   ];
 
+  // Form data and error state management
   const [formData, setFormData] = useState({
     warehouse_name: "",
     address: "",
@@ -45,19 +50,17 @@ function WarehouseAddForm() {
     const phoneRegex = /^\d{11}$/;
     const emailRegex = /@/;
 
-    //mirroring the validation on the server side for phone and email
+    // Validates required fields and checks formats for phone and email fields
     Object.keys(formData).forEach((field) => {
       if (!formData[field].trim()) {
         newErrors[field] = "This field is required.";
       } else if (
-        //notes this field name must match the actual keys in formData
         field === "contact_phone" &&
         !phoneRegex.test(formData[field].replace(/\D/g, ""))
       ) {
         newErrors[field] =
           "Phone number must include country and area code, e.g. +1 (123) 555-6789";
       } else if (
-        //notes this field name must match the actual keys in formData
         field === "contact_email" &&
         !emailRegex.test(formData[field])
       ) {
@@ -83,7 +86,8 @@ function WarehouseAddForm() {
         });
 
         if (response.ok) {
-          console.log("Warehouse added successfully!");
+          //uncomment below for testing
+          // console.log("Warehouse added successfully!");
           setFormData({
             warehouse_name: "",
             address: "",
@@ -94,8 +98,11 @@ function WarehouseAddForm() {
             contact_phone: "",
             contact_email: "",
           });
+
+          navigate("/warehouses"); // Redirect to /warehouses page
         } else {
-          console.log("Failed to add warehouse. Please try again.");
+          //uncomment below for testing
+          // console.log("Failed to add warehouse. Please try again.");
         }
       } catch (error) {
         console.error(
@@ -108,24 +115,31 @@ function WarehouseAddForm() {
   return (
     <main className="warehouse-management">
       <div className="warehouse-form">
+        {/* form header */}
         <form onSubmit={handleSubmit}>
-          <legend className="form-header">
-            <Link to="/warehouses" className="form-icon">
+          <legend className="warehouse-form__header">
+            <Link to="/warehouses" className="warehouse-form__icon">
               <img
                 src="/assets/icons/arrow_back-24px.svg"
                 alt="arrow back icon"
-                className="form-icon"
+                className="warehouse-form__icon"
               />
             </Link>
-            <h1 className="form-title">Add New Warehouse</h1>
+            <h1 className="warehouse-form__title">Add New Warehouse</h1>
           </legend>
-          <hr className="form-divider" />
-          <div className="form-sections">
-            <section className="warehouse-details">
-              <h2 className="section-title">Warehouse Details</h2>
+          <hr className="warehouse-form__divider" />
+          <div className="warehouse-form__sections">
+            {/* warehouse details inputs */}
+            <section className="warehouse-form__warehouse-details">
+              <h2 className="warehouse-form__section-title">
+                Warehouse Details
+              </h2>
               {warehouseFields.map((field) => (
-                <div className="input-field" key={field.name}>
-                  <label htmlFor={field.name} className="input-label">
+                <div className="warehouse-form__input-field" key={field.name}>
+                  <label
+                    htmlFor={field.name}
+                    className="warehouse-form__input-label"
+                  >
                     {field.label}
                   </label>
                   <input
@@ -135,24 +149,32 @@ function WarehouseAddForm() {
                     value={formData[field.name]}
                     onChange={handleChange}
                     className={`input-control ${
-                      errors[field.name] ? "error" : ""
+                      errors[field.name]
+                        ? "warehouse-form__input-control--error"
+                        : ""
                     }`}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
                   />
                   {errors[field.name] && (
-                    <span className="error-message">{errors[field.name]}</span>
+                    <span className="warehouse-form__error-message">
+                      {errors[field.name]}
+                    </span>
                   )}
                 </div>
               ))}
             </section>
 
-            <hr className="form-divider form-divider--tablet" />
+            <hr className="warehouse-form__divider warehouse-form__divider--tablet" />
 
-            <section className="contact-details">
-              <h2 className="section-title">Contact Details</h2>
+            {/* contact details inputs */}
+            <section className="warehouse-form__contact-details">
+              <h2 className="warehouse-form__section-title">Contact Details</h2>
               {contactFields.map((field) => (
-                <div className="input-field" key={field.name}>
-                  <label htmlFor={field.name} className="input-label">
+                <div className="warehouse-form__input-field" key={field.name}>
+                  <label
+                    htmlFor={field.name}
+                    className="warehouse-form__input-label"
+                  >
                     {field.label}
                   </label>
                   <input
@@ -162,19 +184,27 @@ function WarehouseAddForm() {
                     value={formData[field.name]}
                     onChange={handleChange}
                     className={`input-control ${
-                      errors[field.name] ? "error" : ""
+                      errors[field.name]
+                        ? "warehouse-form__input-control--error"
+                        : ""
                     }`}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
                   />
                   {errors[field.name] && (
-                    <span className="error-message">{errors[field.name]}</span>
+                    <span className="warehouse-form__error-message">
+                      {errors[field.name]}
+                    </span>
                   )}
                 </div>
               ))}
             </section>
           </div>
-          <div className="form-actions">
-            <Link to="/warehouses" className="button button--secondary">
+          {/* form actions/buttons */}
+          <div className="warehouse-form__actions">
+            <Link
+              to="/warehouses"
+              className="button button--secondary warehouse-form__button--link"
+            >
               Cancel
             </Link>
 
