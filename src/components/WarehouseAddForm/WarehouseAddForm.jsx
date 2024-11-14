@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./WarehouseAddForm.scss";
 import { useState } from "react";
 
@@ -109,11 +110,13 @@ function WarehouseAddForm() {
       <div className="warehouse-form">
         <form onSubmit={handleSubmit}>
           <legend className="form-header">
-            <img
-              src="/assets/icons/arrow_back-24px.svg"
-              alt=""
-              className="form-icon"
-            />
+            <Link to="/warehouses" className="form-icon">
+              <img
+                src="/assets/icons/arrow_back-24px.svg"
+                alt="arrow back icon"
+                className="form-icon"
+              />
+            </Link>
             <h1 className="form-title">Add New Warehouse</h1>
           </legend>
           <hr className="form-divider" />
@@ -170,9 +173,10 @@ function WarehouseAddForm() {
           </section>
 
           <div className="form-actions">
-            <button type="button" className="button button--secondary">
+            <Link to="/warehouses" className="button button--secondary">
               Cancel
-            </button>
+            </Link>
+
             <button type="submit" className="button button--primary">
               + Add Warehouse
             </button>

@@ -28,6 +28,7 @@ section {
 
 .form-header {
   display: flex;
+  align-items: baseline;
   gap: $gutter-mobile;
 }
 

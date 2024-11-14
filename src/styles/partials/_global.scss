@@ -48,20 +48,22 @@ p {
 
 //BUTTON
 .button {
+  text-decoration: none;
+  text-align: center;
   border-radius: 1.25rem;
-  padding: 0.5rem 1.3125rem;
+  padding: 0.4rem 1.3125rem;
   border: none;
   cursor: pointer;
   font-weight: $demi-600;
   width: 100%;
-  min-height: 2.25rem;
-  height: 2.25rem;
+  min-height: 2.5rem;
+  height: 2.5rem;
 
   min-width: fit-content;
 
   @include tablet {
-    height: 2.375rem;
-    min-height: 2.375rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
 
     padding: 0 1rem;
   }
@@ -94,14 +96,12 @@ p {
 
 .input-label {
   display: flex;
-  font-feature-settings: "liga" off, "clig" off;
   color: $Instock-Black;
   font-weight: $demi-600;
   margin-bottom: 0.25rem;
 }
 
 .input-control {
-  font-feature-settings: "liga" off, "clig" off;
   border-radius: 1.25rem;
   border: 0.0625rem solid $Cloud;
   background-color: $White;
@@ -109,9 +109,13 @@ p {
   color: $Slate;
   font-weight: 400;
   padding: 0.5rem 1rem;
+  min-height: 2.5rem;
+  height: 2.5rem;
 
   @include tablet {
     padding: 0.625rem 1.125rem;
+    min-height: 2.75rem;
+    height: 2.75rem;
   }
 
   @include desktop {

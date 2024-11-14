@@ -9,6 +9,7 @@ import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="inventory/add" element={<InventoryAdd />} />
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }
