@@ -47,6 +47,8 @@
     font-size: 0.875rem; // Text size: 14px
     line-height: 1.375rem; // Line height: 22px
   }
+
+  @content;
 }
 
 @mixin table-header {
@@ -90,4 +92,27 @@
     font-size: 0.75rem; // Text size: 12px
     line-height: 1.125rem; // Line height: 18px
   }
+}
+
+// NavLink
+@mixin navLink {
+  font-size: 1.125rem; // Text size: 18px
+  font-weight: $demi-600;
+  text-decoration: none;
+  line-height: 1.5rem; // Line height: 24px
+  border-radius: 1.5rem;
+  padding: 0.75rem 3.5rem;
+  width: 50%;
+
+  @include tablet {
+    @include labels-links-buttons {
+      border-radius: 1.5rem;
+      padding: 0.5rem;
+      width: 20%;
+
+      @content;
+    }
+  }
+
+  @content;
 }
