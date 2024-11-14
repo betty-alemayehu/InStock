@@ -1,6 +1,6 @@
-import "./WarehouseForm.scss";
+import "./WarehouseAddForm.scss";
 
-function WarehouseForm() {
+function WarehouseAddForm() {
   //todo add logic for rending title at top for edits vs add or consider routing to different pages for different server requests
 
   const warehouseFields = [
@@ -21,16 +21,16 @@ function WarehouseForm() {
     <main className="warehouse-management">
       <div className="warehouse-form">
         <form>
+          <legend className="form-header">
+            <img
+              src="/assets/icons/arrow_back-24px.svg"
+              alt=""
+              className="form-icon"
+            />
+            <h1 className="form-title">Add New Warehouse</h1>
+          </legend>
+          <hr className="form-divider" />
           <section className="warehouse-details">
-            <legend className="form-header">
-              <img
-                src="/assets/icons/arrow_back-24px.svg"
-                alt=""
-                className="form-icon"
-              />
-              <h1 className="form-title">Add New Warehouse</h1>
-            </legend>
-            {/* <hr className="form-divider" /> */}
             <h2 className="section-title">Warehouse Details</h2>
             {warehouseFields.map((field) => (
               <div className="input-field" key={field.name}>
@@ -48,7 +48,7 @@ function WarehouseForm() {
             ))}
           </section>
 
-          {/* <hr className="form-divider" /> */}
+          <hr className="form-divider" />
 
           <section className="contact-details">
             <h2 className="section-title">Contact Details</h2>
@@ -67,6 +67,7 @@ function WarehouseForm() {
               </div>
             ))}
           </section>
+
           <div className="form-actions">
             <button type="button" className="button button--secondary">
               Cancel
@@ -81,4 +82,4 @@ function WarehouseForm() {
   );
 }
 
-export default WarehouseForm;
+export default WarehouseAddForm;

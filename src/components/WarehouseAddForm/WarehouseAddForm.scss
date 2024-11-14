@@ -18,8 +18,12 @@
   width: 100%; // Responsive full width within max-width
 }
 
+legend {
+  padding: $padding-spacing-base-unit * 2 $padding-spacing-base-unit * 4; // Horizontal padding only
+}
+
 section {
-  padding: 0 $padding-spacing-base-unit * 2; // Horizontal padding only
+  padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4; // Horizontal padding only
 }
 
 .form-header {
@@ -27,15 +31,15 @@ section {
   gap: $gutter-mobile;
 }
 
-// .form-divider {
-//   border-top: 0.0625rem solid $Cloud;
-//   overflow: visible;
-// }
+.form-divider {
+  border-top: 0.0625rem solid $Cloud;
+  // overflow: visible;
+}
 
 .form-actions {
   display: flex;
   gap: $gutter-mobile;
   justify-content: center;
   background-color: $Light-Grey;
-  padding: $padding-spacing-base-unit * 2;
+  padding: $padding-spacing-base-unit * 3 $padding-spacing-base-unit * 4;
 }
