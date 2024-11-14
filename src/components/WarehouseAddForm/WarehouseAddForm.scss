@@ -36,6 +36,27 @@ section {
   // overflow: visible;
 }
 
+.input-control {
+  border: 1px solid $Cloud;
+  padding: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: $Instock-Indigo;
+  }
+
+  &.error {
+    border-color: $Red;
+  }
+}
+
+.error-message {
+  color: $Red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 .form-actions {
   display: flex;
   gap: $gutter-mobile;
