@@ -48,7 +48,10 @@ section {
 .form-divider {
   border-top: 0.0625rem solid $Cloud;
   margin: 0;
-  @include tablet {
+  &--tablet {
+    @include tablet {
+      margin: $padding-spacing-base-unit * 4 0;
+    }
   }
 }
 

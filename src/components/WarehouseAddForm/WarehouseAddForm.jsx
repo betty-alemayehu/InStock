@@ -146,7 +146,7 @@ function WarehouseAddForm() {
               ))}
             </section>
 
-            <hr className="form-divider" />
+            <hr className="form-divider form-divider--tablet" />
 
             <section className="contact-details">
               <h2 className="section-title">Contact Details</h2>
