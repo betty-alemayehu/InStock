@@ -8,7 +8,7 @@ const { VITE_API_URL } = import.meta.env;
 
 export default function WarehouseDetails() {
 	const { id } = useParams();
-	const [currentWarehouse, setCurrentWarehouse] = useState({});
+	const [currentWarehouse, setCurrentWarehouse] = useState(null);
 	let navigate = useNavigate();
 
 	useEffect(() => {
@@ -17,8 +17,11 @@ export default function WarehouseDetails() {
 				const response = await axios.get(`${VITE_API_URL}/warehouses/${id}`);
 				setCurrentWarehouse(response.data);
 			} catch (error) {
+				if (error.status === 404) {
+					navigate("/");
+				}
+
 				console.error(`Cannot fetch warehouse with id ${id}: ${error}`);
-				navigate("/");
 			}
 		}
 
