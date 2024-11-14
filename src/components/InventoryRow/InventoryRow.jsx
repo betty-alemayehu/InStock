@@ -10,7 +10,7 @@ function InventoryRow({ inventory }) {
       <li className="inventory-row__row">
         <div
           className="inventory-row__col inventory-row__col--1"
-          data-label="Warehouse"
+          data-label="inventory item"
         >
           <Link
             className="inventory-row__col--title"
