@@ -1,6 +1,5 @@
 import "./WarehouseEdit.scss";
-import WarehouseForm from "../../components/WarehouseForm/WarehouseForm";
 
 export default function WarehouseEdit() {
-  return <WarehouseForm />;
+  return <p>content tbd</p>;
 }

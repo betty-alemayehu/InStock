@@ -1,6 +1,6 @@
 import "./WarehouseAdd.scss";
-import WarehouseForm from "../../components/WarehouseForm/WarehouseForm";
+import WarehouseAddForm from "../../components/WarehouseAddForm/WarehouseAddForm";
 
-export default function WarehouseAdd() {
-  return <WarehouseForm />;
+export default function WarehouseAddForm() {
+  return <WarehouseAddForm />;
 }
