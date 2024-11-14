@@ -1,11 +1,25 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./WarehouseAddForm.scss";
-import { useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import "./WarehouseForm.scss";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const URL = import.meta.env.VITE_API_URL;
 
-function WarehouseAddForm() {
+function WarehouseForm() {
+  //Define an isEditMode Variable to check if the id parameter is present
+  const { id } = useParams();
+  const isEditMode = Boolean(id);
+  useEffect(() => {
+    if (isEditMode) {
+      axios
+        .get(`${URL}/warehouses/${id}`)
+        .then((response) => setFormData(response.data))
+        .catch((error) =>
+          console.error("Error fetching warehouse data:", error)
+        );
+    }
+  }, [isEditMode, id]);
+
   //to redirect user to warehouse list after submission
   const navigate = useNavigate();
 
@@ -80,11 +94,10 @@ function WarehouseAddForm() {
     event.preventDefault();
     if (validateFields()) {
       try {
-        const response = await axios.post(`${URL}/warehouses/add`, formData);
-
-        if (response.ok) {
-          //uncomment below for testing
-          // console.log("Warehouse added successfully!");
+        const response = isEditMode
+          ? await axios.put(`${URL}/warehouses/${id}`, formData)
+          : await axios.post(`${URL}/warehouses`, formData);
+        if (response.status === 200) {
           setFormData({
             warehouse_name: "",
             address: "",
@@ -95,11 +108,7 @@ function WarehouseAddForm() {
             contact_phone: "",
             contact_email: "",
           });
-
-          navigate("/warehouses"); // Redirect to /warehouses page
-        } else {
-          //uncomment below for testing
-          // console.log("Failed to add warehouse. Please try again.");
+          navigate("/");
         }
       } catch (error) {
         console.error(
@@ -122,7 +131,9 @@ function WarehouseAddForm() {
                 className="warehouse-form__icon"
               />
             </Link>
-            <h1 className="warehouse-form__title">Add New Warehouse</h1>
+            <h1 className="warehouse-form__title">
+              {isEditMode ? "Edit Warehouse" : "Add New Warehouse"}
+            </h1>
           </legend>
           <hr className="warehouse-form__divider" />
           <div className="warehouse-form__sections">
@@ -206,7 +217,7 @@ function WarehouseAddForm() {
             </Link>
 
             <button type="submit" className="button button--primary">
-              + Add Warehouse
+              {isEditMode ? "Save" : "+ Add Warehouse"}
             </button>
           </div>
         </form>
@@ -215,4 +226,4 @@ function WarehouseAddForm() {
   );
 }
 
-export default WarehouseAddForm;
+export default WarehouseForm;
