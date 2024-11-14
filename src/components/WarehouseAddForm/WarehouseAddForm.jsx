@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./WarehouseAddForm.scss";
 import { useState } from "react";
+import axios from "axios";
+
+const URL = import.meta.env.VITE_API_URL;
 
 function WarehouseAddForm() {
   //to redirect user to warehouse list after submission
@@ -77,13 +80,7 @@ function WarehouseAddForm() {
     event.preventDefault();
     if (validateFields()) {
       try {
-        const response = await fetch("http://localhost:5050/warehouses/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await axios.post(`${URL}/warehouses/add`, formData);
 
         if (response.ok) {
           //uncomment below for testing
