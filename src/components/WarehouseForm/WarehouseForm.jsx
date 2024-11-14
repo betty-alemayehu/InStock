@@ -97,7 +97,7 @@ function WarehouseForm() {
         const response = isEditMode
           ? await axios.put(`${URL}/warehouses/${id}`, formData)
           : await axios.post(`${URL}/warehouses`, formData);
-        if (response.status === 200) {
+        if (response.status === 201) {
           setFormData({
             warehouse_name: "",
             address: "",
