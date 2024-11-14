@@ -1,10 +1,19 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
 
+// $tablet-breakpoint: 768px;
+// $desktop-breakpoint: 1280px;
+
 .warehouse-management {
   display: flex;
   justify-content: center;
-  padding: $padding-spacing-base-unit * 2; // Only if you want padding around the form within .warehouse-management
+  padding: $padding-spacing-base-unit * 2;
+  @include tablet {
+    padding: 0 $padding-spacing-base-unit * 4;
+  }
+  @include desktop {
+    padding: 0 $padding-spacing-base-unit * 8;
+  }
 }
 
 .warehouse-form {
@@ -16,6 +25,10 @@
   //mobile specific - todo: update for tablet/desktop
   max-width: 600px; // Constrain width to keep form compact
   width: 100%; // Responsive full width within max-width
+  @include tablet {
+    max-width: 1000px;
+    width: 100%;
+  }
 }
 
 legend {
@@ -34,7 +47,6 @@ section {
 
 .form-divider {
   border-top: 0.0625rem solid $Cloud;
-  // overflow: visible;
 }
 
 .input-control {
@@ -64,4 +76,11 @@ section {
   justify-content: center;
   background-color: $Light-Grey;
   padding: $padding-spacing-base-unit * 3 $padding-spacing-base-unit * 4;
+}
+
+.form-sections {
+  @include tablet {
+    display: flex;
+    flex-direction: row;
+  }
 }

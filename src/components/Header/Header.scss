@@ -14,11 +14,11 @@
     white-space: nowrap;
     text-align: center;
     padding: 1.5rem $gutter-mobile;
-    height: 15.625rem;
-    
+    height: 15rem;
+
     @include tablet {
       flex-direction: row;
-      height: 11.25rem;
+      height: 15rem;
       align-items: flex-start;
       padding: 2rem $gutter-tablet-desktop;
     }
