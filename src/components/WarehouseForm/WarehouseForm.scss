@@ -73,14 +73,27 @@
     margin-bottom: 0.5rem;
   }
 
-  &__input-control--error {
-    border-color: $Red;
+  // Apply red border when input has error class
+  .input-control {
+    border: 1px solid $Cloud; // Default border color
+
+    &.warehouse-form__input-control--error {
+      border-color: $Red; // Red border when there’s an error
+    }
   }
 
   &__error-message {
     color: $Red;
     font-size: 12px;
     margin-top: 4px;
+    display: flex;
+    align-items: center; // Align icon and text
+  }
+  // Icon styling within error message
+  &__error-icon {
+    margin-right: 4px; // Add spacing between icon and text
+    width: 1rem; // Set icon size
+    height: 1rem;
   }
 
   &__actions {

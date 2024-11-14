@@ -48,6 +48,7 @@ p {
 
 //BUTTON
 .button {
+  font-family: "TitilliumWeb", sans-serif;
   text-decoration: none;
   text-align: center;
   border-radius: 1.25rem;
@@ -91,6 +92,12 @@ p {
 }
 
 //INPUT FIELD
+input,
+textarea,
+::placeholder {
+  font-family: "TitilliumWeb", sans-serif;
+}
+
 .input-field {
   margin-bottom: 1rem;
 }

@@ -65,7 +65,7 @@ function WarehouseForm() {
   const validateFields = () => {
     const newErrors = {};
     const phoneRegex = /^\d{11}$/;
-    const emailRegex = /@/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Checks for a valid email with "@" and "."
 
     // Validates required fields and checks formats for phone and email fields
     Object.keys(formData).forEach((field) => {
@@ -161,10 +161,15 @@ function WarehouseForm() {
                         ? "warehouse-form__input-control--error"
                         : ""
                     }`}
-                    placeholder={`Enter ${field.label.toLowerCase()}`}
+                    placeholder={`${field.label}`}
                   />
                   {errors[field.name] && (
                     <span className="warehouse-form__error-message">
+                      <img
+                        src="/assets/icons/error-24px.svg"
+                        alt="error icon"
+                        className="warehouse-form__error-icon"
+                      />
                       {errors[field.name]}
                     </span>
                   )}
@@ -196,10 +201,15 @@ function WarehouseForm() {
                         ? "warehouse-form__input-control--error"
                         : ""
                     }`}
-                    placeholder={`Enter ${field.label.toLowerCase()}`}
+                    placeholder={`${field.label}`}
                   />
                   {errors[field.name] && (
                     <span className="warehouse-form__error-message">
+                      <img
+                        src="/assets/icons/error-24px.svg"
+                        alt="error icon"
+                        className="warehouse-form__error-icon"
+                      />
                       {errors[field.name]}
                     </span>
                   )}
