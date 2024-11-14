@@ -63,10 +63,10 @@ function WarehouseAddForm() {
   };
 
   // Handles form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateFields()) {
-      console.log("Form submitted successfully!");
+      console.log("Success!");
     }
   };
 
@@ -99,7 +99,7 @@ function WarehouseAddForm() {
                   className={`input-control ${
                     errors[field.name] ? "error" : ""
                   }`}
-                  placeholder={`Enter ${field.label}`}
+                  placeholder={`Enter ${field.label.toLowerCase()}`}
                 />
                 {errors[field.name] && (
                   <span className="error-message">{errors[field.name]}</span>
@@ -126,7 +126,7 @@ function WarehouseAddForm() {
                   className={`input-control ${
                     errors[field.name] ? "error" : ""
                   }`}
-                  placeholder={`Enter ${field.label}`}
+                  placeholder={`Enter ${field.label.toLowerCase()}`}
                 />
                 {errors[field.name] && (
                   <span className="error-message">{errors[field.name]}</span>
