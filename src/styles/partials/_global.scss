@@ -45,6 +45,17 @@ p {
     @include body-small;
   }
 }
+// Need to explicitly specify font family for input and text area, otherwise its consolas
+input,
+textarea {
+  font-family: "TitilliumWeb", sans-serif;
+}
+
+a,
+label,
+button {
+  text-decoration: none;
+}
 
 //BUTTON
 .button {

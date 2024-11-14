@@ -41,6 +41,7 @@
       flex-direction: row;
       align-items: center;
       text-decoration: none;
+      color: $Instock-Indigo;
 
       @include tablet {
         margin-top: 0;
@@ -50,9 +51,10 @@
         content: url(../../assets/icons/chevron_right-24px.svg);
         line-height: 0;
       }
-
-      &:hover::after {
-        animation: moveArrow 1s linear infinite;
+      /* Prevent color change on active or focus */
+      &:visited {
+        outline: none; /* Prevent the focus outline */
+        color: inherit; /* Keep the original color when clicked or focused */
       }
     }
 

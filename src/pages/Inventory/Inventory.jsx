@@ -1,16 +1,12 @@
 import "./Inventory.scss";
-// import InventoryList from "../../components/InventoryList/InventoryList";
-
-import InventoryList2 from "../../components/InventoryList2/InventoryList2";
+import InventoryList from "../../components/InventoryList/InventoryList";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Inventory() {
   const [inventoryItems, setInventoryItems] = useState([]);
-
-  // Hard coded temporarily
-  const apiUrl = "http://localhost:5050";
 
   useEffect(() => {
     generateInventoryItems();
@@ -28,13 +24,7 @@ export default function Inventory() {
 
   return (
     <>
-      {/* <InventoryList /> */}
-      {/* <div className="container"> */}
-      <InventoryList2
-        inventoryItems={inventoryItems}
-        generateInventoryItems={generateInventoryItems}
-      />
-      {/* </div> */}
+      <InventoryList inventoryItems={inventoryItems} />
     </>
   );
 }

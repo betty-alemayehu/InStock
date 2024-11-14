@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import deleteImage from "/assets/icons/delete_outline-24px.svg";
 import editImage from "/assets/icons/edit-24px.svg";
 
-function InventoryRow({ inventory, setInventory }) {
+function InventoryRow({ inventory }) {
   return (
     <div>
       <li className="inventory-row__row">

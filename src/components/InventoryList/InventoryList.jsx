@@ -1,26 +1,13 @@
 import React from "react";
-import "./InventoryList2.scss";
+import "./InventoryList.scss";
 
-// import InventoryHeader from "../InventoryHeader/InventoryHeader.jsx";
-// import InventoryItem from "../InventoryItem/InventoryItem.jsx";
-
-// import searchIcon from "/assets/icons/search-24px.svg";
-// import chevronIcon from "/assets/icons/chevron_right-24px.svg";
-// import trashIcon from "/assets/icons/delete_outline-24px.svg";
-// import editIcon from "/assets/icons/edit-24px.svg";
-
-import InventoryRow from "../InventoryRow/InventoryRow";
+import InventoryRow from "../InventoryRow/InventoryRow.jsx";
 import InventoryRibbon from "../InventoryRibbon/InventoryRibbon.jsx";
-import SearchHeader from "../SearchHeader/SearchHeader";
+import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
-
-export default function InventoryList2({
-  inventoryItems,
-  generateInventoryItems,
-}) {
+export default function InventoryList2({ inventoryItems }) {
   const [inventory, setInventory] = useState();
 
   const [search, setSearch] = useState("");
