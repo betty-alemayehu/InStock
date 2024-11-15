@@ -73,10 +73,18 @@ function LabelContent({ label, content, className }) {
 		? `inventory-info ${className}`
 		: "inventory-info";
 
+	let contentClassName = `inventory-info__description`;
+	if (label === "status") {
+		if (content.toLowerCase() === "in stock") {
+			contentClassName += " inventory-info__description--success";
+		} else {
+			contentClassName += " inventory-info__description--failed";
+		}
+	}
 	return (
 		<div className={newClassName}>
 			<h2 className="inventory-info__title">{`${label}:`}</h2>
-			<span className="inventory-info__description">{content}</span>
+			<span className={contentClassName}>{content}</span>
 		</div>
 	);
 }
