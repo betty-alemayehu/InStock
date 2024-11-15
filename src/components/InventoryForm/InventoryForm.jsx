@@ -13,38 +13,30 @@ function InventoryForm() {
   useEffect(() => {
     if (isEditMode) {
       axios
-        //   Change endpoint from warehouses -> inventories
         .get(`${URL}/inventories/${id}`)
-        .then((response) => setFormData(response.data))
+        .then((response) => {
+          const inventoryItem = response.data;
+          setFormData({
+            item_name: inventoryItem.item_name,
+            description: inventoryItem.description,
+            category: inventoryItem.category,
+            status: inventoryItem.status,
+            quantity: inventoryItem.quantity,
+            warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
+            warehouse_id: inventoryItem.warehouse_id, // Prepopulate warehouse_id
+          });
+        })
         .catch((error) =>
           console.error("Error fetching inventory item data:", error)
         );
     }
   }, [isEditMode, id]);
 
-  //to redirect user to warehouse list after submission
+  //to redirect user to inventory list after submission
   const navigate = useNavigate();
 
   // Logic for edit from Betty ^
-  // -=-=--=-=-=-==-=--=--=-==-=-=-=-==-=-=-=-=-=-=-=-==-=-=-=-=-
 
-  // Field configurations for warehouse and contact information sections
-  const warehouseFields = [
-    { label: "Warehouse Name", name: "warehouse_name" },
-    { label: "Street Address", name: "address" },
-    { label: "City", name: "city" },
-    { label: "Country", name: "country" },
-  ];
-
-  const contactFields = [
-    { label: "Contact Name", name: "contact_name" },
-    { label: "Position", name: "contact_position" },
-    { label: "Phone Number", name: "contact_phone" },
-    { label: "Email", name: "contact_email" },
-  ];
-
-  // -=-=--=-=-=-==-=--=--=-==-MW CHANGE ==-=-=-=-=-=-=-=-==-=-=-=-=-
-  // Fields for Inventory Item Details
   // Fields for Inventory Item Details
   const itemFields = [
     { label: "Item Name", name: "item_name" },
