@@ -50,6 +50,20 @@ function InventoryForm() {
         .get(`${URL}/inventories/${id}`)
         .then((response) => {
           const inventoryItem = response.data;
+
+          // If warehouse_id is missing, try to find it using warehouse_name
+          let warehouse_id = inventoryItem.warehouse_id;
+
+          if (!warehouse_id && inventoryItem.warehouse_name) {
+            // Find the warehouse_id by warehouse_name
+            const selectedWarehouse = warehouses.find(
+              (warehouse) =>
+                warehouse.warehouse_name === inventoryItem.warehouse_name
+            );
+            warehouse_id = selectedWarehouse ? selectedWarehouse.id : "";
+          }
+
+          // Prepopulate the form data with the existing item details
           setFormData({
             item_name: inventoryItem.item_name,
             description: inventoryItem.description,
@@ -57,19 +71,16 @@ function InventoryForm() {
             status: inventoryItem.status,
             quantity: inventoryItem.quantity, // Ensure quantity is a number from the API
             warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
-            warehouse_id: inventoryItem.warehouse_id || "", // Prepopulate warehouse_id (ensure it is set)
+            warehouse_id: warehouse_id, // Set warehouse_id from either response or lookup
           });
-          // undefined
-          console.log(
-            "inventoryItem.warehouse_id: ",
-            inventoryItem.warehouse_id
-          );
+
+          console.log("inventoryItem.warehouse_id: ", warehouse_id);
         })
         .catch((error) =>
           console.error("Error fetching inventory item data:", error)
         );
     }
-  }, [isEditMode, id]);
+  }, [isEditMode, id, warehouses]); // Depend on `warehouses` in case they are updated.
 
   useEffect(() => {
     fetchWarehouses();
