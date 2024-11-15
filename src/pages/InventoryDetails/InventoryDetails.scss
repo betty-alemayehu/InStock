@@ -1,8 +1,134 @@
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.inventoryDetails__container {
+	padding: 0 1.5rem;
+	margin-bottom: 5.3125rem;
+
+	@include tablet {
+		padding: 0 2.5rem;
+		margin-bottom: 42.5rem;
+	}
+
+	@include desktop {
+		padding: 0 10.625rem;
+		margin-bottom: 35.625rem;
+	}
+
+	&--shadow {
+		background-color: $White;
+		border-radius: 5px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.inventoryDetails-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding: 1.25rem 2rem 2rem;
+
+		@include tablet {
+			flex-direction: row;
+			padding: 2rem 2.625rem;
+			gap: unset;
+		}
+
+		@include desktop {
+			padding: 2rem 3.4375rem;
+		}
+
+		&__section {
+			display: flex;
+			flex-direction: column;
+			gap: 1.25rem;
+
+			@include tablet {
+				gap: 2.5rem;
+			}
+
+			&--one {
+				@include tablet {
+					padding-right: 3.4375rem;
+				}
+			}
+
+			&--three {
+				flex-direction: row;
+			}
+
+			&--two {
+				@include tablet {
+					border-left: 1.5px solid $Cloud;
+					padding-left: 3.4375rem;
+				}
+			}
+
+			&--one,
+			&--two {
+				@include tablet {
+					flex: 1;
+				}
+			}
+
+			&--status,
+			&--quantity {
+				flex: 1;
+			}
+		}
+	}
+}
 
 .inventory-info {
 	&__title {
+		font-size: 0.9375rem;
 		text-transform: uppercase;
 		color: $Slate;
+		margin: 0 0 0.25rem;
+
+		@include tablet {
+			font-size: 1rem;
+		}
+	}
+
+	&__description {
+		font-size: 1.0625rem;
+
+		@include tablet {
+			font-size: 1.125rem;
+		}
 	}
 }
+
+// &--success {
+// 	background-color: rgba($Green, 0.1);
+// 	color: $Green;
+// 	width: 5rem;
+// 	text-align: center;
+// 	padding: 0.4rem;
+// 	border-radius: 1rem;
+// 	text-transform: uppercase;
+// 	font-weight: $demi-600;
+// 	// Ensure text is on 1 line
+// 	white-space: nowrap;
+
+// 	@include tablet {
+// 	  width: auto;
+// 	}
+//   }
+
+//   &--failed {
+// 	background-color: rgba($Red, 0.1);
+// 	width: 7rem;
+// 	text-align: center;
+// 	padding: 0.4rem;
+// 	border-radius: 1rem;
+// 	text-transform: uppercase;
+// 	font-weight: $demi-600;
+// 	color: $Red;
+// 	// Ensure text is on 1 line
+// 	white-space: nowrap;
+
+// 	@include tablet {
+// 	  width: auto;
+// 	}
+//   }

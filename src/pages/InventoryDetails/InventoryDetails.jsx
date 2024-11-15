@@ -3,6 +3,7 @@ import axios from "axios";
 import "./InventoryDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import DetailsHeader from "../../components/DetailsHeader/DetailsHeader";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -34,26 +35,47 @@ export default function InventoryDetails() {
 		currentInventoryItem;
 
 	return (
-		<>
-			<section className="inventoryDetails-card">
-				<LabelContent label="item description" content={description} />
-				<LabelContent label="category" content={category} />
-				<div className="inventoryDetails-card">
-					<div>
-						<LabelContent label="status" content={status} />
-						<LabelContent label="quantity" content={quantity} />
+		<div className="inventoryDetails__container">
+			<div className="inventoryDetails__container--shadow">
+				<DetailsHeader
+					title={item_name}
+					pathBack="/inventory"
+					pathEdit={`/inventory/${id}`}
+				/>
+				<section className="inventoryDetails-card">
+					<div className="inventoryDetails-card__section inventoryDetails-card__section--one">
+						<LabelContent label="item description" content={description} />
+						<LabelContent label="category" content={category} />
 					</div>
-					<LabelContent label="warehouse" content={warehouse_name} />
-				</div>
-			</section>
-		</>
+					<div className="inventoryDetails-card__section inventoryDetails-card__section--two">
+						<div className="inventoryDetails-card__section inventoryDetails-card__section--three">
+							<LabelContent
+								label="status"
+								content={status}
+								className="inventoryDetails-card__section--status"
+							/>
+							<LabelContent
+								label="quantity"
+								content={quantity}
+								className="inventoryDetails-card__section--quantity"
+							/>
+						</div>
+						<LabelContent label="warehouse" content={warehouse_name} />
+					</div>
+				</section>
+			</div>
+		</div>
 	);
 }
 
-function LabelContent({ label, content }) {
+function LabelContent({ label, content, className }) {
+	const newClassName = className
+		? `inventory-info ${className}`
+		: "inventory-info";
+
 	return (
-		<div className="inventory-info">
-			<h2 className="inventory-info__title">{label}</h2>
+		<div className={newClassName}>
+			<h2 className="inventory-info__title">{`${label}:`}</h2>
 			<span className="inventory-info__description">{content}</span>
 		</div>
 	);
