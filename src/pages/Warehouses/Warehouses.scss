@@ -1,0 +1,12 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/global" as *;
+
+.warehouses {
+    padding: $gutter-mobile;
+
+    @include tablet {
+       padding:  $gutter-tablet-desktop
+    }
+}
