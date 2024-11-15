@@ -3,6 +3,10 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/global" as *;
 
+.inventory-container {
+  padding: 0 2.5rem;
+}
+
 .inventory-list {
   padding: 0;
   border-top: solid 1px $Cloud;
