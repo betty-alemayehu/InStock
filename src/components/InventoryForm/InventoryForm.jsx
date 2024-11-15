@@ -73,8 +73,6 @@ function InventoryForm() {
             warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
             warehouse_id: warehouse_id, // Set warehouse_id from either response or lookup
           });
-
-          console.log("inventoryItem.warehouse_id: ", warehouse_id);
         })
         .catch((error) =>
           console.error("Error fetching inventory item data:", error)
@@ -89,8 +87,6 @@ function InventoryForm() {
     try {
       const { data } = await axios.get(`${URL}/warehouses`);
       setWarehouses(data); // sets the inventory list as all inventory items
-      // check warehouses are fetched in FE console
-      console.log(data);
     } catch (error) {
       console.error("Error fetching warehouses data:", error);
     }
@@ -159,9 +155,6 @@ function InventoryForm() {
           quantity:
             formData.status === "Out of Stock" ? 0 : Number(formData.quantity),
         };
-
-        // Log the requestData before sending to ensure it's correct
-        console.log("Request Data being sent:", requestData);
 
         delete requestData.warehouse; // Remove warehouse name from request data
 
