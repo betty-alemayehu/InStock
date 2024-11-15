@@ -37,7 +37,7 @@
     border-top: 0.0625rem solid $Cloud;
     margin: 0;
 
-    &--tablet {
+    &-tablet {
       @include tablet {
         margin: $padding-spacing-base-unit * 4 0;
       }
@@ -111,7 +111,7 @@
     }
   }
 
-  &__button--link {
+  &__button-link {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -303,7 +303,7 @@ function InventoryForm() {
               })}
             </section>
 
-            <hr className="inventory-form__divider inventory-form__divider--tablet" />
+            <hr className="inventory-form__divider inventory-form__divider-tablet" />
 
             {/* Item Availability Section */}
             <section className="inventory-form__contact-details">
@@ -429,7 +429,7 @@ function InventoryForm() {
           <div className="inventory-form__actions">
             <Link
               to={isEditMode ? `/inventory/${id}` : "/inventory"} // Conditionally navigate
-              className="button button--secondary inventory-form__button--link"
+              className="button button--secondary inventory-form__button-link"
             >
               Cancel
             </Link>
