@@ -31,10 +31,12 @@ export default function WarehouseList({ warehouseItems }) {
         {/* Pass prop of what items to show in list for the warehouse inventory view */}
         <WarehouseRibbon />
         {/* Table contents */}
-        {warehouseItems.map((warehouse) => (
+        {warehouseItems.map((warehouse, index) => (
           <WarehouseRow
             key={warehouse.id}
+            index={index}
             warehouse={warehouse}
+            total={warehouseItems.length}
             setWarehouse={setWarehouse}
           />
         ))}
