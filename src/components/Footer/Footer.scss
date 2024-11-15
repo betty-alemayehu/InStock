@@ -1,3 +1,16 @@
-.footer-test {
-  text-align: center;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  @include body-small {
+    color: $Slate;
+    // padding: 2rem 0;
+  }
 }

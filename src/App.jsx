@@ -18,8 +18,10 @@ function App() {
         v7_startTransition: true,
       }}
     >
-      <Header />
-      <div className="app-content">
+      <header>
+        <Header />
+      </header>
+      <main className="app-content">
         <Routes>
           <Route path="/" element={<Navigate to="warehouses" />} />
           <Route path="warehouses" element={<Warehouses />} />
@@ -31,8 +33,10 @@ function App() {
           <Route path="inventory/:id/edit" element={<InventoryEdit />} />
           <Route path="inventory/add" element={<InventoryAdd />} />
         </Routes>
-      </div>
-      <Footer />
+      </main>
+      <footer className="footer">
+        <Footer />
+      </footer>
     </BrowserRouter>
   );
 }

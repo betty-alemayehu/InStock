@@ -92,6 +92,8 @@
     font-size: 0.75rem; // Text size: 12px
     line-height: 1.125rem; // Line height: 18px
   }
+
+  @content;
 }
 
 // NavLink
