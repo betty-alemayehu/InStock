@@ -49,7 +49,11 @@ function DeleteModal({
             </h1>
             <p className="modal__description">
               {`Please confirm that you’d like to delete ${itemName} from the
-               ${itemType} list. You won’t be able to undo this action.`}
+                             ${
+                               itemType === "inventory"
+                                 ? " inventory list"
+                                 : " list of warehouses"
+                             }. You won’t be able to undo this action.`}
             </p>
           </div>
           <div className="modal__buttons">
