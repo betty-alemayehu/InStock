@@ -2,9 +2,9 @@ import "./Footer.scss";
 
 function Footer() {
   return (
-    <main className="footer-test">
-      <p>Footer Test</p>
-    </main>
+    <footer>
+      <p className="footer">© InStock Inc. All Rights Reserved.</p>
+    </footer>
   );
 }
 
