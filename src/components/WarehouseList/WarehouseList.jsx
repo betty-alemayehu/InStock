@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./WarehouseList.scss";
 
 import WarehouseRow from "../WarehouseRow/WarehouseRow.jsx";
 import WarehouseRibbon from "../WarehouseRibbon/WarehouseRibbon.jsx";
 import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
-import { useState } from "react";
-
 export default function WarehouseList({
   warehouseItems,
   generateWarehouseItems,
 }) {
-  const [warehouse, setWarehouse] = useState();
-
+  const [filteredWarehouses, setFilteredWarehouses] = useState(warehouseItems);
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    if (search) {
+      const filtered = warehouseItems.filter((warehouse) =>
+        [
+          warehouse.warehouse_name,
+          warehouse.address,
+          warehouse.city,
+          warehouse.country,
+          warehouse.contact_name,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      );
+      setFilteredWarehouses(filtered);
+    } else {
+      setFilteredWarehouses(warehouseItems);
+    }
+  }, [search, warehouseItems]);
+
   const handleSearchInput = (event) => {
-    const { value } = event.target;
-    setSearch(value);
+    setSearch(event.target.value);
   };
 
   return (
@@ -30,17 +46,13 @@ export default function WarehouseList({
         handleSearchInput={handleSearchInput}
       />
       <div className="warehouse-list">
-        {/* The table header. Seperate from contents ribbon doesnt show on mobile */}
-        {/* Pass prop of what items to show in list for the warehouse inventory view */}
         <WarehouseRibbon />
-        {/* Table contents */}
-        {warehouseItems.map((warehouse, index) => (
+        {filteredWarehouses.map((warehouse, index) => (
           <WarehouseRow
             key={warehouse.id}
             index={index}
             warehouse={warehouse}
-            total={warehouseItems.length}
-            setWarehouse={setWarehouse}
+            total={filteredWarehouses.length}
             generateWarehouseItems={generateWarehouseItems}
           />
         ))}
