@@ -149,22 +149,6 @@ function InventoryForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Ensure warehouse_id is set before submission
-    if (!formData.warehouse_id) {
-      const selectedWarehouse = warehouses.find(
-        (warehouse) => warehouse.warehouse_name === formData.warehouse
-      );
-
-      // If warehouse is selected, update formData with warehouse_id
-      if (selectedWarehouse) {
-        setFormData((prev) => ({
-          ...prev,
-          warehouse_id: selectedWarehouse.id,
-        }));
-      }
-      return; // Exit here to wait for state to be updated
-    }
-
     // Continue with form submission if warehouse_id is already set
     if (validateFields()) {
       try {
