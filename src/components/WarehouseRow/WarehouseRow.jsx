@@ -29,7 +29,7 @@ function WarehouseRow({ warehouse, index, total }) {
           className="warehouse-row__col warehouse-row__col--2"
           data-label="Address"
         >
-          {warehouse.address}
+          {warehouse.address}, {warehouse.city}, {warehouse.country}
         </div>
         <div
           className="warehouse-row__col warehouse-row__col--3"
