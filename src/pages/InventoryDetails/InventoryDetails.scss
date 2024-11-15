@@ -1,0 +1,8 @@
+@use "../../styles/partials/variables" as *;
+
+.inventory-info {
+	&__title {
+		text-transform: uppercase;
+		color: $Slate;
+	}
+}
