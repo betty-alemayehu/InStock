@@ -26,7 +26,7 @@ export default function WarehouseList({
       <SearchHeader
         title="Warehouses"
         buttonTitle="+ Add New Warehouse"
-        buttonLink="/warehouse/add"
+        buttonLink="/warehouses/add"
         handleSearchInput={handleSearchInput}
       />
       <div className="warehouse-list">
