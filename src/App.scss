@@ -14,7 +14,7 @@ body {
   position: relative;
   top: -7.25rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
   padding-top: 25px; // Ensure content starts below the header
-  z-index: 0; // Place below the header if needed
+  z-index: 1; // Place below the header if needed
 
   @include tablet {
     top: -9.25rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
