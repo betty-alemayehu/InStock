@@ -1,5 +1,4 @@
 const URL = import.meta.env.VITE_API_URL;
-
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./InventoryForm.scss";
 import { useEffect, useState } from "react";
@@ -153,10 +152,10 @@ function InventoryForm() {
         console.log("Request Data being sent:", requestData);
 
         const response = isEditMode
-          ? // If edit mode, make put/edit request
-            await axios.put(`${URL}/inventories/${id}`, formData)
+          ? // If edit mode, make PUT/edit request
+            await axios.put(`${URL}/inventories/${id}`, requestData) // Use `requestData` instead of `formData`
           : // If NOT edit mode, make POST request (new item)
-            await axios.post(`${URL}/inventories`, formData);
+            await axios.post(`${URL}/inventories`, requestData); // Use `requestData` instead of `formData`
         if (response.status === 201) {
           // Clear form input
           setFormData({
@@ -276,7 +275,11 @@ function InventoryForm() {
                   {availabilityFields[0].options.map((statusOption) => (
                     <label
                       key={statusOption}
-                      className="warehouse-form__radio-label"
+                      className={`warehouse-form__radio-label ${
+                        formData.status === statusOption
+                          ? "warehouse-form__radio-label--selected"
+                          : ""
+                      }`}
                     >
                       <input
                         type="radio"
