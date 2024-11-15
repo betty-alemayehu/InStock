@@ -23,8 +23,8 @@ export default function Warehouses() {
   };
 
   return (
-    <>
+    <div className="warehouses">
       <WarehouseList warehouseItems={warehouseItems} />
-    </>
+    </div>
   );
 }
