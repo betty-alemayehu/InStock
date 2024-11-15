@@ -58,10 +58,9 @@ function InventoryForm() {
 
   // Fields for Item Availability
   const availabilityFields = [
-    { label: "Status", name: "status", options: ["in stock", "out of stock"] },
+    { label: "Status", name: "status", options: ["In Stock", "Out of Stock"] },
     { label: "Quantity", name: "quantity", type: "number" },
-    // Request needs warehouse_id, hardcode to 2 for now
-    // it should take warehouse_name, do i need to find the id from warehouse name?? or do i get list of warehouses, list them, but when auser selectes it, we convert it to id for the request?
+    // Placeholder
     { label: "Warehouse", name: "warehouse", options: ["nj", "new york"] },
   ];
 
@@ -70,7 +69,7 @@ function InventoryForm() {
     item_name: "",
     description: "",
     category: "",
-    status: "in stock", // Default status to "in stock"
+    status: "In Stock", // Default status to "in stock"
     quantity: "",
     warehouse: "",
     warehouse_id: "", // Add warehouse_id here to store the ID from the name
@@ -104,14 +103,16 @@ function InventoryForm() {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
 
-    // If the 'warehouse' field changes, look up the warehouse_id by name
+    // If the 'warehouse' field changes, find the warehouse_id by warehouse name
     if (name === "warehouse") {
       const selectedWarehouse = warehouses.find(
-        (warehouse) => warehouse.name === value
+        (warehouse) => warehouse.warehouse_name === value
       );
+
+      // Ensure warehouse_id is set correctly
       setFormData((prev) => ({
         ...prev,
-        warehouse_id: selectedWarehouse ? selectedWarehouse.id : "",
+        warehouse_id: selectedWarehouse ? selectedWarehouse.id : "", // this should be a number
       }));
     }
   };
@@ -131,8 +132,8 @@ function InventoryForm() {
     if (!formData.status) {
       newErrors.status = "Status is required.";
     }
-    if (formData.status === "in stock" && !formData.quantity) {
-      newErrors.quantity = "Quantity is required when in stock.";
+    if (formData.status === "In Stock" && !formData.quantity) {
+      newErrors.quantity = "Quantity is required when In Stock.";
     }
     if (!formData.warehouse) {
       newErrors.warehouse = "Warehouse is required.";
@@ -146,6 +147,19 @@ function InventoryForm() {
     event.preventDefault();
     if (validateFields()) {
       try {
+        // Ensure we are sending warehouse_id and not warehouse_name
+        // Set quantity to 0 if the item is "Out of Stock"
+        const requestData = {
+          ...formData, // Directly use formData, since it's updated now
+          warehouse_id: formData.warehouse_id || "", // Ensure warehouse_id is set correctly
+          quantity: formData.status === "Out of Stock" ? 0 : formData.quantity,
+        };
+
+        delete requestData.warehouse; // Remove warehouse name from request data
+
+        // Log the requestData before sending to ensure it's correct
+        console.log("Request Data being sent:", requestData);
+
         const response = isEditMode
           ? // If edit mode, make put/edit request
             await axios.put(`${URL}/inventories/${id}`, formData)
@@ -157,12 +171,12 @@ function InventoryForm() {
             item_name: "",
             description: "",
             category: "",
-            status: "in stock",
+            status: "In Stock",
             quantity: "",
             warehouse: "",
             warehouse_id: "",
           });
-          navigate("/inventories");
+          navigate("/inventory");
         }
       } catch (error) {
         console.error(
@@ -178,7 +192,7 @@ function InventoryForm() {
         {/* form header */}
         <form onSubmit={handleSubmit}>
           <legend className="warehouse-form__header">
-            <Link to="/inventories" className="warehouse-form__icon">
+            <Link to="/inventory" className="warehouse-form__icon">
               <img
                 src="/assets/icons/arrow_back-24px.svg"
                 alt="arrow back icon"
@@ -205,32 +219,6 @@ function InventoryForm() {
                   >
                     {field.label}
                   </label>
-                  {/* Where it diverges */}
-                  {/* <input
-                    type="text"
-                    id={field.name}
-                    name={field.name}
-                    value={formData[field.name]}
-                    onChange={handleChange}
-                    className={`input-control ${
-                      errors[field.name]
-                        ? "warehouse-form__input-control--error"
-                        : ""
-                    }`}
-                    placeholder={`${field.label}`}
-                  />
-                  {errors[field.name] && (
-                    <span className="warehouse-form__error-message">
-                      <img
-                        src="/assets/icons/error-24px.svg"
-                        alt="error icon"
-                        className="warehouse-form__error-icon"
-                      />
-                      {errors[field.name]}
-                    </span>
-                  )}
-                </div>
-              ))} */}
                   {field.options ? (
                     <select
                       id={field.name}
@@ -323,7 +311,7 @@ function InventoryForm() {
               </div>
 
               {/* Quantity Field: Only visible if 'In Stock' is selected */}
-              {formData.status === "in stock" && (
+              {formData.status === "In Stock" && (
                 <div className="warehouse-form__input-field">
                   <label
                     htmlFor="quantity"
