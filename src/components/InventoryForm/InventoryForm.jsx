@@ -12,10 +12,11 @@ function InventoryForm() {
   useEffect(() => {
     if (isEditMode) {
       axios
-        .get(`${URL}/warehouses/${id}`)
+        //   Change endpoint from warehouses -> inventories
+        .get(`${URL}/inventories/${id}`)
         .then((response) => setFormData(response.data))
         .catch((error) =>
-          console.error("Error fetching warehouse data:", error)
+          console.error("Error fetching inventory item data:", error)
         );
     }
   }, [isEditMode, id]);
@@ -41,18 +42,6 @@ function InventoryForm() {
     { label: "Email", name: "contact_email" },
   ];
 
-  // Form data and error state management
-  const [formData, setFormData] = useState({
-    warehouse_name: "",
-    address: "",
-    city: "",
-    country: "",
-    contact_name: "",
-    contact_position: "",
-    contact_phone: "",
-    contact_email: "",
-  });
-
   // -=-=--=-=-=-==-=--=--=-==-MW CHANGE ==-=-=-=-=-=-=-=-==-=-=-=-=-
   // Fields for Inventory Item Details
   // Fields for Inventory Item Details
@@ -70,8 +59,20 @@ function InventoryForm() {
   const availabilityFields = [
     { label: "Status", name: "status", options: ["in stock", "out of stock"] },
     { label: "Quantity", name: "quantity", type: "number" },
+    // Request needs warehouse_id, hardcode to 2 for now
+    // it should take warehouse_name, do i need to find the id from warehouse name?? or do i get list of warehouses, list them, but when auser selectes it, we convert it to id for the request?
     { label: "Warehouse", name: "warehouse", options: ["nj", "new york"] },
   ];
+
+  // Form data state
+  const [formData, setFormData] = useState({
+    item_name: "",
+    description: "",
+    category: "",
+    status: "in stock", // Default status to "in stock"
+    quantity: "",
+    warehouse: "",
+  });
 
   // -=-=--=-=-=-==-=--=--=-==-MW CHANGE ==-=-=-=-=-=-=-=-==-=-=-=-=-
 
@@ -89,27 +90,24 @@ function InventoryForm() {
   // Validates the form fields
   const validateFields = () => {
     const newErrors = {};
-    const phoneRegex = /^\d{11}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Checks for a valid email with "@" and "."
-
-    // Validates required fields and checks formats for phone and email fields
-    Object.keys(formData).forEach((field) => {
-      const fieldValue = formData[field]
-        ? formData[field].toString().trim()
-        : ""; // Safely convert to string and trim
-      if (!fieldValue) {
-        newErrors[field] = "This field is required.";
-      } else if (
-        field === "contact_phone" &&
-        !phoneRegex.test(fieldValue.replace(/\D/g, ""))
-      ) {
-        newErrors[field] =
-          "Phone number must include country and area code, e.g. +1 (123) 555-6789";
-      } else if (field === "contact_email" && !emailRegex.test(fieldValue)) {
-        newErrors[field] = "Invalid email format.";
-      }
-    });
-
+    if (!formData.item_name.trim()) {
+      newErrors.item_name = "Item name is required.";
+    }
+    if (!formData.description.trim()) {
+      newErrors.description = "Description is required.";
+    }
+    if (!formData.category) {
+      newErrors.category = "Category is required.";
+    }
+    if (!formData.status) {
+      newErrors.status = "Status is required.";
+    }
+    if (formData.status === "in stock" && !formData.quantity) {
+      newErrors.quantity = "Quantity is required when in stock.";
+    }
+    if (!formData.warehouse) {
+      newErrors.warehouse = "Warehouse is required.";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -121,21 +119,29 @@ function InventoryForm() {
       try {
         const response = isEditMode
           ? // If edit mode, make put/edit request
-            await axios.put(`${URL}/warehouses/${id}`, formData)
+            await axios.put(`${URL}/inventories/${id}`, formData)
           : // If NOT edit mode, make POST request (new item)
-            await axios.post(`${URL}/warehouses`, formData);
+            await axios.post(`${URL}/inventories`, formData);
         if (response.status === 201) {
+          // Clear form input
           setFormData({
-            warehouse_name: "",
-            address: "",
-            city: "",
-            country: "",
-            contact_name: "",
-            contact_position: "",
-            contact_phone: "",
-            contact_email: "",
+            // warehouse_name: "",
+            // address: "",
+            // city: "",
+            // country: "",
+            // contact_name: "",
+            // contact_position: "",
+            // contact_phone: "",
+            // contact_email: "",
+            warehouse_id: "",
+            warehouse: "",
+            item_name: "",
+            description: "",
+            category: "",
+            status: "",
+            quantity: 0,
           });
-          navigate("/");
+          navigate("/inventories");
         }
       } catch (error) {
         console.error(
@@ -151,7 +157,7 @@ function InventoryForm() {
         {/* form header */}
         <form onSubmit={handleSubmit}>
           <legend className="warehouse-form__header">
-            <Link to="/warehouses" className="warehouse-form__icon">
+            <Link to="/inventories" className="warehouse-form__icon">
               <img
                 src="/assets/icons/arrow_back-24px.svg"
                 alt="arrow back icon"
@@ -162,12 +168,15 @@ function InventoryForm() {
               {isEditMode ? "Edit Inventory Item" : "Add New Inventory Item"}
             </h1>
           </legend>
+
           <hr className="warehouse-form__divider" />
+
           <div className="warehouse-form__sections">
-            {/* warehouse details inputs */}
+            {/* Item Details inputs */}
             <section className="warehouse-form__warehouse-details">
               <h2 className="warehouse-form__section-title">Item Details</h2>
-              {warehouseFields.map((field) => (
+              {/* warehouseFields -> itemFields */}
+              {itemFields.map((field) => (
                 <div className="warehouse-form__input-field" key={field.name}>
                   <label
                     htmlFor={field.name}
@@ -175,7 +184,8 @@ function InventoryForm() {
                   >
                     {field.label}
                   </label>
-                  <input
+                  {/* Where it diverges */}
+                  {/* <input
                     type="text"
                     id={field.name}
                     name={field.name}
@@ -188,6 +198,52 @@ function InventoryForm() {
                     }`}
                     placeholder={`${field.label}`}
                   />
+                  {errors[field.name] && (
+                    <span className="warehouse-form__error-message">
+                      <img
+                        src="/assets/icons/error-24px.svg"
+                        alt="error icon"
+                        className="warehouse-form__error-icon"
+                      />
+                      {errors[field.name]}
+                    </span>
+                  )}
+                </div>
+              ))} */}
+                  {field.options ? (
+                    <select
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className={`input-control ${
+                        errors[field.name]
+                          ? "warehouse-form__input-control--error"
+                          : ""
+                      }`}
+                    >
+                      <option value="">Select {field.label}</option>
+                      {field.options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className={`input-control ${
+                        errors[field.name]
+                          ? "warehouse-form__input-control--error"
+                          : ""
+                      }`}
+                      placeholder={field.label}
+                    />
+                  )}
                   {errors[field.name] && (
                     <span className="warehouse-form__error-message">
                       <img
