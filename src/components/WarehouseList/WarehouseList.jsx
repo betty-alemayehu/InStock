@@ -23,7 +23,7 @@ export default function WarehouseList({ warehouseItems }) {
       <SearchHeader
         title="Warehouses"
         buttonTitle="+ Add New Warehouse"
-        buttonLink="/warehouse/add"
+        buttonLink="/warehouses/add"
         handleSearchInput={handleSearchInput}
       />
       <div className="warehouse-list">
