@@ -7,7 +7,7 @@ import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
 import { useState } from "react";
 
-export default function InventoryList2({ inventoryItems }) {
+export default function InventoryList({ inventoryItems }) {
   const [inventory, setInventory] = useState();
 
   const [search, setSearch] = useState("");

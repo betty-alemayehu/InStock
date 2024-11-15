@@ -9,32 +9,21 @@ function InventoryForm() {
   const { id } = useParams();
   const isEditMode = Boolean(id);
 
-  useEffect(() => {
-    if (isEditMode) {
-      axios
-        .get(`${URL}/inventories/${id}`)
-        .then((response) => {
-          const inventoryItem = response.data;
-          setFormData({
-            item_name: inventoryItem.item_name,
-            description: inventoryItem.description,
-            category: inventoryItem.category,
-            status: inventoryItem.status,
-            quantity: inventoryItem.quantity,
-            warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
-            warehouse_id: inventoryItem.warehouse_id, // Prepopulate warehouse_id
-          });
-        })
-        .catch((error) =>
-          console.error("Error fetching inventory item data:", error)
-        );
-    }
-  }, [isEditMode, id]);
+  const [warehouses, setWarehouses] = useState([]); // State to store warehouses list
 
   //to redirect user to inventory list after submission
   const navigate = useNavigate();
 
-  // Logic for edit from Betty ^
+  // Form data state
+  const [formData, setFormData] = useState({
+    item_name: "",
+    description: "",
+    category: "",
+    status: "In Stock", // Default status to "in stock"
+    quantity: "",
+    warehouse: "",
+    warehouse_id: "", // Add warehouse_id here to store the ID from the name
+  });
 
   // Fields for Inventory Item Details
   const itemFields = [
@@ -55,20 +44,32 @@ function InventoryForm() {
     { label: "Warehouse", name: "warehouse", options: ["nj", "new york"] },
   ];
 
-  // Form data state
-  const [formData, setFormData] = useState({
-    item_name: "",
-    description: "",
-    category: "",
-    status: "In Stock", // Default status to "in stock"
-    quantity: "",
-    warehouse: "",
-    warehouse_id: "", // Add warehouse_id here to store the ID from the name
-  });
-
-  // -=-=--=-=-=-==-=--=--=-==-MW CHANGE ==-=-=-=-=-=-=-=-==-=-=-=-=-
-
-  const [warehouses, setWarehouses] = useState([]); // State to store warehouses list
+  useEffect(() => {
+    if (isEditMode) {
+      axios
+        .get(`${URL}/inventories/${id}`)
+        .then((response) => {
+          const inventoryItem = response.data;
+          setFormData({
+            item_name: inventoryItem.item_name,
+            description: inventoryItem.description,
+            category: inventoryItem.category,
+            status: inventoryItem.status,
+            quantity: inventoryItem.quantity, // Ensure quantity is a number from the API
+            warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
+            warehouse_id: inventoryItem.warehouse_id || "", // Prepopulate warehouse_id (ensure it is set)
+          });
+          // undefined
+          console.log(
+            "inventoryItem.warehouse_id: ",
+            inventoryItem.warehouse_id
+          );
+        })
+        .catch((error) =>
+          console.error("Error fetching inventory item data:", error)
+        );
+    }
+  }, [isEditMode, id]);
 
   useEffect(() => {
     fetchWarehouses();
@@ -136,28 +137,44 @@ function InventoryForm() {
   // Handles form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Ensure warehouse_id is set before submission
+    if (!formData.warehouse_id) {
+      const selectedWarehouse = warehouses.find(
+        (warehouse) => warehouse.warehouse_name === formData.warehouse
+      );
+
+      // If warehouse is selected, update formData with warehouse_id
+      if (selectedWarehouse) {
+        setFormData((prev) => ({
+          ...prev,
+          warehouse_id: selectedWarehouse.id,
+        }));
+      }
+      return; // Exit here to wait for state to be updated
+    }
+
+    // Continue with form submission if warehouse_id is already set
     if (validateFields()) {
       try {
-        // Ensure we are sending warehouse_id and not warehouse_name
-        // Set quantity to 0 if the item is "Out of Stock"
+        // Now create the requestData with updated formData
         const requestData = {
-          ...formData, // Directly use formData, since it's updated now
-          warehouse_id: formData.warehouse_id || "", // Ensure warehouse_id is set correctly
-          quantity: formData.status === "Out of Stock" ? 0 : formData.quantity,
+          ...formData,
+          warehouse_id: formData.warehouse_id, // Ensure warehouse_id is set correctly
+          quantity:
+            formData.status === "Out of Stock" ? 0 : Number(formData.quantity),
         };
-
-        delete requestData.warehouse; // Remove warehouse name from request data
 
         // Log the requestData before sending to ensure it's correct
         console.log("Request Data being sent:", requestData);
 
+        delete requestData.warehouse; // Remove warehouse name from request data
+
         const response = isEditMode
-          ? // If edit mode, make PUT/edit request
-            await axios.put(`${URL}/inventories/${id}`, requestData) // Use `requestData` instead of `formData`
-          : // If NOT edit mode, make POST request (new item)
-            await axios.post(`${URL}/inventories`, requestData); // Use `requestData` instead of `formData`
-        if (response.status === 201) {
-          // Clear form input
+          ? await axios.put(`${URL}/inventories/${id}`, requestData)
+          : await axios.post(`${URL}/inventories`, requestData);
+
+        if (response.status === 201 || response.status === 200) {
           setFormData({
             item_name: "",
             description: "",
@@ -382,7 +399,7 @@ function InventoryForm() {
           {/* inventory form actions/buttons */}
           <div className="warehouse-form__actions">
             <Link
-              to="/warehouses"
+              to="/inventory"
               className="button button--secondary warehouse-form__button--link"
             >
               Cancel
