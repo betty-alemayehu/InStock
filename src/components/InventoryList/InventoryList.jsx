@@ -7,7 +7,10 @@ import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
 import { useState } from "react";
 
-export default function InventoryList2({ inventoryItems }) {
+export default function InventoryList2({
+  inventoryItems,
+  generateInventoryItems,
+}) {
   const [inventory, setInventory] = useState();
 
   const [search, setSearch] = useState("");
@@ -36,6 +39,7 @@ export default function InventoryList2({ inventoryItems }) {
             key={inventory.id}
             inventory={inventory}
             setInventory={setInventory}
+            generateInventoryItems={generateInventoryItems}
           />
         ))}
       </div>

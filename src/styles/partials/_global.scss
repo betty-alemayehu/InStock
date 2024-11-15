@@ -47,7 +47,8 @@ p {
 }
 // Need to explicitly specify font family for input and text area, otherwise its consolas
 input,
-textarea {
+textarea,
+select {
   font-family: "TitilliumWeb", sans-serif;
 }
 
@@ -98,6 +99,13 @@ button {
     &:hover {
       color: $Instock-Indigo;
       border: 0.0625rem solid $Instock-Indigo;
+    }
+  }
+  &--delete {
+    background-color: $Red;
+    color: $White;
+    &:hover {
+      background-color: $Instock-Black;
     }
   }
 }

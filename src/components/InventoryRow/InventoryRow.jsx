@@ -1,10 +1,21 @@
-import React from "react";
-import "./InventoryRow.scss";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import "./InventoryRow.scss";
 import deleteImage from "/assets/icons/delete_outline-24px.svg";
 import editImage from "/assets/icons/edit-24px.svg";
 
-function InventoryRow({ inventory }) {
+function InventoryRow({ inventory, generateInventoryItems }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteSuccess = () => {
+    generateInventoryItems();
+  };
+
   return (
     <div>
       <li className="inventory-row__row">
@@ -31,7 +42,6 @@ function InventoryRow({ inventory }) {
           className="inventory-row__col inventory-row__col--3"
           data-label="Status"
         >
-          {/* Conditional styling for in vs out of stock*/}
           {inventory.status === "In Stock" ? (
             <span className="inventory-row__col--success">
               {inventory.status}
@@ -62,11 +72,12 @@ function InventoryRow({ inventory }) {
           className="inventory-row__col inventory-row__col--6"
           data-label="Actions"
         >
-          {/* Trash icon, route to delete modal once created */}
-          <button className="inventory-row__col--btn">
+          <button
+            className="inventory-row__col--btn"
+            onClick={() => setIsModalOpen(true)}
+          >
             <img src={deleteImage} alt="delete" />
           </button>
-          {/* Route to: <Route path="inventory/:id/edit" element={<InventoryEdit />} /> */}
           <Link
             to={`/inventory/${inventory.id}/edit`}
             className="inventory-row__col--btn"
@@ -75,6 +86,15 @@ function InventoryRow({ inventory }) {
           </Link>
         </div>
       </li>
+
+      <DeleteModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        itemType="inventory"
+        itemId={inventory.id}
+        itemName={inventory.item_name}
+        onSuccess={handleDeleteSuccess}
+      />
     </div>
   );
 }
