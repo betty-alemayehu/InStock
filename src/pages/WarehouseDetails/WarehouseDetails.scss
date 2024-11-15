@@ -1,0 +1,17 @@
+@use "../../styles/partials/mixins" as *;
+
+.warehouseDetails__container {
+	padding: 0 1.5rem;
+
+	@include tablet {
+		padding: 0 2.5rem;
+	}
+
+	@include desktop {
+		padding: 0 10.625rem;
+	}
+
+	&--shadow {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+}

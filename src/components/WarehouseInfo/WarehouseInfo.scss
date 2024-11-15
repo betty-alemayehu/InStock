@@ -3,6 +3,7 @@
 
 .warehouse {
 	border-radius: 5px 5px 0 0;
+	background-color: $White;
 
 	&__title-card {
 		display: flex;
@@ -10,9 +11,9 @@
 		align-items: center;
 		padding: 2.8125rem 2rem 2.1875rem 2rem;
 		border-bottom: 1.5px solid $Cloud;
-
 		@include tablet {
 			padding: 2.8125rem 2.625rem 1.875rem 2.625rem;
+			height: 7.7rem;
 		}
 
 		@include desktop {
