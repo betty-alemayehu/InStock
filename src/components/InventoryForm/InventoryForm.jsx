@@ -9,6 +9,7 @@ function InventoryForm() {
   //Define an isEditMode Variable to check if the id parameter is present
   const { id } = useParams();
   const isEditMode = Boolean(id);
+
   useEffect(() => {
     if (isEditMode) {
       axios
@@ -72,9 +73,26 @@ function InventoryForm() {
     status: "in stock", // Default status to "in stock"
     quantity: "",
     warehouse: "",
+    warehouse_id: "", // Add warehouse_id here to store the ID from the name
   });
 
   // -=-=--=-=-=-==-=--=--=-==-MW CHANGE ==-=-=-=-=-=-=-=-==-=-=-=-=-
+
+  const [warehouses, setWarehouses] = useState([]); // State to store warehouses list
+
+  useEffect(() => {
+    fetchWarehouses();
+  }, []);
+  const fetchWarehouses = async () => {
+    try {
+      const { data } = await axios.get(`${URL}/warehouses`);
+      setWarehouses(data); // sets the inventory list as all inventory items
+      // check warehouses are fetched in FE console
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching warehouses data:", error);
+    }
+  };
 
   const [errors, setErrors] = useState({});
 
@@ -84,6 +102,17 @@ function InventoryForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+
+    // If the 'warehouse' field changes, look up the warehouse_id by name
+    if (name === "warehouse") {
+      const selectedWarehouse = warehouses.find(
+        (warehouse) => warehouse.name === value
+      );
+      setFormData((prev) => ({
+        ...prev,
+        warehouse_id: selectedWarehouse ? selectedWarehouse.id : "",
+      }));
     }
   };
 
@@ -125,21 +154,13 @@ function InventoryForm() {
         if (response.status === 201) {
           // Clear form input
           setFormData({
-            // warehouse_name: "",
-            // address: "",
-            // city: "",
-            // country: "",
-            // contact_name: "",
-            // contact_position: "",
-            // contact_phone: "",
-            // contact_email: "",
-            warehouse_id: "",
-            warehouse: "",
             item_name: "",
             description: "",
             category: "",
-            status: "",
-            quantity: 0,
+            status: "in stock",
+            quantity: "",
+            warehouse: "",
+            warehouse_id: "",
           });
           navigate("/inventories");
         }
@@ -356,9 +377,9 @@ function InventoryForm() {
                   }`}
                 >
                   <option value="">Select Warehouse</option>
-                  {availabilityFields[2].options.map((warehouse) => (
-                    <option key={warehouse} value={warehouse}>
-                      {warehouse}
+                  {warehouses.map((warehouse) => (
+                    <option key={warehouse.id} value={warehouse.warehouse_name}>
+                      {warehouse.warehouse_name}
                     </option>
                   ))}
                 </select>
