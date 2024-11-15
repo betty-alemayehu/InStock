@@ -231,8 +231,9 @@ function InventoryForm() {
                   >
                     {field.label}
                   </label>
-                  {field.options ? (
-                    <select
+                  {/* Have descrition field be textarea instead of text since it's taller  */}
+                  {field.name === "description" ? (
+                    <textarea
                       id={field.name}
                       name={field.name}
                       value={formData[field.name]}
@@ -242,14 +243,8 @@ function InventoryForm() {
                           ? "warehouse-form__input-control--error"
                           : ""
                       }`}
-                    >
-                      <option value="">Select {field.label}</option>
-                      {field.options.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                      placeholder={field.label}
+                    />
                   ) : (
                     <input
                       type="text"
