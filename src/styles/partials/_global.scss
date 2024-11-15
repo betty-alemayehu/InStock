@@ -101,6 +101,13 @@ button {
       border: 0.0625rem solid $Instock-Indigo;
     }
   }
+  &--delete {
+    background-color: $Red;
+    color: $White;
+    &:hover {
+      background-color: $Instock-Black;
+    }
+  }
 }
 
 //INPUT FIELD

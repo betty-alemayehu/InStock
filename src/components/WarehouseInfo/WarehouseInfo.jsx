@@ -1,7 +1,5 @@
+import DetailsHeader from "../DetailsHeader/DetailsHeader";
 import "./WarehouseInfo.scss";
-import arrowBack from "/assets/icons/arrow_back-24px.svg";
-import editIcon from "/assets/icons/edit-white-24px.svg";
-import { Link } from "react-router-dom";
 
 export default function WarehouseInfo({ currentWarehouse }) {
 	const {
@@ -18,28 +16,11 @@ export default function WarehouseInfo({ currentWarehouse }) {
 
 	return (
 		<div className="warehouse">
-			<section className="warehouse__title-card">
-				<div className="warehouse__title-wrapper">
-					<Link to="/" className="warehouse__link">
-						<img
-							src={arrowBack}
-							alt="Back Arrow Icon"
-							className="warehouse__icon--back"
-						/>
-					</Link>
-					<h1 className="warehouse__title">{warehouse_name}</h1>
-				</div>
-				<Link to={`/warehouses/${id}/edit`} className="warehouse__link">
-					<div className="warehouse__icon-wrapper">
-						<img
-							src={editIcon}
-							alt="Edit Icon"
-							className="warehouse__icon--edit-white"
-						/>
-						<span className="warehouse__icon-name">Edit</span>
-					</div>
-				</Link>
-			</section>
+			<DetailsHeader
+				title={warehouse_name}
+				pathBack="/"
+				pathEdit={`/warehouses/${id}`}
+			/>
 			<section className="warehouse-card">
 				<div className="warehouse-card__addressInfo">
 					<h2 className="warehouse-card__title">warehouse address:</h2>

@@ -24,7 +24,10 @@ export default function Inventory() {
 
   return (
     <>
-      <InventoryList inventoryItems={inventoryItems} />
+      <InventoryList
+        inventoryItems={inventoryItems}
+        generateInventoryItems={generateInventoryItems}
+      />
     </>
   );
 }
