@@ -40,6 +40,13 @@ ul {
       &::after {
         content: url(/assets/icons/chevron_right-24px.svg);
         line-height: 0;
+        //diving deeper
+        margin-left: 0.25rem; //4px //initial position of arrow
+        transition: transform 0.3s ease;
+      }
+
+      &:hover::after {
+        transform: translateX(0.25rem); //move arrow to right
       }
     }
 
