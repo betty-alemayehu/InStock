@@ -4,6 +4,7 @@ import "./InventoryDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DetailsHeader from "../../components/DetailsHeader/DetailsHeader";
+import LabelContent from "../../components/LabelContent/LabelContent";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -44,47 +45,26 @@ export default function InventoryDetails() {
 				/>
 				<section className="inventoryDetails-card">
 					<div className="inventoryDetails-card__section inventoryDetails-card__section--one">
-						<LabelContent label="item description" content={description} />
-						<LabelContent label="category" content={category} />
+						<LabelContent label="item description:" content={description} />
+						<LabelContent label="category:" content={category} />
 					</div>
 					<div className="inventoryDetails-card__section inventoryDetails-card__section--two">
 						<div className="inventoryDetails-card__section inventoryDetails-card__section--three">
 							<LabelContent
-								label="status"
+								label="status:"
 								content={status}
 								className="inventoryDetails-card__section--status"
 							/>
 							<LabelContent
-								label="quantity"
+								label="quantity:"
 								content={quantity}
 								className="inventoryDetails-card__section--quantity"
 							/>
 						</div>
-						<LabelContent label="warehouse" content={warehouse_name} />
+						<LabelContent label="warehouse:" content={warehouse_name} />
 					</div>
 				</section>
 			</div>
-		</div>
-	);
-}
-
-function LabelContent({ label, content, className }) {
-	const newClassName = className
-		? `inventory-info ${className}`
-		: "inventory-info";
-
-	let contentClassName = `inventory-info__description`;
-	if (label === "status") {
-		if (content.toLowerCase() === "in stock") {
-			contentClassName += " inventory-info__description--success";
-		} else {
-			contentClassName += " inventory-info__description--failed";
-		}
-	}
-	return (
-		<div className={newClassName}>
-			<h2 className="inventory-info__title">{`${label}:`}</h2>
-			<span className={contentClassName}>{content}</span>
 		</div>
 	);
 }
