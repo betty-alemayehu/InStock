@@ -184,7 +184,13 @@ function InventoryForm() {
             warehouse: "",
             warehouse_id: "",
           });
-          navigate("/inventory");
+
+          // Redirect to the item details page after saving the item in edit mode
+          if (isEditMode) {
+            navigate(`/inventory/${id}`); // Navigate to the details page of the edited item
+          } else {
+            navigate("/inventory"); // Navigate to inventory list if it's a new item
+          }
         }
       } catch (error) {
         console.error(
