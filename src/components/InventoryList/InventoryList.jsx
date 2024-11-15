@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./InventoryList.scss";
 
 import InventoryRow from "../InventoryRow/InventoryRow.jsx";
 import InventoryRibbon from "../InventoryRibbon/InventoryRibbon.jsx";
 import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
-import { useState } from "react";
+import axios from "axios";
 
-export default function InventoryList2({ inventoryItems }) {
-  const [inventory, setInventory] = useState();
-
+const apiUrl = import.meta.env.VITE_API_URL;
+//consider removing inventoryItems
+export default function InventoryList({ inventoryItems }) {
+  const [inventory, setInventory] = useState([]);
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    fetchInventory();
+  }, [search]);
+
+  const fetchInventory = async () => {
+    try {
+      const { data } = await axios.get(`${apiUrl}/inventories`, {
+        params: { s: search },
+      });
+      setInventory(data);
+    } catch (error) {
+      console.error("Error fetching inventory data:", error);
+    }
+  };
+
   const handleSearchInput = (event) => {
-    const { value } = event.target;
-    setSearch(value);
+    setSearch(event.target.value);
   };
 
   return (
@@ -27,11 +42,8 @@ export default function InventoryList2({ inventoryItems }) {
         handleSearchInput={handleSearchInput}
       />
       <div className="inventory-list">
-        {/* The table header. Seperate from contents ribbon doesnt show on mobile */}
-        {/* Pass prop of what items to show in list for the warehouse inventory view */}
         <InventoryRibbon />
-        {/* Table contents */}
-        {inventoryItems.map((inventory) => (
+        {inventory.map((inventory) => (
           <InventoryRow
             key={inventory.id}
             inventory={inventory}
