@@ -1,5 +1,6 @@
 import "./InventoryEdit.scss";
+import InventoryForm from "../../components/InventoryForm/InventoryForm";
 
-export default function InventoryEdit() {
-	return <></>;
+export default function InventoryAdd() {
+  return <InventoryForm />;
 }
