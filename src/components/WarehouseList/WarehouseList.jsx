@@ -7,7 +7,10 @@ import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
 import { useState } from "react";
 
-export default function WarehouseList({ warehouseItems }) {
+export default function WarehouseList({
+  warehouseItems,
+  generateWarehouseItems,
+}) {
   const [warehouse, setWarehouse] = useState();
 
   const [search, setSearch] = useState("");
@@ -38,6 +41,7 @@ export default function WarehouseList({ warehouseItems }) {
             warehouse={warehouse}
             total={warehouseItems.length}
             setWarehouse={setWarehouse}
+            generateWarehouseItems={generateWarehouseItems}
           />
         ))}
       </div>

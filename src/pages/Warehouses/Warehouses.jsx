@@ -24,7 +24,10 @@ export default function Warehouses() {
 
   return (
     <>
-      <WarehouseList warehouseItems={warehouseItems} />
+      <WarehouseList
+        warehouseItems={warehouseItems}
+        generateWarehouseItems={generateWarehouseItems}
+      />
     </>
   );
 }

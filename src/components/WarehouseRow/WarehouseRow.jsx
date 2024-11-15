@@ -1,25 +1,30 @@
-import React from "react";
-import "./WarehouseRow.scss";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import "./WarehouseRow.scss";
 import deleteImage from "/assets/icons/delete_outline-24px.svg";
 import editImage from "/assets/icons/edit-24px.svg";
 
-function WarehouseRow({ warehouse, index, total }) {
+function WarehouseRow({ warehouse, generateWarehouseItems }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteSuccess = () => {
+    generateWarehouseItems();
+  };
+
   return (
     <ul>
-      <li
-        key={warehouse.id}
-        className={`warehouse-row__row ${
-          index === total - 1 ? "last-item" : ""
-        }`}
-      >
+      <li className="warehouse-row__row">
         <div
           className="warehouse-row__col warehouse-row__col--1"
           data-label="warehouse item"
         >
           <Link
             className="warehouse-row__col--title"
-            key={warehouse.id}
             to={`/warehouse/${warehouse.id}`}
           >
             {warehouse.warehouse_name}
@@ -50,11 +55,12 @@ function WarehouseRow({ warehouse, index, total }) {
           className="warehouse-row__col warehouse-row__col--5"
           data-label="Actions"
         >
-          {/* Trash icon, route to delete modal once created */}
-          <button className="warehouse-row__col--btn">
+          <button
+            className="warehouse-row__col--btn"
+            onClick={() => setIsModalOpen(true)}
+          >
             <img src={deleteImage} alt="delete" />
           </button>
-          {/* Route to: <Route path="warehouse/:id/edit" element={<WarehouseEdit />} /> */}
           <Link
             to={`/warehouse/${warehouse.id}/edit`}
             className="warehouse-row__col--btn"
@@ -63,6 +69,15 @@ function WarehouseRow({ warehouse, index, total }) {
           </Link>
         </div>
       </li>
+
+      <DeleteModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        itemType="warehouse"
+        itemId={warehouse.id}
+        itemName={warehouse.warehouse_name}
+        onSuccess={handleDeleteSuccess}
+      />
     </ul>
   );
 }
