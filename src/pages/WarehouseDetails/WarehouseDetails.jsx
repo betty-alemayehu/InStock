@@ -53,7 +53,10 @@ export default function WarehouseDetails() {
 		<div className="warehouseDetails__container">
 			<div className="warehouseDetails__container--shadow">
 				<WareHouseInfo currentWarehouse={currentWarehouse} />
-				<WarehouseInventoryList inventoryList={inventoryList} />
+				<WarehouseInventoryList
+					inventoryList={inventoryList}
+					getInventory={getInventory}
+				/>
 			</div>
 		</div>
 	);

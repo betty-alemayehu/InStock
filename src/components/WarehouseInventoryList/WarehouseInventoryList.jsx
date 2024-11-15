@@ -1,16 +1,21 @@
-import InventoryRibbon from "../InventoryRibbon/InventoryRibbon";
-import InventoryRow from "../InventoryRow/InventoryRow";
+import WarehouseInventoryRibbon from "../WarehouseInventoryRibbon/WarehouseInventoryRibbon";
+import WarehouseInventoryRow from "../WarehouseInventoryRow/WarehouseInventoryRow";
 import "./WarehouseInventoryList.scss";
 
-export default function WarehouseInventoryList({ inventoryList }) {
-	console.log(inventoryList);
+export default function WarehouseInventoryList({
+	inventoryList,
+	getInventory,
+}) {
 	return (
 		<>
-			<InventoryRibbon />
+			<WarehouseInventoryRibbon />
 			<ul className="warehouseInventory__list">
 				{inventoryList.map((inventory) => (
 					<li key={inventory.id} className="warehouseInventory__item">
-						<InventoryRow inventory={inventory} path="warehouse" />
+						<WarehouseInventoryRow
+							inventory={inventory}
+							getInventory={getInventory}
+						/>
 					</li>
 				))}
 			</ul>
