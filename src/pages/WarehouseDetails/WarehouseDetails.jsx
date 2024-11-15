@@ -33,8 +33,10 @@ export default function WarehouseDetails() {
 	}
 
 	return (
-		<>
-			<WareHouseInfo currentWarehouse={currentWarehouse} />
-		</>
+		<div className="warehouseDetails__container">
+			<div className="warehouseDetails__container--shadow">
+				<WareHouseInfo currentWarehouse={currentWarehouse} />
+			</div>
+		</div>
 	);
 }
