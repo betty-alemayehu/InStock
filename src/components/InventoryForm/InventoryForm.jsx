@@ -73,8 +73,6 @@ function InventoryForm() {
             warehouse: inventoryItem.warehouse_name, // Prepopulate warehouse_name
             warehouse_id: warehouse_id, // Set warehouse_id from either response or lookup
           });
-
-          console.log("inventoryItem.warehouse_id: ", warehouse_id);
         })
         .catch((error) =>
           console.error("Error fetching inventory item data:", error)
@@ -89,8 +87,6 @@ function InventoryForm() {
     try {
       const { data } = await axios.get(`${URL}/warehouses`);
       setWarehouses(data); // sets the inventory list as all inventory items
-      // check warehouses are fetched in FE console
-      console.log(data);
     } catch (error) {
       console.error("Error fetching warehouses data:", error);
     }
@@ -160,9 +156,6 @@ function InventoryForm() {
             formData.status === "Out of Stock" ? 0 : Number(formData.quantity),
         };
 
-        // Log the requestData before sending to ensure it's correct
-        console.log("Request Data being sent:", requestData);
-
         delete requestData.warehouse; // Remove warehouse name from request data
 
         const response = isEditMode
@@ -196,43 +189,62 @@ function InventoryForm() {
   };
 
   return (
-    <main className="warehouse-management">
-      <div className="warehouse-form">
+    <main className="inventory-management">
+      <div className="inventory-form">
         {/* form header */}
         <form onSubmit={handleSubmit}>
-          <legend className="warehouse-form__header">
+          <legend className="inventory-form__header">
             <Link
               to={isEditMode ? `/inventory/${id}` : "/inventory"} // Conditionally navigate based on edit mode
-              className="warehouse-form__icon"
+              className="inventory-form__icon"
             >
               <img
                 src="/assets/icons/arrow_back-24px.svg"
                 alt="arrow back icon"
-                className="warehouse-form__icon"
+                className="inventory-form__icon"
               />
             </Link>
-            <h1 className="warehouse-form__title">
+            <h1 className="inventory-form__title">
               {isEditMode ? "Edit Inventory Item" : "Add New Inventory Item"}
             </h1>
           </legend>
 
-          <hr className="warehouse-form__divider" />
+          <hr className="inventory-form__divider" />
 
-          <div className="warehouse-form__sections">
+          <div className="inventory-form__sections">
             {/* Item Details inputs */}
-            <section className="warehouse-form__warehouse-details">
-              <h2 className="warehouse-form__section-title">Item Details</h2>
-              {/* warehouseFields -> itemFields */}
-              {itemFields.map((field) => (
-                <div className="warehouse-form__input-field" key={field.name}>
-                  <label
-                    htmlFor={field.name}
-                    className="warehouse-form__input-label"
-                  >
-                    {field.label}
-                  </label>
-                  {/* Have descrition field be textarea instead of text since it's taller  */}
-                  {field.name === "description" ? (
+            <section className="inventory-form__inventory-details">
+              <h2 className="inventory-form__section-title">Item Details</h2>
+              {/* itemFields */}
+              {itemFields.map((field) => {
+                let inputElement = null;
+
+                // If field has options (dropdown for category selection)
+                if (field.options) {
+                  inputElement = (
+                    <select
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className={`input-control ${
+                        errors[field.name]
+                          ? "inventory-form__input-control--error"
+                          : ""
+                      }`}
+                    >
+                      <option value="">Select {field.label}</option>
+                      {field.options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  );
+                }
+                // If the field is for description, render a textarea
+                else if (field.name === "description") {
+                  inputElement = (
                     <textarea
                       id={field.name}
                       name={field.name}
@@ -240,12 +252,16 @@ function InventoryForm() {
                       onChange={handleChange}
                       className={`input-control ${
                         errors[field.name]
-                          ? "warehouse-form__input-control--error"
+                          ? "inventory-form__input-control--error"
                           : ""
                       }`}
                       placeholder={field.label}
                     />
-                  ) : (
+                  );
+                }
+                // For other fields, render a normal text input
+                else {
+                  inputElement = (
                     <input
                       type="text"
                       id={field.name}
@@ -254,46 +270,59 @@ function InventoryForm() {
                       onChange={handleChange}
                       className={`input-control ${
                         errors[field.name]
-                          ? "warehouse-form__input-control--error"
+                          ? "inventory-form__input-control--error"
                           : ""
                       }`}
                       placeholder={field.label}
                     />
-                  )}
-                  {errors[field.name] && (
-                    <span className="warehouse-form__error-message">
-                      <img
-                        src="/assets/icons/error-24px.svg"
-                        alt="error icon"
-                        className="warehouse-form__error-icon"
-                      />
-                      {errors[field.name]}
-                    </span>
-                  )}
-                </div>
-              ))}
+                  );
+                }
+
+                return (
+                  <div className="inventory-form__input-field" key={field.name}>
+                    <label
+                      htmlFor={field.name}
+                      className="inventory-form__input-label"
+                    >
+                      {field.label}
+                    </label>
+                    {inputElement}{" "}
+                    {/* Render the corresponding input element based on conditions */}
+                    {errors[field.name] && (
+                      <span className="inventory-form__error-message">
+                        <img
+                          src="/assets/icons/error-24px.svg"
+                          alt="error icon"
+                          className="inventory-form__error-icon"
+                        />
+                        {errors[field.name]}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </section>
 
-            <hr className="warehouse-form__divider warehouse-form__divider--tablet" />
+            <hr className="inventory-form__divider inventory-form__divider-tablet" />
 
             {/* Item Availability Section */}
-            <section className="warehouse-form__contact-details">
-              <h2 className="warehouse-form__section-title">
+            <section className="inventory-form__contact-details">
+              <h2 className="inventory-form__section-title">
                 Item Availability
               </h2>
 
               {/* Status Field: Radio buttons for 'In Stock' and 'Out of Stock' */}
-              <div className="warehouse-form__input-field">
-                <label className="warehouse-form__input-label" htmlFor="status">
+              <div className="inventory-form__input-field">
+                <label className="inventory-form__input-label" htmlFor="status">
                   Status
                 </label>
-                <div className="warehouse-form__radio-group">
+                <div className="inventory-form__radio-group">
                   {availabilityFields[0].options.map((statusOption) => (
                     <label
                       key={statusOption}
-                      className={`warehouse-form__radio-label ${
+                      className={`inventory-form__radio-label ${
                         formData.status === statusOption
-                          ? "warehouse-form__radio-label--selected"
+                          ? "inventory-form__radio-label--selected"
                           : ""
                       }`}
                     >
@@ -303,18 +332,18 @@ function InventoryForm() {
                         value={statusOption}
                         checked={formData.status === statusOption}
                         onChange={handleChange}
-                        className="warehouse-form__radio-input"
+                        className="inventory-form__radio-input"
                       />
                       {statusOption}
                     </label>
                   ))}
                 </div>
                 {errors.status && (
-                  <span className="warehouse-form__error-message">
+                  <span className="inventory-form__error-message">
                     <img
                       src="/assets/icons/error-24px.svg"
                       alt="error icon"
-                      className="warehouse-form__error-icon"
+                      className="inventory-form__error-icon"
                     />
                     {errors.status}
                   </span>
@@ -323,10 +352,10 @@ function InventoryForm() {
 
               {/* Quantity Field: Only visible if 'In Stock' is selected */}
               {formData.status === "In Stock" && (
-                <div className="warehouse-form__input-field">
+                <div className="inventory-form__input-field">
                   <label
                     htmlFor="quantity"
-                    className="warehouse-form__input-label"
+                    className="inventory-form__input-label"
                   >
                     Quantity
                   </label>
@@ -338,17 +367,17 @@ function InventoryForm() {
                     onChange={handleChange}
                     className={`input-control ${
                       errors.quantity
-                        ? "warehouse-form__input-control--error"
+                        ? "inventory-form__input-control--error"
                         : ""
                     }`}
                     placeholder="Enter quantity"
                   />
                   {errors.quantity && (
-                    <span className="warehouse-form__error-message">
+                    <span className="inventory-form__error-message">
                       <img
                         src="/assets/icons/error-24px.svg"
                         alt="error icon"
-                        className="warehouse-form__error-icon"
+                        className="inventory-form__error-icon"
                       />
                       {errors.quantity}
                     </span>
@@ -357,10 +386,10 @@ function InventoryForm() {
               )}
 
               {/* Warehouse Dropdown */}
-              <div className="warehouse-form__input-field">
+              <div className="inventory-form__input-field">
                 <label
                   htmlFor="warehouse"
-                  className="warehouse-form__input-label"
+                  className="inventory-form__input-label"
                 >
                   Warehouse
                 </label>
@@ -371,7 +400,7 @@ function InventoryForm() {
                   onChange={handleChange}
                   className={`input-control ${
                     errors.warehouse
-                      ? "warehouse-form__input-control--error"
+                      ? "inventory-form__input-control--error"
                       : ""
                   }`}
                 >
@@ -383,11 +412,11 @@ function InventoryForm() {
                   ))}
                 </select>
                 {errors.warehouse && (
-                  <span className="warehouse-form__error-message">
+                  <span className="inventory-form__error-message">
                     <img
                       src="/assets/icons/error-24px.svg"
                       alt="error icon"
-                      className="warehouse-form__error-icon"
+                      className="inventory-form__error-icon"
                     />
                     {errors.warehouse}
                   </span>
@@ -395,11 +424,12 @@ function InventoryForm() {
               </div>
             </section>
           </div>
-          {/* inventory form actions/buttons */}
-          <div className="warehouse-form__actions">
+
+          {/* Inventory form actions/buttons */}
+          <div className="inventory-form__actions">
             <Link
               to={isEditMode ? `/inventory/${id}` : "/inventory"} // Conditionally navigate
-              className="button button--secondary warehouse-form__button--link"
+              className="button button--secondary inventory-form__button-link"
             >
               Cancel
             </Link>
