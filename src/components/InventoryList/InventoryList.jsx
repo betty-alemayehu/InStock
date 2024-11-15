@@ -61,10 +61,7 @@ import InventoryRow from "../InventoryRow/InventoryRow.jsx";
 import InventoryRibbon from "../InventoryRibbon/InventoryRibbon.jsx";
 import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
-export default function InventoryList({
-  inventoryItems,
-  generateInventoryItems,
-}) {
+export default function InventoryList({ inventoryItems }) {
   const [filteredInventory, setFilteredInventory] = useState(inventoryItems);
   const [search, setSearch] = useState("");
 
@@ -97,13 +94,8 @@ export default function InventoryList({
       />
       <div className="inventory-list">
         <InventoryRibbon />
-        {/* Table contents */}
-        {inventoryItems.map((inventory) => (
-          <InventoryRow
-            key={inventory.id}
-            inventory={inventory}
-            setInventory={setInventory}
-          />
+        {filteredInventory.map((inventory) => (
+          <InventoryRow key={inventory.id} inventory={inventory} />
         ))}
       </div>
     </div>
