@@ -47,7 +47,8 @@ p {
 }
 // Need to explicitly specify font family for input and text area, otherwise its consolas
 input,
-textarea {
+textarea,
+select {
   font-family: "TitilliumWeb", sans-serif;
 }
 

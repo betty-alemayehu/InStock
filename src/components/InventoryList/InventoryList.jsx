@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./InventoryList.scss";
 
 import InventoryRow from "../InventoryRow/InventoryRow.jsx";
 import InventoryRibbon from "../InventoryRibbon/InventoryRibbon.jsx";
 import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 
-import { useState } from "react";
-
-export default function InventoryList2({
-	inventoryItems,
-	generateInventoryItems,
-}) {
-	const [inventory, setInventory] = useState();
-
+export default function InventoryList({ inventoryItems }) {
+	const [filteredInventory, setFilteredInventory] = useState(inventoryItems);
 	const [search, setSearch] = useState("");
 
+	useEffect(() => {
+		if (search) {
+			const filtered = inventoryItems.filter((item) =>
+				[item.item_name, item.warehouse_name, item.category, item.description]
+					.join(" ")
+					.toLowerCase()
+					.includes(search.toLowerCase())
+			);
+			setFilteredInventory(filtered);
+		} else {
+			setFilteredInventory(inventoryItems);
+		}
+	}, [search, inventoryItems]);
+
 	const handleSearchInput = (event) => {
-		const { value } = event.target;
-		setSearch(value);
+		setSearch(event.target.value);
 	};
 
 	return (
@@ -30,17 +37,9 @@ export default function InventoryList2({
 				handleSearchInput={handleSearchInput}
 			/>
 			<div className="inventory-list">
-				{/* The table header. Seperate from contents ribbon doesnt show on mobile */}
-				{/* Pass prop of what items to show in list for the warehouse inventory view */}
 				<InventoryRibbon />
-				{/* Table contents */}
-				{inventoryItems.map((inventory) => (
-					<InventoryRow
-						key={inventory.id}
-						inventory={inventory}
-						setInventory={setInventory}
-						generateInventoryItems={generateInventoryItems}
-					/>
+				{filteredInventory.map((inventory) => (
+					<InventoryRow key={inventory.id} inventory={inventory} />
 				))}
 			</div>
 		</div>
