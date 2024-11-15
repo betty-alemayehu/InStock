@@ -8,7 +8,7 @@ import editImage from "/assets/icons/edit-24px.svg";
 
 const URL = import.meta.env.VITE_API_URL;
 
-function InventoryRow({ inventory }) {
+function InventoryRow({ inventory, generateInventoryItems }) {
   //to navigate back to page after cancel or submit
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,6 +28,7 @@ function InventoryRow({ inventory }) {
     try {
       const response = await axios.delete(`${URL}/inventories/${inventory.id}`);
       if (response.status === 204) {
+        generateInventoryItems();
         navigate("/inventory"); // Redirect after successful delete
       }
     } catch (error) {

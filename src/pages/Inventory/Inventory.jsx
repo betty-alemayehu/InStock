@@ -10,7 +10,7 @@ export default function Inventory() {
 
   useEffect(() => {
     generateInventoryItems();
-  }, [inventoryItems]);
+  }, []);
   const generateInventoryItems = async () => {
     try {
       const { data } = await axios.get(`${apiUrl}/inventories`);
@@ -24,7 +24,10 @@ export default function Inventory() {
 
   return (
     <>
-      <InventoryList inventoryItems={inventoryItems} />
+      <InventoryList
+        inventoryItems={inventoryItems}
+        generateInventoryItems={generateInventoryItems}
+      />
     </>
   );
 }
