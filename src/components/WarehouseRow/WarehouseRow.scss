@@ -1,0 +1,184 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/global" as *;
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.warehouse-row {
+  padding: 0;
+  border-top: solid 1px grey;
+
+  @include tablet {
+    border-top: none;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0 0.5rem;
+    flex: 1 1 50%;
+    font-size: 0.875rem;
+
+    &--title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-decoration: none;
+      color: $Instock-Indigo;
+      font-weight: $bold-700;
+      @include body-large;
+
+      @include tablet {
+        margin-top: 0;
+      }
+
+      &::after {
+        content: url(/assets/icons/chevron_right-24px.svg);
+        line-height: 0;
+      }
+    }
+
+    &:before {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: $Slate;
+      margin-bottom: 0.5rem;
+      content: attr(data-label);
+
+      @include tablet {
+        display: none;
+      }
+    }
+
+    @include tablet {
+      &--1,
+      &--2,
+      &--3,
+      &--4,
+      &--5 {
+        flex: 1;
+      }
+    }
+
+    &-btn {
+      padding: 0.6rem 1rem;
+      background-color: black;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+
+      @include tablet {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        background-color: blacker;
+      }
+    }
+
+    &--1,
+    &--2,
+    &--3,
+    &--4,
+    &--5 {
+      order: 1;
+      display: flex;
+      flex-direction: column;
+
+      @include tablet {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    &--1 {
+      @include tablet {
+        // flex: 1.1;
+      }
+    }
+
+    &--2 {
+      order: 3;
+
+      @include tablet {
+        order: 2;
+      }
+    }
+
+    &--3 {
+      order: 2;
+    }
+
+    &--4 {
+      order: 4;
+    }
+
+    &--5 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+      order: 6;
+      flex: 1;
+      padding-bottom: 1rem;
+
+      @include tablet {
+        margin-top: 0;
+        justify-content: flex-end;
+        padding-bottom: 0.5rem;
+      }
+
+      &::before {
+        content: none;
+      }
+    }
+
+    &--btn {
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+
+      @include tablet {
+        margin-top: 0.2rem;
+      }
+    }
+  }
+
+  &__row {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.6rem;
+    padding: 0 1.5rem;
+    border-bottom: solid 1px $Cloud;
+
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0;
+      gap: 1rem;
+      padding: 0.7rem 2rem;
+
+      &:hover {
+        background-color: aliceblue;
+        transition: all 0.2s;
+      }
+    }
+  }
+
+  &__row.last-item {
+    border-bottom: none;
+  }
+}
