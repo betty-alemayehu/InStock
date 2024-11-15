@@ -206,7 +206,10 @@ function InventoryForm() {
         {/* form header */}
         <form onSubmit={handleSubmit}>
           <legend className="warehouse-form__header">
-            <Link to="/inventory" className="warehouse-form__icon">
+            <Link
+              to={isEditMode ? `/inventory/${id}` : "/inventory"} // Conditionally navigate based on edit mode
+              className="warehouse-form__icon"
+            >
               <img
                 src="/assets/icons/arrow_back-24px.svg"
                 alt="arrow back icon"
@@ -405,7 +408,7 @@ function InventoryForm() {
           {/* inventory form actions/buttons */}
           <div className="warehouse-form__actions">
             <Link
-              to="/inventory"
+              to={isEditMode ? `/inventory/${id}` : "/inventory"} // Conditionally navigate
               className="button button--secondary warehouse-form__button--link"
             >
               Cancel
