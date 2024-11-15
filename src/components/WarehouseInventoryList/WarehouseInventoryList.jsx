@@ -7,9 +7,9 @@ export default function WarehouseInventoryList({ inventoryList }) {
 	return (
 		<>
 			<InventoryRibbon />
-			<ul>
+			<ul className="warehouseInventory__list">
 				{inventoryList.map((inventory) => (
-					<li key={inventory.id}>
+					<li key={inventory.id} className="warehouseInventory__item">
 						<InventoryRow inventory={inventory} path="warehouse" />
 					</li>
 				))}
