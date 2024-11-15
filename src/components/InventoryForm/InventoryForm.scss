@@ -34,4 +34,9 @@
   &::placeholder {
     font-family: "TitilliumWeb", sans-serif;
   }
+
+  &__input-field textarea {
+    height: 9rem; /* Adjust this value as needed */
+    resize: vertical; /* Allows the user to resize the field vertically only*/
+  }
 }

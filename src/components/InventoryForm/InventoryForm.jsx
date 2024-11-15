@@ -223,15 +223,12 @@ function InventoryForm() {
             <section className="warehouse-form__warehouse-details">
               <h2 className="warehouse-form__section-title">Item Details</h2>
               {/* warehouseFields -> itemFields */}
-              {itemFields.map((field) => (
-                <div className="warehouse-form__input-field" key={field.name}>
-                  <label
-                    htmlFor={field.name}
-                    className="warehouse-form__input-label"
-                  >
-                    {field.label}
-                  </label>
-                  {field.options ? (
+              {itemFields.map((field) => {
+                let inputElement = null;
+
+                // If field has options (dropdown for category selection)
+                if (field.options) {
+                  inputElement = (
                     <select
                       id={field.name}
                       name={field.name}
@@ -250,7 +247,28 @@ function InventoryForm() {
                         </option>
                       ))}
                     </select>
-                  ) : (
+                  );
+                }
+                // If the field is for description, render a textarea
+                else if (field.name === "description") {
+                  inputElement = (
+                    <textarea
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className={`input-control ${
+                        errors[field.name]
+                          ? "warehouse-form__input-control--error"
+                          : ""
+                      }`}
+                      placeholder={field.label}
+                    />
+                  );
+                }
+                // For other fields, render a normal text input
+                else {
+                  inputElement = (
                     <input
                       type="text"
                       id={field.name}
@@ -264,19 +282,32 @@ function InventoryForm() {
                       }`}
                       placeholder={field.label}
                     />
-                  )}
-                  {errors[field.name] && (
-                    <span className="warehouse-form__error-message">
-                      <img
-                        src="/assets/icons/error-24px.svg"
-                        alt="error icon"
-                        className="warehouse-form__error-icon"
-                      />
-                      {errors[field.name]}
-                    </span>
-                  )}
-                </div>
-              ))}
+                  );
+                }
+
+                return (
+                  <div className="warehouse-form__input-field" key={field.name}>
+                    <label
+                      htmlFor={field.name}
+                      className="warehouse-form__input-label"
+                    >
+                      {field.label}
+                    </label>
+                    {inputElement}{" "}
+                    {/* Render the corresponding input element based on conditions */}
+                    {errors[field.name] && (
+                      <span className="warehouse-form__error-message">
+                        <img
+                          src="/assets/icons/error-24px.svg"
+                          alt="error icon"
+                          className="warehouse-form__error-icon"
+                        />
+                        {errors[field.name]}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </section>
 
             <hr className="warehouse-form__divider warehouse-form__divider--tablet" />
