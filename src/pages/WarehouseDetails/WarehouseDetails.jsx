@@ -59,8 +59,10 @@ export default function WarehouseDetails() {
 
   if (inventoryList.length === 0) {
     return (
-      <div>
-        <h1>No inventory items for this warehouse!</h1>
+      <div className="warehouseDetails__container">
+        <div className="warehouseDetails__container--shadow">
+          <WareHouseInfo currentWarehouse={currentWarehouse} />
+        </div>
       </div>
     );
   }
