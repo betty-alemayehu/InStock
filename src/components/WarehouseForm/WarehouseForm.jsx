@@ -119,7 +119,7 @@ function WarehouseForm() {
 	};
 
 	return (
-		<main className="warehouse-management">
+		<div className="warehouse-management">
 			<div className="warehouse-form">
 				{/* form header */}
 				<form onSubmit={handleSubmit}>
@@ -232,7 +232,7 @@ function WarehouseForm() {
 					</div>
 				</form>
 			</div>
-		</main>
+		</div>
 	);
 }
 
