@@ -9,7 +9,6 @@ import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 import InventoryEdit from "./pages/InventoryEdit/InventoryEdit";
 import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 
 function App() {
 	return (
@@ -19,9 +18,7 @@ function App() {
 				v7_startTransition: true,
 			}}
 		>
-			<header>
-				<Header />
-			</header>
+			<Header />
 			<main className="app-content">
 				<Routes>
 					<Route path="/" element={<Navigate to="warehouses" />} />
@@ -36,7 +33,7 @@ function App() {
 				</Routes>
 			</main>
 			<footer className="footer">
-				<Footer />
+				<p>© InStock Inc. All Rights Reserved.</p>
 			</footer>
 		</BrowserRouter>
 	);
