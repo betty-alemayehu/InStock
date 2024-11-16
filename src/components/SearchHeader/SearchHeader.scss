@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
   background-color: $White;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
 
   max-width: $mobile-max-width;
   margin: auto;
