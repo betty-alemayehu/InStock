@@ -46,22 +46,8 @@ export default function WarehouseDetails() {
 	}, [id]);
 
 	if (!currentWarehouse || !inventoryList) {
-		return (
-			<div>
-				<h1>Loading...</h1>
-			</div>
-		);
+		return <div></div>;
 	}
-
-	// if (inventoryList.length === 0) {
-	//   return (
-	//     <div className="warehouseDetails__container">
-	//       <div className="warehouseDetails__container--shadow">
-	//         <WareHouseInfo currentWarehouse={currentWarehouse} />
-	//       </div>
-	//     </div>
-	//   );
-	// }
 
 	return (
 		<div className="warehouseDetails__container">
