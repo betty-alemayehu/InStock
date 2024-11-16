@@ -49,8 +49,8 @@
     @include tablet {
       display: flex;
       align-self: center;
-      margin: 1.5rem 0;
-      padding: 0.5rem 0;
+      margin: $gutter-tablet-desktop 0;
+      padding: $padding-spacing-base-unit 0;
     }
   }
 
@@ -68,13 +68,6 @@
 }
 
 .nav__link-inactive {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-width: 6.25rem;
-  width: 12.5rem;
   @include navLink {
     color: $Cloud;
 
@@ -85,13 +78,6 @@
 }
 
 .nav__link-active {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  // width: 100%;
-  // min-width: 6.25rem;
-  width: 12.5rem;
   @include navLink {
     background-color: $Instock-Black;
     color: $White;
