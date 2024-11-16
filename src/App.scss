@@ -1,5 +1,6 @@
 @use "./styles/partials/global" as *;
 @use "./styles/partials/mixins" as *;
+@use "./styles/partials/variables" as *;
 
 body {
   margin: 0 auto;
@@ -12,7 +13,7 @@ body {
 
 .app-content {
   position: relative;
-  top: -7.25rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
+  top: -6rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
   padding-top: 25px; // Ensure content starts below the header
   z-index: 1; // Place below the header if needed
 
@@ -29,5 +30,12 @@ body {
 
   @include tablet {
     top: -2rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
+  }
+
+  display: flex;
+  justify-content: center;
+
+  @include body-small {
+    color: $Slate;
   }
 }
