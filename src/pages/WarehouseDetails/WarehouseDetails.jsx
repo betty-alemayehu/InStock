@@ -22,7 +22,9 @@ export default function WarehouseDetails() {
         navigate("/");
       }
 
-      console.error(`Cannot fetch warehouse with id ${id}: ${error}`);
+      console.error(
+        `In getWarehouse() - Cannot fetch warehouse with id ${id}: ${error}`
+      );
     }
   }
 
@@ -37,7 +39,9 @@ export default function WarehouseDetails() {
         navigate("/");
       }
 
-      console.error(`Cannot fetch warehouse with id ${id}: ${error}`);
+      console.error(
+        `in getInventory() Cannot fetch warehouse with id ${id}: ${error}`
+      );
     }
   }
   useEffect(() => {
@@ -45,8 +49,12 @@ export default function WarehouseDetails() {
     getInventory();
   }, [id]);
 
-  if (!currentWarehouse || inventoryList.length === 0) {
-    return <div>Loading...</div>;
+  if (!currentWarehouse) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
   if (inventoryList.length === 0) {
