@@ -2,7 +2,7 @@
 @use "./styles/partials/mixins" as *;
 @use "./styles/partials/variables" as *;
 
-body {
+.app-body {
   margin: 0 auto;
   background: linear-gradient(rgb(35 41 64) 253px, rgb(255, 255, 255) 200px);
   min-height: 100vh;
