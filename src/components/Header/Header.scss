@@ -4,7 +4,6 @@
 @use "../../styles/partials/variables" as *;
 
 .nav {
-  background-color: $Graphite;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -17,7 +16,6 @@
     white-space: nowrap;
     text-align: center;
     padding: $gutter-mobile;
-    height: 15rem;
     max-width: 600px;
 
     @include tablet {
