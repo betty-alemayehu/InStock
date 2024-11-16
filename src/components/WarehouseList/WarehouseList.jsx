@@ -47,7 +47,7 @@ export default function WarehouseList({
       />
       <div className="warehouse-list">
         <WarehouseRibbon />
-        <ul>
+        <ul className="warehouse-list__wrap">
           {filteredWarehouses.map((warehouse, index) => (
             <li className="warehouse-row__row">
               <WarehouseRow
