@@ -111,6 +111,11 @@ function WarehouseForm() {
 						contact_phone: "",
 						contact_email: "",
 					});
+
+					if (response.status === 200) {
+						navigate(`/warehouses/${id}`);
+					}
+
 					navigate("/");
 				}
 			} catch (error) {
