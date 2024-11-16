@@ -38,7 +38,7 @@ export default function InventoryList({ inventoryItems }) {
       />
       <div className="inventory-list">
         <InventoryRibbon />
-        <ul>
+        <ul className="inventory-list__wrap">
           {filteredInventory.map((inventory) => (
             <li className="inventory-row__row">
               <InventoryRow key={inventory.id} inventory={inventory} />
