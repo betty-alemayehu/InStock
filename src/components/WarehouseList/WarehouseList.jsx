@@ -33,6 +33,7 @@ export default function WarehouseList({
   }, [search, warehouseItems]);
 
   const handleSearchInput = (event) => {
+    event.preventDefault();
     setSearch(event.target.value);
   };
 
@@ -49,9 +50,8 @@ export default function WarehouseList({
         <WarehouseRibbon />
         <ul className="warehouse-list__wrap">
           {filteredWarehouses.map((warehouse, index) => (
-            <li className="warehouse-row__row">
+            <li key={warehouse.id} className="warehouse-row__row">
               <WarehouseRow
-                key={warehouse.id}
                 index={index}
                 warehouse={warehouse}
                 total={filteredWarehouses.length}
