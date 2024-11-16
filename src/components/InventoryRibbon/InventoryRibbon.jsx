@@ -1,5 +1,4 @@
 import "./InventoryRibbon.scss";
-// import { useState } from "react";
 
 function InventoryRibbon() {
   return (

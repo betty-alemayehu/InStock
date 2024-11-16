@@ -14,9 +14,7 @@ export default function Inventory() {
   const generateInventoryItems = async () => {
     try {
       const { data } = await axios.get(`${apiUrl}/inventories`);
-      setInventoryItems(data); // sets the inventory list as all inventory items
-      // check inventory items are fetched in FE console
-      // console.log(data);
+      setInventoryItems(data);
     } catch (error) {
       console.error("Error fetching inventory data:", error);
     }
