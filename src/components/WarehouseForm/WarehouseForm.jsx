@@ -6,22 +6,26 @@ import axios from "axios";
 const URL = import.meta.env.VITE_API_URL;
 
 function WarehouseForm() {
-  //Define an isEditMode Variable to check if the id parameter is present
-  const { id } = useParams();
-  const isEditMode = Boolean(id);
-  useEffect(() => {
-    if (isEditMode) {
-      axios
-        .get(`${URL}/warehouses/${id}`)
-        .then((response) => setFormData(response.data))
-        .catch((error) =>
-          console.error("Error fetching warehouse data:", error)
-        );
-    }
-  }, [isEditMode, id]);
+	//to redirect user to warehouse list after submission
+	const navigate = useNavigate();
 
-  //to redirect user to warehouse list after submission
-  const navigate = useNavigate();
+	//Define an isEditMode Variable to check if the id parameter is present
+	const { id } = useParams();
+	const isEditMode = Boolean(id);
+	useEffect(() => {
+		if (isEditMode) {
+			axios
+				.get(`${URL}/warehouses/${id}`)
+				.then((response) => setFormData(response.data))
+				.catch((error) => {
+					if (error.response?.status === 404) {
+						navigate("/");
+					} else {
+						console.error("Error fetching warehouse data:", error);
+					}
+				});
+		}
+	}, [isEditMode, id]);
 
   // Field configurations for warehouse and contact information sections
   const warehouseFields = [
@@ -89,34 +93,35 @@ function WarehouseForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (validateFields()) {
-      try {
-        const response = isEditMode
-          ? await axios.put(`${URL}/warehouses/${id}`, formData)
-          : await axios.post(`${URL}/warehouses`, formData);
-        if (response.status === 201 || response.status === 200) {
-          setFormData({
-            warehouse_name: "",
-            address: "",
-            city: "",
-            country: "",
-            contact_name: "",
-            contact_position: "",
-            contact_phone: "",
-            contact_email: "",
-          });
-          navigate("/");
-        }
-      } catch (error) {
-        console.error(
-          "Error connecting to the server. Please try again later.",
-          error
-        );
-      }
-    }
-  };
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		if (validateFields()) {
+			try {
+				const response = isEditMode
+					? await axios.put(`${URL}/warehouses/${id}`, formData)
+					: await axios.post(`${URL}/warehouses`, formData);
+				if (response.status === 201 || response.status === 200) {
+					setFormData({
+						warehouse_name: "",
+						address: "",
+						city: "",
+						country: "",
+						contact_name: "",
+						contact_position: "",
+						contact_phone: "",
+						contact_email: "",
+					});
+
+					navigate(`/warehouses/${id}`);
+				}
+			} catch (error) {
+				console.error(
+					"Error connecting to the server. Please try again later.",
+					error
+				);
+			}
+		}
+	};
 
   return (
     <main className="warehouse-management">

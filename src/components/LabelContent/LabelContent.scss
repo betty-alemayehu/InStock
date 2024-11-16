@@ -2,6 +2,21 @@
 @use "../../styles/partials/mixins" as *;
 
 .inventory-info {
+	&__container {
+		display: flex;
+
+		.inventory-info__icon {
+			margin-left: 0.25rem; //4px //initial position of arrow
+			transition: transform 0.3s ease;
+		}
+
+		&:hover {
+			.inventory-info__icon {
+				transform: translateX(0.25rem); //move arrow to right
+			}
+		}
+	}
+
 	&__title {
 		font-size: 0.9375rem;
 		text-transform: uppercase;
@@ -26,23 +41,11 @@
 			font-size: 1.125rem;
 		}
 
-		&--clickable {
-			&::after {
-				content: url(/assets/icons/chevron_right-24px.svg);
-				vertical-align: middle;
-				//diving deeper
-				margin-left: 0.25rem; //4px //initial position of arrow
-				transition: transform 0.3s ease;
-			}
-
-			&:hover::after {
-				transform: translateX(0.25rem); //move arrow to right
-			}
-		}
-
 		&--success,
 		&--failed {
 			font-size: 0.875rem;
+			display: inline-block;
+			min-width: max-content;
 			padding: 0.3125rem 0.8125rem;
 			border-radius: 1rem;
 			text-transform: uppercase;

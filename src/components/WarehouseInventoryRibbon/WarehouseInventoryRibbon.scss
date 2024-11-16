@@ -85,15 +85,6 @@
 			}
 		}
 
-		@include tablet {
-			&--1,
-			&--2,
-			&--3,
-			&--4 {
-				flex: 1;
-			}
-		}
-
 		&-btn {
 			padding: 0.6rem 1rem;
 			background-color: black;
