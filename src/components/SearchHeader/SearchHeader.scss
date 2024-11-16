@@ -23,7 +23,7 @@
     max-width: $tablet-max-width;
 
     // TO ensure header lines up with behind blue bar
-    height: 7.25rem;
+    height: 7.7rem;
   }
 
   @include desktop {
@@ -32,6 +32,11 @@
 
   &__title {
     @include page-header;
+    margin-top: 1rem;
+
+    @include tablet {
+      margin-top: 0;
+    }
   }
 
   &__form {

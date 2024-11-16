@@ -2,76 +2,76 @@
 @use "../../styles/partials/mixins.scss" as *;
 
 .details__title-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.8125rem 2rem 2.1875rem 2rem;
-  border-bottom: 1.5px solid $Cloud;
-  @include tablet {
-    padding: 2.8125rem 2.625rem 1.875rem 2.625rem;
-    height: 7.25rem;
-  }
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2.8125rem 2rem 2.1875rem 2rem;
+	border-bottom: 1.5px solid $Cloud;
+	@include tablet {
+		padding: 2.8125rem 2.625rem 1.875rem 2.625rem;
+		height: 7.7rem;
+	}
 
-  @include desktop {
-    padding-left: 55px;
-    padding-right: 55px;
-    padding: 2.8125rem 3.4375rem 1.875rem 3.4375rem;
-  }
+	@include desktop {
+		padding-left: 55px;
+		padding-right: 55px;
+		padding: 2.8125rem 3.4375rem 1.875rem 3.4375rem;
+	}
 }
 
 .details__title-wrapper {
-  display: flex;
-  gap: 0.625rem;
+	display: flex;
+	gap: 0.625rem;
 }
 
 .details__link {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .details__icon {
-  &--back,
-  &--edit-white {
-    width: 1.875rem;
-  }
+	&--back,
+	&--edit-white {
+		width: 1.875rem;
+	}
 
-  &--edit-white {
-    @include tablet {
-      width: 1.5625rem;
-    }
-  }
+	&--edit-white {
+		@include tablet {
+			width: 1.5625rem;
+		}
+	}
 }
 
 .details__icon-wrapper {
-  background-color: $Instock-Indigo;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 3.125rem;
-  height: 3.125rem;
+	background-color: $Instock-Indigo;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	width: 3.125rem;
+	height: 3.125rem;
 
-  @include tablet {
-    width: 6.875rem;
-    border-radius: 2.5rem;
-    gap: 0.5rem;
-  }
+	@include tablet {
+		width: 6.875rem;
+		border-radius: 2.5rem;
+		gap: 0.5rem;
+	}
 }
 
 .details__icon-name {
-  display: none;
+	display: none;
 
-  @include tablet {
-    display: unset;
-    color: $White;
-    font-size: 1.125rem;
-  }
+	@include tablet {
+		display: unset;
+		color: $White;
+		font-size: 1.125rem;
+	}
 }
 
 .details__title {
-  font-size: 2.3125rem;
-  margin: 0;
+	font-size: 2.3125rem;
+	margin: 0;
 
-  @include tablet {
-    font-size: 2.6875rem;
-  }
+	@include tablet {
+		font-size: 2.6875rem;
+	}
 }
