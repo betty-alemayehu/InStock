@@ -110,12 +110,6 @@ ul {
       }
     }
 
-    &--1 {
-      @include tablet {
-        // flex: 1.1;
-      }
-    }
-
     &--2 {
       order: 3;
       padding-right: 3rem;
