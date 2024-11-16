@@ -246,5 +246,9 @@
         transition: all 0.2s;
       }
     }
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
