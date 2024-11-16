@@ -4,7 +4,6 @@
 @use "../../styles/partials/variables" as *;
 
 .nav {
-  background-color: $Graphite;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -12,50 +11,62 @@
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
+    width: calc(100% - $gutter-mobile * 2);
     white-space: nowrap;
     text-align: center;
-    padding: $gutter-mobile;
-    height: 15rem;
+    height: 14rem;
     max-width: 600px;
-
+    
     @include tablet {
+      width: calc(100% - $gutter-tablet-desktop * 2);
       flex-direction: row;
       height: 14rem;
+      justify-content: center;
       align-items: flex-start;
+      justify-content: space-between;
       max-width: 1000px;
-      padding: $gutter-tablet-desktop;
     }
   }
 
-  &__logo {
+  &__logo-mobile {
     aspect-ratio: 4.61;
     object-fit: contain;
     object-position: center;
     width: 11.25rem;
     align-self: center;
     max-width: 100%;
+    margin: $gutter-mobile;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__logo-tablet {
+    display: none;
+
+    @include tablet {
+      display: flex;
+      align-self: center;
+      margin: $gutter-tablet-desktop 0;
+      padding: $padding-spacing-base-unit 0;
+    }
   }
 
   &-links__wrap {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-self: center;
+    justify-content: center;
+    align-items: center;
     gap: $gutter-mobile;
 
     @include tablet {
-      justify-content: flex-end;
-      align-self: flex-start;
-      gap: 0;
+      gap: $gutter-tablet-desktop;
     }
   }
 }
 
 .nav__link-inactive {
-  width: 12.5rem;
   @include navLink {
     color: $Cloud;
 
@@ -66,7 +77,6 @@
 }
 
 .nav__link-active {
-  width: 12.5rem;
   @include navLink {
     background-color: $Instock-Black;
     color: $White;
@@ -74,5 +84,11 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.button {
+  @include tablet {
+    margin: $gutter-tablet-desktop 0;
   }
 }

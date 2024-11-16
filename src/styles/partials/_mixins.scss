@@ -102,19 +102,23 @@
 
 // NavLink
 @mixin navLink {
-	font-size: 1.125rem; // Text size: 18px
-	font-weight: $demi-600;
-	text-decoration: none;
-	line-height: 1.5rem; // Line height: 24px
-	border-radius: 1.5rem;
-	padding: 0.75rem 3.5rem;
-	width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 1.125rem; // Text size: 18px
+  font-weight: $demi-600;
+  text-decoration: none;
+  line-height: 1.5rem; // Line height: 24px
 
-	@include tablet {
-		@include labels-links-buttons {
-			border-radius: 1.5rem;
-			padding: 0.5rem;
-			width: 20%;
+  min-width: 6.25rem;
+  border-radius: 1.5rem;
+  width: 50%;
+
+  @include tablet {
+    @include labels-links-buttons {
+      border-radius: 1.5rem;
 
 			@content;
 		}

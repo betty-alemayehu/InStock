@@ -234,6 +234,15 @@
     border-bottom: solid 1px $Cloud;
     padding: 0 1.5rem;
 
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:first-child {
+      margin-top: 0;
+      padding-top: 1rem;
+    }
+
     @include tablet {
       display: flex;
       justify-content: space-between;

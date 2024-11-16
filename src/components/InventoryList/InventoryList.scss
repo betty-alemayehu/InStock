@@ -11,20 +11,24 @@
 }
 
 .inventory-list {
-  background-color: red;
-
   padding: 0;
   border-top: solid 1px $Cloud;
+  overflow: visible;
 
   background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
+  
   max-width: $mobile-max-width;
-
+  
   margin: auto;
-
+  
   @include tablet {
     border-top: none;
     max-width: $tablet-max-width;
+  }
+  
+  &__wrap {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
   }
 }

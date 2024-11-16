@@ -64,7 +64,6 @@ ul {
     }
 
     @include tablet {
-      
       &--1,
       &--2,
       &--3,
@@ -111,17 +110,11 @@ ul {
       }
     }
 
-    &--1 {
-      @include tablet {
-        // flex: 1.1;
-      }
-    }
-
     &--2 {
       order: 3;
       padding-right: 3rem;
       word-wrap: break-word;
-      hyphens: auto; 
+      hyphens: auto;
 
       @include tablet {
         order: 2;
@@ -194,9 +187,13 @@ ul {
         transition: all 0.2s;
       }
     }
-  }
+    &:last-child {
+      border-bottom: none;
+    }
 
-  &__row.last-item {
-    border-bottom: none;
+    &:first-child {
+      margin-top: 0;
+      padding-top: 1rem;
+    }
   }
 }

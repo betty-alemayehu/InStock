@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import axios from "axios";
 import "./InventoryDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";

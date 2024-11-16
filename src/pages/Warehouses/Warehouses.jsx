@@ -6,28 +6,25 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function Warehouses() {
-  const [warehouseItems, setWarehouseItems] = useState([]);
+	const [warehouseItems, setWarehouseItems] = useState([]);
 
-  useEffect(() => {
-    generateWarehouseItems();
-  }, []);
+	useEffect(() => {
+		generateWarehouseItems();
+	}, []);
 
-  const generateWarehouseItems = async () => {
-    try {
-      const { data } = await axios.get(`${apiUrl}/warehouses`);
-      setWarehouseItems(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching warehouse data:", error);
-    }
-  };
+	const generateWarehouseItems = async () => {
+		try {
+			const { data } = await axios.get(`${apiUrl}/warehouses`);
+			setWarehouseItems(data);
+		} catch (error) {
+			console.error("Error fetching warehouse data:", error);
+		}
+	};
 
-  return (
-    <>
-      <WarehouseList
-        warehouseItems={warehouseItems}
-        generateWarehouseItems={generateWarehouseItems}
-      />
-    </>
-  );
+	return (
+		<WarehouseList
+			warehouseItems={warehouseItems}
+			generateWarehouseItems={generateWarehouseItems}
+		/>
+	);
 }

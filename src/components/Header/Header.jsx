@@ -1,19 +1,21 @@
 import { NavLink, Link } from "react-router-dom";
 import "./Header.scss";
-import logo from "/assets/logo/InStock-Logo_2x.png";
+import logoMobile from "/assets/logo/InStock-Logo_2x.png";
+import logoTablet from "/assets/logo/InStock-Logo_1x.png";
 
 function Header() {
   return (
-    <nav className="nav">
-      <header className="nav__container">
+    <header className="nav">
+      <nav className="nav__container">
         <Link to="/">
-          <img src={logo} alt="InStock logo" className="nav__logo" />
+          <img src={logoMobile} alt="InStock logo" className="nav__logo-mobile" />
+          <img src={logoTablet} alt="InStock logo" className="nav__logo-tablet" />
         </Link>
         <div className="nav-links__wrap">
           <NavLink
             to="/warehouses"
             className={({ isActive }) =>
-              isActive ? "nav__link-active" : "nav__link-inactive"
+              isActive ? "button nav__link-active" : "nav__link-inactive"
             }
           >
             Warehouses
@@ -21,14 +23,14 @@ function Header() {
           <NavLink
             to="/inventory"
             className={({ isActive }) =>
-              isActive ? "nav__link-active" : "nav__link-inactive"
+              isActive ? "button nav__link-active" : "nav__link-inactive"
             }
           >
             Inventory
           </NavLink>
         </div>
-      </header>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

@@ -4,6 +4,14 @@
 
 body {
   margin: 0 auto;
+  background: linear-gradient(rgb(35 41 64) 253px, rgb(255, 255, 255) 200px);
+  min-height: 100vh;
+
+  @include tablet {
+    margin: 0 auto;
+    background: linear-gradient(rgb(35 41 64) 235px, rgb(255, 255, 255) 200px);
+    min-height: 100vh;
+  }
 }
 
 .header {

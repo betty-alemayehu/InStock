@@ -37,7 +37,7 @@ export default function WarehouseList({
   };
 
   return (
-    <>
+    <div className="warehouse-container">
       {/* Responsive Search Header */}
       <SearchHeader
         title="Warehouses"
@@ -47,16 +47,20 @@ export default function WarehouseList({
       />
       <div className="warehouse-list">
         <WarehouseRibbon />
-        {filteredWarehouses.map((warehouse, index) => (
-          <WarehouseRow
-            key={warehouse.id}
-            index={index}
-            warehouse={warehouse}
-            total={filteredWarehouses.length}
-            generateWarehouseItems={generateWarehouseItems}
-          />
-        ))}
+        <ul className="warehouse-list__wrap">
+          {filteredWarehouses.map((warehouse, index) => (
+            <li className="warehouse-row__row">
+              <WarehouseRow
+                key={warehouse.id}
+                index={index}
+                warehouse={warehouse}
+                total={filteredWarehouses.length}
+                generateWarehouseItems={generateWarehouseItems}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
-    </>
+    </div>
   );
 }
