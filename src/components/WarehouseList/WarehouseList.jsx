@@ -47,15 +47,19 @@ export default function WarehouseList({
       />
       <div className="warehouse-list">
         <WarehouseRibbon />
-        {filteredWarehouses.map((warehouse, index) => (
-          <WarehouseRow
-            key={warehouse.id}
-            index={index}
-            warehouse={warehouse}
-            total={filteredWarehouses.length}
-            generateWarehouseItems={generateWarehouseItems}
-          />
-        ))}
+        <ul>
+          {filteredWarehouses.map((warehouse, index) => (
+            <li className="warehouse-row__row">
+              <WarehouseRow
+                key={warehouse.id}
+                index={index}
+                warehouse={warehouse}
+                total={filteredWarehouses.length}
+                generateWarehouseItems={generateWarehouseItems}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
