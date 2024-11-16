@@ -128,7 +128,7 @@ function WarehouseForm() {
 				{/* form header */}
 				<form onSubmit={handleSubmit}>
 					<legend className="warehouse-form__header">
-						<Link to="/warehouses" className="warehouse-form__icon">
+						<Link to={`/warehouses/${id}`} className="warehouse-form__icon">
 							<img
 								src="/assets/icons/arrow_back-24px.svg"
 								alt="arrow back icon"
@@ -224,7 +224,7 @@ function WarehouseForm() {
 					{/* form actions/buttons */}
 					<div className="warehouse-form__actions">
 						<Link
-							to="/warehouses"
+							to={`/warehouses/${id}`}
 							className="button button--secondary warehouse-form__button--link"
 						>
 							Cancel
