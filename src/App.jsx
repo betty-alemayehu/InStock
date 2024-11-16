@@ -11,32 +11,34 @@ import InventoryAdd from "./pages/InventoryAdd/InventoryAdd";
 import Header from "./components/Header/Header";
 
 function App() {
-	return (
-		<BrowserRouter
-			future={{
-				v7_relativeSplatPath: true,
-				v7_startTransition: true,
-			}}
-		>
-			<Header />
-			<main className="app-content">
-				<Routes>
-					<Route path="/" element={<Navigate to="warehouses" />} />
-					<Route path="warehouses" element={<Warehouses />} />
-					<Route path="warehouses/:id" element={<WarehouseDetails />} />
-					<Route path="warehouses/:id/edit" element={<WarehouseEdit />} />
-					<Route path="warehouses/add" element={<WarehouseAdd />} />
-					<Route path="inventory" element={<Inventory />} />
-					<Route path="inventory/:id" element={<InventoryDetails />} />
-					<Route path="inventory/:id/edit" element={<InventoryEdit />} />
-					<Route path="inventory/add" element={<InventoryAdd />} />
-				</Routes>
-			</main>
-			<footer className="footer">
-				<p>© InStock Inc. All Rights Reserved.</p>
-			</footer>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
+      <body>
+        <Header />
+        <main className="app-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="warehouses" />} />
+            <Route path="warehouses" element={<Warehouses />} />
+            <Route path="warehouses/:id" element={<WarehouseDetails />} />
+            <Route path="warehouses/:id/edit" element={<WarehouseEdit />} />
+            <Route path="warehouses/add" element={<WarehouseAdd />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="inventory/:id" element={<InventoryDetails />} />
+            <Route path="inventory/:id/edit" element={<InventoryEdit />} />
+            <Route path="inventory/add" element={<InventoryAdd />} />
+          </Routes>
+        </main>
+        <footer className="footer">
+          <p>© InStock Inc. All Rights Reserved.</p>
+        </footer>
+      </body>
+    </BrowserRouter>
+  );
 }
 
 export default App;
