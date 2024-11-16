@@ -3,14 +3,8 @@
 
 .warehouse-management {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  padding: 0 $padding-spacing-base-unit * 2;
-  @include tablet {
-    padding: 0 $padding-spacing-base-unit * 4;
-  }
-  @include desktop {
-    padding: 0 $padding-spacing-base-unit * 8;
-  }
 }
 
 .warehouse-form {
@@ -20,43 +14,63 @@
   border-radius: 0.25rem;
   max-width: 600px;
   width: 100%;
+  width: calc(100% - $gutter-mobile * 2);
+
   @include tablet {
     max-width: 1000px;
+    width: calc(100% - $gutter-tablet-desktop * 2);
   }
 
   &__header {
     display: flex;
-    align-items: baseline;
+    justify-content: center;
+  }
+
+  &__header-container {
+    width: calc(100% - $gutter-mobile * 4);
+    display: flex;
+    align-items: center;
     gap: $gutter-mobile;
-    padding: $padding-spacing-base-unit * 2 $padding-spacing-base-unit * 4;
+    min-height: 7.5rem;
   }
 
   &__divider {
     border-top: 0.0625rem solid $Cloud;
-    margin: 0;
 
     &--tablet {
+      border-top: 0.0625rem solid $Cloud;
+      width: 100%;
       @include tablet {
-        margin: $padding-spacing-base-unit * 4 0;
+        height: 22.5rem;
+        margin: 0;
+        width: 0;
       }
     }
   }
 
   &__sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     @include tablet {
-      display: flex;
       flex-direction: row;
+      gap: $gutter-tablet-desktop;
     }
   }
 
   &__warehouse-details,
   &__contact-details {
     flex-grow: 1;
-    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4;
+    width: calc(100% - $gutter-mobile * 4);
 
     @include tablet {
-      max-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
-      min-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
+      max-width: calc(
+        50% - $gutter-mobile * 4
+      ); // Ensures both sections stay at this width even when empty or with fewer elements or error state
+      min-width: calc(
+        50% - $gutter-mobile * 4
+      ); // Ensures both sections stay at this width even when empty or with fewer elements or error state
     }
   }
 
@@ -84,8 +98,8 @@
 
   &__error-message {
     color: $Red;
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
     display: flex;
     align-items: center; // Align icon and text
   }
@@ -98,11 +112,20 @@
 
   &__actions {
     display: flex;
-    gap: $gutter-mobile;
     justify-content: center;
+
     background-color: $Light-Grey;
-    padding: $padding-spacing-base-unit * 3 $padding-spacing-base-unit * 4;
+    height: 6.25rem;
+    margin-top: $gutter-tablet-desktop;
+  }
+
+  &__actions-container {
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: $gutter-mobile;
+    width: calc(100% - $gutter-tablet-desktop * 3);
+    justify-content: center;
     @include tablet {
       justify-content: end;
     }

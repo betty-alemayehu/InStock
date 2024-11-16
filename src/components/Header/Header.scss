@@ -17,12 +17,12 @@
     white-space: nowrap;
     text-align: center;
     padding: $gutter-mobile;
-    height: 14.5rem;
+    height: 15rem;
     max-width: 600px;
 
     @include tablet {
       flex-direction: row;
-      height: 12.5rem;
+      height: 14rem;
       align-items: flex-start;
       max-width: 1000px;
       padding: $gutter-tablet-desktop;
