@@ -16,7 +16,7 @@
     width: 100%;
     white-space: nowrap;
     text-align: center;
-    padding: 1.5rem 0;
+    padding: $gutter-mobile;
     height: 15rem;
     max-width: 600px;
 
@@ -25,7 +25,7 @@
       height: 14rem;
       align-items: flex-start;
       max-width: 1000px;
-      padding: 1.5rem 0;
+      padding: $gutter-tablet-desktop;
     }
   }
 

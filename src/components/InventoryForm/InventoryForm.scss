@@ -6,24 +6,24 @@
 .inventory-management {
   display: flex;
   justify-content: center;
-  padding: $padding-spacing-base-unit * 2;
+  padding: 0 $padding-spacing-base-unit * 2;
   @include tablet {
-    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4;
+    padding: 0 $padding-spacing-base-unit * 4;
   }
   @include desktop {
-    padding: $padding-spacing-base-unit $padding-spacing-base-unit * 8;
+    padding: 0 $padding-spacing-base-unit * 8;
   }
 }
 
 .inventory-form {
   background-color: $White;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
   position: relative;
   border-radius: 0.25rem;
-  max-width: 600px;
+  max-width: 37.5rem;
   width: 100%;
   @include tablet {
-    max-width: 1000px;
+    max-width: 62.5rem;
   }
 
   &__header {
@@ -56,9 +56,10 @@
     flex-grow: 1;
     padding: $padding-spacing-base-unit $padding-spacing-base-unit * 4;
 
+    // Ensures both sections stay at this width even when empty or with fewer elements or error state
     @include tablet {
-      max-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
-      min-width: 50%; // Ensures both sections stay at this width even when empty or with fewer elements or error state
+      max-width: 50%;
+      min-width: 50%;
     }
   }
 
@@ -77,7 +78,7 @@
 
   // Apply red border when input has error class
   .input-control {
-    border: 1px solid $Cloud; // Default border color
+    border: 0.0625rem solid $Cloud; // Default border color
 
     &.inventory-form__input-control--error {
       border-color: $Red; // Red border when there’s an error
@@ -86,20 +87,21 @@
 
   &__error-message {
     color: $Red;
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
     display: flex;
     align-items: center; // Align icon and text
   }
 
   // Icon styling within error message
   &__error-icon {
-    margin-right: 4px; // Add spacing between icon and text
+    margin-right: 0.25rem; // Add spacing between icon and text
     width: 1rem; // Set icon size
     height: 1rem;
   }
 
   &__actions {
+    border-radius: 0.25rem;
     display: flex;
     gap: $gutter-mobile;
     justify-content: center;
@@ -121,13 +123,14 @@
 
 // =-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 .inventory-form {
+  border-radius: 0.25rem;
   &__radio {
     &-group {
       display: flex;
       gap: 3rem;
     }
     &-label {
-      //   align-items: center;
+      align-items: center;
       &--selected {
         font-weight: bold;
       }
@@ -143,7 +146,7 @@
   &__input-field select {
     appearance: none; /* Remove the default dropdown arrow */
     background: url("/assets/icons/arrow_drop_down-24px.svg") no-repeat right
-      10px center;
+      0.625rem center;
   }
   &::placeholder {
     font-family: "TitilliumWeb", sans-serif;
