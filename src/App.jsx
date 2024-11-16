@@ -12,12 +12,7 @@ import Header from "./components/Header/Header";
 
 function App() {
   return (
-    <BrowserRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <BrowserRouter>
       <div className="app-body">
         <Header />
         <main className="app-content">
@@ -31,6 +26,7 @@ function App() {
             <Route path="inventory/:id" element={<InventoryDetails />} />
             <Route path="inventory/:id/edit" element={<InventoryEdit />} />
             <Route path="inventory/add" element={<InventoryAdd />} />
+            <Route path="*" element={<Navigate to="warehouses" />} />
           </Routes>
         </main>
         <footer className="footer">
