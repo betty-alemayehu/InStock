@@ -18,7 +18,7 @@ function App() {
         v7_startTransition: true,
       }}
     >
-      <body>
+      <div className="app-body">
         <Header />
         <main className="app-content">
           <Routes>
@@ -36,7 +36,7 @@ function App() {
         <footer className="footer">
           <p>© InStock Inc. All Rights Reserved.</p>
         </footer>
-      </body>
+      </div>
     </BrowserRouter>
   );
 }
