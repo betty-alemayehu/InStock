@@ -6,122 +6,117 @@ import axios from "axios";
 const URL = import.meta.env.VITE_API_URL;
 
 function WarehouseForm() {
-  //Define an isEditMode Variable to check if the id parameter is present
-  const { id } = useParams();
-  const isEditMode = Boolean(id);
-  useEffect(() => {
-    if (isEditMode) {
-      axios
-        .get(`${URL}/warehouses/${id}`)
-        .then((response) => setFormData(response.data))
-        .catch((error) =>
-          console.error("Error fetching warehouse data:", error)
-        );
-    }
-  }, [isEditMode, id]);
+	//Define an isEditMode Variable to check if the id parameter is present
+	const { id } = useParams();
+	const isEditMode = Boolean(id);
+	useEffect(() => {
+		if (isEditMode) {
+			axios
+				.get(`${URL}/warehouses/${id}`)
+				.then((response) => setFormData(response.data))
+				.catch((error) =>
+					console.error("Error fetching warehouse data:", error)
+				);
+		}
+	}, [isEditMode, id]);
 
-  //to redirect user to warehouse list after submission
-  const navigate = useNavigate();
+	//to redirect user to warehouse list after submission
+	const navigate = useNavigate();
 
-  // Field configurations for warehouse and contact information sections
-  const warehouseFields = [
-    { label: "Warehouse Name", name: "warehouse_name" },
-    { label: "Street Address", name: "address" },
-    { label: "City", name: "city" },
-    { label: "Country", name: "country" },
-  ];
+	// Field configurations for warehouse and contact information sections
+	const warehouseFields = [
+		{ label: "Warehouse Name", name: "warehouse_name" },
+		{ label: "Street Address", name: "address" },
+		{ label: "City", name: "city" },
+		{ label: "Country", name: "country" },
+	];
 
-  const contactFields = [
-    { label: "Contact Name", name: "contact_name" },
-    { label: "Position", name: "contact_position" },
-    { label: "Phone Number", name: "contact_phone" },
-    { label: "Email", name: "contact_email" },
-  ];
+	const contactFields = [
+		{ label: "Contact Name", name: "contact_name" },
+		{ label: "Position", name: "contact_position" },
+		{ label: "Phone Number", name: "contact_phone" },
+		{ label: "Email", name: "contact_email" },
+	];
 
-  // Form data and error state management
-  const [formData, setFormData] = useState({
-    warehouse_name: "",
-    address: "",
-    city: "",
-    country: "",
-    contact_name: "",
-    contact_position: "",
-    contact_phone: "",
-    contact_email: "",
-  });
+	// Form data and error state management
+	const [formData, setFormData] = useState({
+		warehouse_name: "",
+		address: "",
+		city: "",
+		country: "",
+		contact_name: "",
+		contact_position: "",
+		contact_phone: "",
+		contact_email: "",
+	});
 
-  const [errors, setErrors] = useState({});
+	const [errors, setErrors] = useState({});
 
-  // Handles field changes and removes error message on input
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
+	// Handles field changes and removes error message on input
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setFormData((prev) => ({ ...prev, [name]: value }));
+		if (errors[name]) {
+			setErrors((prev) => ({ ...prev, [name]: "" }));
+		}
+	};
 
-  // Validates the form fields
-  const validateFields = () => {
-    const newErrors = {};
-    const phoneRegex = /^\d{11}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Checks for a valid email with "@" and "."
+	// Validates the form fields
+	const validateFields = () => {
+		const newErrors = {};
+		const phoneRegex = /^\d{11}$/;
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Checks for a valid email with "@" and "."
 
-    // Validates required fields and checks formats for phone and email fields
-    Object.keys(formData).forEach((field) => {
-      const fieldValue = formData[field]
-        ? formData[field].toString().trim()
-        : ""; // Safely convert to string and trim
-      if (!fieldValue) {
-        newErrors[field] = "This field is required.";
-      } else if (
-        field === "contact_phone" &&
-        !phoneRegex.test(fieldValue.replace(/\D/g, ""))
-      ) {
-        newErrors[field] =
-          "Phone number must include country and area code, e.g. +1 (123) 555-6789";
-      } else if (field === "contact_email" && !emailRegex.test(fieldValue)) {
-        newErrors[field] = "Invalid email format.";
-      }
-    });
+		// Validates required fields and checks formats for phone and email fields
+		Object.keys(formData).forEach((field) => {
+			const fieldValue = formData[field]
+				? formData[field].toString().trim()
+				: ""; // Safely convert to string and trim
+			if (!fieldValue) {
+				newErrors[field] = "This field is required.";
+			} else if (
+				field === "contact_phone" &&
+				!phoneRegex.test(fieldValue.replace(/\D/g, ""))
+			) {
+				newErrors[field] =
+					"Phone number must include country and area code, e.g. +1 (123) 555-6789";
+			} else if (field === "contact_email" && !emailRegex.test(fieldValue)) {
+				newErrors[field] = "Invalid email format.";
+			}
+		});
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (validateFields()) {
-      try {
-        const response = isEditMode
-          ? await axios.put(`${URL}/warehouses/${id}`, formData)
-          : await axios.post(`${URL}/warehouses`, formData);
-        if (response.status === 201 || response.status === 200) {
-          setFormData({
-            warehouse_name: "",
-            address: "",
-            city: "",
-            country: "",
-            contact_name: "",
-            contact_position: "",
-            contact_phone: "",
-            contact_email: "",
-          });
-          // Redirect to the warehouse details page after saving the item in edit mode
-          if (isEditMode) {
-            navigate(`/warehouses/${id}`); // Navigate to the details page of the edited item
-          } else {
-            navigate("/warehouses"); // Navigate to warehouse list if it's a new item
-          }
-        }
-      } catch (error) {
-        console.error(
-          "Error connecting to the server. Please try again later.",
-          error
-        );
-      }
-    }
-  };
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		if (validateFields()) {
+			try {
+				const response = isEditMode
+					? await axios.put(`${URL}/warehouses/${id}`, formData)
+					: await axios.post(`${URL}/warehouses`, formData);
+				if (response.status === 201 || response.status === 200) {
+					setFormData({
+						warehouse_name: "",
+						address: "",
+						city: "",
+						country: "",
+						contact_name: "",
+						contact_position: "",
+						contact_phone: "",
+						contact_email: "",
+					});
+					navigate("/");
+				}
+			} catch (error) {
+				console.error(
+					"Error connecting to the server. Please try again later.",
+					error
+				);
+			}
+		}
+	};
 
   return (
     <main className="warehouse-management">
@@ -184,7 +179,7 @@ function WarehouseForm() {
               ))}
             </section>
 
-            <hr className="warehouse-form__divider warehouse-form__divider--tablet" />
+						<hr className="warehouse-form__divider warehouse-form__divider--tablet" />
 
             {/* contact details inputs */}
             <section className="warehouse-form__contact-details">
@@ -234,15 +229,14 @@ function WarehouseForm() {
                 Cancel
               </Link>
 
-              <button type="submit" className="button button--primary">
-                {isEditMode ? "Save" : "+ Add Warehouse"}
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </main>
-  );
+						<button type="submit" className="button button--primary">
+							{isEditMode ? "Save" : "+ Add Warehouse"}
+						</button>
+					</div>
+				</form>
+			</div>
+		</main>
+	);
 }
 
 export default WarehouseForm;

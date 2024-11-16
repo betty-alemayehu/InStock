@@ -37,7 +37,7 @@ export default function WarehouseList({
   };
 
   return (
-    <div className="warehouse-container">
+    <>
       {/* Responsive Search Header */}
       <SearchHeader
         title="Warehouses"
@@ -61,6 +61,6 @@ export default function WarehouseList({
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 }

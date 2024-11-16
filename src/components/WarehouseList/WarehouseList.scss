@@ -3,13 +3,6 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/global" as *;
 
-.warehouse-container {
-  padding: 0 $gutter-mobile;
-  @include tablet {
-    padding: 0 $gutter-tablet-desktop;
-  }
-}
-
 .warehouse-list {
   padding: 0;
   border-top: solid 1px $Cloud;
