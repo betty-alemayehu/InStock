@@ -8,74 +8,70 @@ import axios from "axios";
 const { VITE_API_URL } = import.meta.env;
 
 export default function WarehouseDetails() {
-  const { id } = useParams();
-  const [currentWarehouse, setCurrentWarehouse] = useState(null);
-  const [inventoryList, setInventoryList] = useState([]);
-  let navigate = useNavigate();
+	const { id } = useParams();
+	let navigate = useNavigate();
+	const [currentWarehouse, setCurrentWarehouse] = useState(null);
+	const [inventoryList, setInventoryList] = useState(null);
 
-  async function getWarehouse() {
-    try {
-      const response = await axios.get(`${VITE_API_URL}/warehouses/${id}`);
-      setCurrentWarehouse(response.data);
-    } catch (error) {
-      if (error.status === 404) {
-        navigate("/");
-      }
+	async function getWarehouse() {
+		try {
+			const response = await axios.get(`${VITE_API_URL}/warehouses/${id}`);
+			setCurrentWarehouse(response.data);
+		} catch (error) {
+			if (error.status === 404) {
+				navigate("/");
+			}
+			console.error(`Cannot fetch warehouse with id ${id}: ${error}`);
+		}
+	}
 
-      console.error(
-        `In getWarehouse() - Cannot fetch warehouse with id ${id}: ${error}`
-      );
-    }
-  }
+	async function getInventory() {
+		try {
+			const response = await axios.get(
+				`${VITE_API_URL}/warehouses/${id}/inventories`
+			);
+			setInventoryList(response.data);
+		} catch (error) {
+			if (error.status === 404) {
+				navigate("/");
+			}
+			console.error(
+				`Cannot retrieve inventories for warehouse with id ${id}: ${error}`
+			);
+		}
+	}
+	useEffect(() => {
+		getWarehouse();
+		getInventory();
+	}, [id]);
 
-  async function getInventory() {
-    try {
-      const response = await axios.get(
-        `${VITE_API_URL}/warehouses/${id}/inventories`
-      );
-      setInventoryList(response.data);
-    } catch (error) {
-      if (error.status === 404) {
-        navigate("/");
-      }
+	if (!currentWarehouse || !inventoryList) {
+		return (
+			<div>
+				<h1>Loading...</h1>
+			</div>
+		);
+	}
 
-      console.error(
-        `in getInventory() Cannot fetch warehouse with id ${id}: ${error}`
-      );
-    }
-  }
-  useEffect(() => {
-    getWarehouse();
-    getInventory();
-  }, [id]);
+	// if (inventoryList.length === 0) {
+	//   return (
+	//     <div className="warehouseDetails__container">
+	//       <div className="warehouseDetails__container--shadow">
+	//         <WareHouseInfo currentWarehouse={currentWarehouse} />
+	//       </div>
+	//     </div>
+	//   );
+	// }
 
-  if (!currentWarehouse) {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
-  }
-
-  if (inventoryList.length === 0) {
-    return (
-      <div className="warehouseDetails__container">
-        <div className="warehouseDetails__container--shadow">
-          <WareHouseInfo currentWarehouse={currentWarehouse} />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="warehouseDetails__container">
-      <div className="warehouseDetails__container--shadow">
-        <WareHouseInfo currentWarehouse={currentWarehouse} />
-        <WarehouseInventoryList
-          inventoryList={inventoryList}
-          getInventory={getInventory}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div className="warehouseDetails__container">
+			<div className="warehouseDetails__container--shadow">
+				<WareHouseInfo currentWarehouse={currentWarehouse} />
+				<WarehouseInventoryList
+					inventoryList={inventoryList}
+					getInventory={getInventory}
+				/>
+			</div>
+		</div>
+	);
 }

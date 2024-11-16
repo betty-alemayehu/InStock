@@ -38,7 +38,9 @@ export default function WarehouseInfo({ currentWarehouse }) {
 					<div className="warehouse-card__contact">
 						<h2 className="warehouse-card__title">contact information:</h2>
 						<span className="warehouse-card__info">{contact_phone}</span>
-						<span className="warehouse-card__info">{contact_email}</span>
+						<span className="warehouse-card__info warehouse-card__info--email">
+							{contact_email}
+						</span>
 					</div>
 				</div>
 			</section>
