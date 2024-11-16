@@ -8,23 +8,50 @@ import SearchHeader from "../SearchHeader/SearchHeader.jsx";
 export default function InventoryList({ inventoryItems }) {
   const [filteredInventory, setFilteredInventory] = useState(inventoryItems);
   const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState(null); // State for sorting column
+  const [orderBy, setOrderBy] = useState("asc"); // State for sorting order
 
+  // Apply search and sorting functionality
   useEffect(() => {
+    let updatedInventory = [...inventoryItems];
+
+    // Apply search filter
     if (search) {
-      const filtered = inventoryItems.filter((item) =>
+      updatedInventory = updatedInventory.filter((item) =>
         [item.item_name, item.warehouse_name, item.category, item.description]
           .join(" ")
           .toLowerCase()
           .includes(search.toLowerCase())
       );
-      setFilteredInventory(filtered);
-    } else {
-      setFilteredInventory(inventoryItems);
     }
-  }, [search, inventoryItems]);
+
+    // Apply sorting if sortBy is set
+    if (sortBy) {
+      updatedInventory.sort((a, b) => {
+        const aValue = a[sortBy]?.toString().toLowerCase() || "";
+        const bValue = b[sortBy]?.toString().toLowerCase() || "";
+
+        if (aValue < bValue) return orderBy === "asc" ? -1 : 1;
+        if (aValue > bValue) return orderBy === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    setFilteredInventory(updatedInventory);
+  }, [search, sortBy, orderBy, inventoryItems]);
 
   const handleSearchInput = (event) => {
     setSearch(event.target.value);
+  };
+
+  // Handle sorting logic
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setOrderBy(orderBy === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setOrderBy("asc");
+    }
   };
 
   return (
@@ -37,7 +64,11 @@ export default function InventoryList({ inventoryItems }) {
         handleSearchInput={handleSearchInput}
       />
       <div className="inventory-list">
-        <InventoryRibbon />
+        <InventoryRibbon
+          onSort={handleSort}
+          sortBy={sortBy}
+          orderBy={orderBy}
+        />
         {filteredInventory.map((inventory) => (
           <InventoryRow key={inventory.id} inventory={inventory} />
         ))}

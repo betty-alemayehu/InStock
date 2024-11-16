@@ -11,10 +11,16 @@ export default function WarehouseList({
 }) {
   const [filteredWarehouses, setFilteredWarehouses] = useState(warehouseItems);
   const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState(null); // State for sorting column
+  const [orderBy, setOrderBy] = useState("asc"); // State for sorting order
 
+  // Filter warehouses based on the search term
   useEffect(() => {
+    let updatedWarehouses = [...warehouseItems];
+
+    // Apply search filter
     if (search) {
-      const filtered = warehouseItems.filter((warehouse) =>
+      updatedWarehouses = updatedWarehouses.filter((warehouse) =>
         [
           warehouse.warehouse_name,
           warehouse.address,
@@ -26,14 +32,35 @@ export default function WarehouseList({
           .toLowerCase()
           .includes(search.toLowerCase())
       );
-      setFilteredWarehouses(filtered);
-    } else {
-      setFilteredWarehouses(warehouseItems);
     }
-  }, [search, warehouseItems]);
+
+    // Apply sorting if sortBy is set
+    if (sortBy) {
+      updatedWarehouses.sort((a, b) => {
+        const aValue = a[sortBy]?.toString().toLowerCase() || "";
+        const bValue = b[sortBy]?.toString().toLowerCase() || "";
+
+        if (aValue < bValue) return orderBy === "asc" ? -1 : 1;
+        if (aValue > bValue) return orderBy === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    setFilteredWarehouses(updatedWarehouses);
+  }, [search, sortBy, orderBy, warehouseItems]);
 
   const handleSearchInput = (event) => {
     setSearch(event.target.value);
+  };
+
+  // Handle sorting logic
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setOrderBy(orderBy === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setOrderBy("asc");
+    }
   };
 
   return (
@@ -46,7 +73,11 @@ export default function WarehouseList({
         handleSearchInput={handleSearchInput}
       />
       <div className="warehouse-list">
-        <WarehouseRibbon />
+        <WarehouseRibbon
+          onSort={handleSort}
+          sortBy={sortBy}
+          orderBy={orderBy}
+        />
         {filteredWarehouses.map((warehouse, index) => (
           <WarehouseRow
             key={warehouse.id}
