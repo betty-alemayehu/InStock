@@ -4,8 +4,8 @@ import logo from "/assets/logo/InStock-Logo_2x.png";
 
 function Header() {
   return (
-    <nav className="nav">
-      <header className="nav__container">
+    <header>
+      <nav className="nav__container">
         <Link to="/">
           <img src={logo} alt="InStock logo" className="nav__logo" />
         </Link>
@@ -27,8 +27,8 @@ function Header() {
             Inventory
           </NavLink>
         </div>
-      </header>
-    </nav>
+      </nav>
+    </header>
   );
 }
 
