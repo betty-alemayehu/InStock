@@ -190,5 +190,10 @@ ul {
     &:last-child {
       border-bottom: none;
     }
+
+    &:first-child {
+      margin-top: 0;
+      padding-top: 1rem;
+    }
   }
 }
