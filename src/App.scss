@@ -18,7 +18,7 @@ body {
   z-index: 1; // Place below the header if needed
 
   @include tablet {
-    top: -9.6rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
+    top: -9.25rem; // Move it up to overlap bottom 25% of the header which is ~250px tall
   }
 }
 
