@@ -19,10 +19,13 @@
 
     @include tablet {
       flex-direction: row;
+      height: 14rem;
+      justify-content: center;
       align-items: flex-start;
       justify-content: space-between;
       max-width: 1000px;
       width: calc(100% - $gutter-tablet-desktop * 2);
+      padding: 0;
     }
   }
 
@@ -55,6 +58,12 @@
 }
 
 .nav__link-inactive {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // width: 100%;
+  // min-width: 6.25rem;
   width: 12.5rem;
   @include navLink {
     color: $Cloud;
@@ -66,6 +75,12 @@
   }
 
 .nav__link-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // width: 100%;
+  // min-width: 6.25rem;
   width: 12.5rem;
   @include navLink {
     background-color: $Instock-Black;

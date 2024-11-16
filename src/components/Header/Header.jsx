@@ -4,7 +4,7 @@ import logo from "/assets/logo/InStock-Logo_2x.png";
 
 function Header() {
   return (
-    <header>
+    <header className="nav">
       <nav className="nav__container">
         <Link to="/">
           <img src={logo} alt="InStock logo" className="nav__logo" />
