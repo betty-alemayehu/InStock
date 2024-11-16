@@ -21,6 +21,7 @@
 
 .details__title-wrapper {
 	display: flex;
+	align-items: baseline;
 	gap: 0.625rem;
 }
 
@@ -32,6 +33,13 @@
 	&--back,
 	&--edit-white {
 		width: 1.875rem;
+	}
+
+	&--back {
+		vertical-align: sub;
+		@include tablet {
+			vertical-align: unset;
+		}
 	}
 
 	&--edit-white {
@@ -49,6 +57,11 @@
 	border-radius: 50%;
 	width: 3.125rem;
 	height: 3.125rem;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		background-color: $Graphite;
+	}
 
 	@include tablet {
 		width: 6.875rem;
@@ -69,6 +82,7 @@
 
 .details__title {
 	font-size: 2.3125rem;
+	text-transform: capitalize;
 	margin: 0;
 
 	@include tablet {

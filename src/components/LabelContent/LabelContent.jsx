@@ -1,4 +1,5 @@
 import "./LabelContent.scss";
+import chevronRight from "/assets/icons/chevron_right-24px.svg";
 
 export default function LabelContent({
 	label,
@@ -19,9 +20,6 @@ export default function LabelContent({
 			contentClassName += " inventory-info__description--failed";
 		}
 	}
-	if (clickable) {
-		contentClassName += " inventory-info__description--clickable";
-	}
 
 	let titleClass = path
 		? "inventory-info__title inventory-info__title--disappear"
@@ -30,7 +28,17 @@ export default function LabelContent({
 	return (
 		<div className={newClassName}>
 			<h2 className={titleClass}>{label}</h2>
-			<span className={contentClassName}>{content}</span>
+
+			<div className="inventory-info__container">
+				<span className={contentClassName}>{content}</span>
+				{clickable && (
+					<img
+						src={chevronRight}
+						alt="Right Chevron"
+						className="inventory-info__icon"
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

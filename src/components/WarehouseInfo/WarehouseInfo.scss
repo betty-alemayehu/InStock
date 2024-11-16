@@ -35,10 +35,15 @@
 
 		&__info {
 			font-size: 1.0625rem;
+			text-transform: capitalize;
 			margin: 0;
 
 			@include tablet {
 				font-size: 1.125rem;
+			}
+
+			&--email {
+				text-transform: unset;
 			}
 
 			&--address {
