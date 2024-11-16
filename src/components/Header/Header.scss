@@ -12,20 +12,18 @@
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
+    width: calc(100% - $gutter-mobile * 2);
     white-space: nowrap;
     text-align: center;
-    padding: $gutter-mobile;
-    height: 15rem;
+    height: 14rem;
     max-width: 600px;
 
     @include tablet {
       flex-direction: row;
-      height: 14rem;
       align-items: flex-start;
+      justify-content: space-between;
       max-width: 1000px;
-      padding: $gutter-tablet-desktop;
+      width: calc(100% - $gutter-tablet-desktop * 2);
     }
   }
 
@@ -36,43 +34,61 @@
     width: 11.25rem;
     align-self: center;
     max-width: 100%;
+    margin: $gutter-mobile;
+
+    @include tablet {
+      margin: $gutter-tablet-desktop 0;
+    }
   }
 
   &-links__wrap {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-self: center;
+    justify-content: center;
+    align-items: center;
     gap: $gutter-mobile;
 
     @include tablet {
-      justify-content: flex-end;
-      align-self: flex-start;
-      gap: 0;
+      gap: $gutter-tablet-desktop;
+    }
+  }
+
+  .nav__link--inactive {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    // @include tablet {
+    //   margin: 0;
+    // }
+
+    @include navLink {
+      color: $Cloud;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .nav__link--active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @include navLink {
+      background-color: $Instock-Black;
+      color: $White;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
 
-.nav__link-inactive {
-  width: 12.5rem;
-  @include navLink {
-    color: $Cloud;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-.nav__link-active {
-  width: 12.5rem;
-  @include navLink {
-    background-color: $Instock-Black;
-    color: $White;
-
-    &:hover {
-      text-decoration: underline;
-    }
+.button {
+  @include tablet {
+    margin: $gutter-tablet-desktop 0;
   }
 }

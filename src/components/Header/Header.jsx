@@ -13,7 +13,7 @@ function Header() {
           <NavLink
             to="/warehouses"
             className={({ isActive }) =>
-              isActive ? "nav__link-active" : "nav__link-inactive"
+              isActive ? "button nav__link--active" : "nav__link--inactive"
             }
           >
             Warehouses
@@ -21,7 +21,7 @@ function Header() {
           <NavLink
             to="/inventory"
             className={({ isActive }) =>
-              isActive ? "nav__link-active" : "nav__link-inactive"
+              isActive ? "button nav__link--active" : "nav__link--inactive"
             }
           >
             Inventory
