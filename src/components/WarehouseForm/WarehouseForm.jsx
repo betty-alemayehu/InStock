@@ -89,7 +89,6 @@ function WarehouseForm() {
 		return Object.keys(newErrors).length === 0;
 	};
 
-	// Handles form submission
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		if (validateFields()) {
@@ -112,7 +111,8 @@ function WarehouseForm() {
 				}
 			} catch (error) {
 				console.error(
-					"Error connecting to the server. Please try again later."
+					"Error connecting to the server. Please try again later.",
+					error
 				);
 			}
 		}
