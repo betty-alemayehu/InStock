@@ -107,7 +107,12 @@ function WarehouseForm() {
             contact_phone: "",
             contact_email: "",
           });
-          navigate("/");
+          // Redirect to the warehouse details page after saving the item in edit mode
+          if (isEditMode) {
+            navigate(`/warehouses/${id}`); // Navigate to the details page of the edited item
+          } else {
+            navigate("/warehouses"); // Navigate to warehouse list if it's a new item
+          }
         }
       } catch (error) {
         console.error(
