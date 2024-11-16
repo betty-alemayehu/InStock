@@ -4,10 +4,15 @@
 @use "../../styles/partials/global" as *;
 
 .inventory-container {
-  padding: 0 2.5rem;
+  padding: 0 $gutter-mobile;
+  @include tablet {
+    padding: 0 $gutter-tablet-desktop;
+  }
 }
 
 .inventory-list {
+  background-color: red;
+
   padding: 0;
   border-top: solid 1px $Cloud;
 
