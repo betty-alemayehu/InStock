@@ -27,7 +27,7 @@ InStock is a full-stack web application designed to address the scalability and 
 - Built animations for improved user experience.
 - Optimized search functionality.
 
-### Ifechukwu Omuorah ([GitHub Profile](https://github.com/ifechukwu123))
+### Ifechukwu Onuorah ([GitHub Profile](https://github.com/ifechukwu123))
 
 - Developed APIs for inventory CRUD operations using Node.js and Express.
 - Integrated navigation and routing with React Router.
