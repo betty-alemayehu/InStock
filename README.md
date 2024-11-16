@@ -66,4 +66,4 @@ InStock is a full-stack web application designed to address the scalability and 
 
 ---
 
-Developed with ❤️ by our talented team. Explore the [GitHub Client Repository](https://github.com/betty-alemayehu/InStock/) & [GitHub Server Repository](https://github.com/betty-alemayehu/InStock-Database/) .
+Developed with ❤️ by our talented team. Explore the [GitHub Client Repository](https://github.com/betty-alemayehu/InStock/) & [GitHub Server Repository](https://github.com/betty-alemayehu/InStock-Database/).
