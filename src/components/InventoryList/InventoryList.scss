@@ -4,7 +4,7 @@
 @use "../../styles/partials/global" as *;
 
 .inventory-container {
-  padding: 0 2.5rem;
+  padding: 0 $gutter-mobile;
 }
 
 .inventory-list {

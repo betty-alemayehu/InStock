@@ -45,6 +45,7 @@
     justify-content: space-between;
     align-self: center;
     gap: $gutter-mobile;
+    padding: 0 $gutter-mobile;
 
     @include tablet {
       justify-content: flex-end;
@@ -55,10 +56,11 @@
 }
 
 .nav__link-inactive {
-  width: 12.5rem;
+  width: 100%;
+  min-width: 6.25rem;
   @include navLink {
     color: $Cloud;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -66,7 +68,8 @@
 }
 
 .nav__link-active {
-  width: 12.5rem;
+  width: 100%;
+  min-width: 6.25rem;
   @include navLink {
     background-color: $Instock-Black;
     color: $White;
