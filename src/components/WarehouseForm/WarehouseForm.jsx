@@ -6,6 +6,9 @@ import axios from "axios";
 const URL = import.meta.env.VITE_API_URL;
 
 function WarehouseForm() {
+	//to redirect user to warehouse list after submission
+	const navigate = useNavigate();
+
 	//Define an isEditMode Variable to check if the id parameter is present
 	const { id } = useParams();
 	const isEditMode = Boolean(id);
@@ -14,14 +17,15 @@ function WarehouseForm() {
 			axios
 				.get(`${URL}/warehouses/${id}`)
 				.then((response) => setFormData(response.data))
-				.catch((error) =>
-					console.error("Error fetching warehouse data:", error)
-				);
+				.catch((error) => {
+					if (error.response?.status === 404) {
+						navigate("/");
+					} else {
+						console.error("Error fetching warehouse data:", error);
+					}
+				});
 		}
 	}, [isEditMode, id]);
-
-	//to redirect user to warehouse list after submission
-	const navigate = useNavigate();
 
 	// Field configurations for warehouse and contact information sections
 	const warehouseFields = [
@@ -119,7 +123,7 @@ function WarehouseForm() {
 	};
 
 	return (
-		<div className="warehouse-management">
+		<main className="warehouse-management">
 			<div className="warehouse-form">
 				{/* form header */}
 				<form onSubmit={handleSubmit}>
@@ -232,7 +236,7 @@ function WarehouseForm() {
 					</div>
 				</form>
 			</div>
-		</div>
+		</main>
 	);
 }
 
